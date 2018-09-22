@@ -1,0 +1,22 @@
+#!/bin/bash -
+SSH_ENV=~/.ssh/environment
+
+function start_agent {
+	/usr/bin/ssh-agent | sed '/^echo/d' > "${SSH_ENV}"
+	chmod 600 "${SSH_ENV}"
+	. "${SSH_ENV}" > /dev/null
+	SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+if [ ! -f ~/.ssh/no_agent ]; then
+	if [ -f "${SSH_ENV}" ]; then
+		. "${SSH_ENV}" > /dev/null
+		ps ${SSH_AGENT_PID} &>/dev/null || {
+			start_agent;
+		}
+	else
+		start_agent;
+	fi
+fi
+unset SSH_ENV

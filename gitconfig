@@ -1,0 +1,132 @@
+[user]
+	name = Johannes Larsen
+	email = mail@johslarsen.net
+	signingkey = B26FAB26
+
+[blame]
+	showEmail
+
+[branch]
+	autoSetupMerge = false
+
+[color]
+	ui = auto
+
+[core]
+	pager = less -FiJMRSWX
+	editor = vim
+
+[diff]
+	context = 2
+	mnemonicPrefix
+	renames = copy
+	indentHeuristic
+	colorMoved
+
+[interactive]
+	singleKey
+
+[log]
+	date = iso
+	decorate = auto
+
+[merge]
+	tool = vim
+
+[mergetool]
+	keepBackup = false
+	keepTemporaries = false
+
+[mergetool.vim]
+	cmd = vim +Gdiff $MERGED
+
+
+[pretty]
+	r = %C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s
+	rd = %C(yellow)%h%C(auto)%d %C(cyan)%ai %C(magenta)%aE %C(green)%s
+
+[pull]
+	ff = only
+
+[push]
+	default = current
+
+[rebase]
+	abbreviateCommands
+	missingCommitsCheck = warn
+	stat = true
+
+[status]
+    showStash = true
+
+
+[alias]
+	st = status
+	nst = status -s
+	ust = status -uno
+	unst = status -s -uno
+
+	df = diff --compact-summary -p
+	sdf = diff --compact-summary
+	rdf = diff --dirstat
+	cdf = diff --compact-summary -p --cached
+
+	ci = commit
+	cim = commit -m
+	cia = commit -a
+	fix = commit --fixup
+	squash = commit --squash
+	amend = commit --amend
+
+	l = log
+	pl = log --compact-summary -p
+	sl = log --compact-summary
+	sgl = log --graph --all --compact-summary
+	gl = log --graph --all
+	hl = log --format=format:'%H %s'
+	fl = log --format=fuller
+	rl = log --format=r
+	rl0 = log --format=r --compact-summary -U0
+	rdl = log --format=rd
+	rgl = log --graph --all --format=rd
+	rsgl = log --compact-summary --graph --all --format=rd
+	rsl = log --format=rd --compact-summary
+
+	wc = whatchanged
+	rwc = whatchanged --pretty=format:'%C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s'
+
+	ns = show --name-status
+	ps = show -p --compact-summary
+	ss = show --compact-summary
+
+	ff = merge --ff-only
+	rpull = pull --rebase
+	ipull = pull --rebase=interactive
+	mpull = pull --no-rebase
+	mt = mergetool
+
+	rbi = rebase -i
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbs = rebase -i --autosquash
+	ch = cherry-pick
+	cha = cherry-pick --abort
+	chc = cherry-pick --continue
+
+	big = bisect good
+	bib = bisect bad
+	bis = bisect stop
+	bir = bisect reset
+
+	padd = add -p
+
+	rclone = clone --recurse-submodules
+	co = checkout
+	cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | selecta`
+	cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | selecta`
+
+	submaster = submodule foreach --recursive git checkout master
+	subpull = submodule foreach --recursive git rpull
+	subpush = submodule foreach --recursive git push
+
+	spop = stash pop --index

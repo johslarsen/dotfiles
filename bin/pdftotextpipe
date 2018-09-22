@@ -1,0 +1,5 @@
+#!/bin/bash -
+pdf=/tmp/$$.pdf
+cat > "$pdf"
+pdftotext "$pdf" -
+rm "$pdf"

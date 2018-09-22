@@ -1,0 +1,20 @@
+#!/bin/bash -
+me=`basename "$0"`
+mydir=`dirname "$0"`
+
+output_dir="/tmp/$me.$$"
+output_suffix=${1%:*}
+
+mkdir "$output_dir"
+if [[ $# -gt 1 ]]; then
+	input="$2"
+else
+	input="$output_dir/foo.hopefully_doc"
+	cat > "$input"
+fi
+output="$output_dir/$(basename "${input%.*}").$output_suffix"
+
+libreoffice --headless --convert-to "$1" --outdir "$output_dir" "$input" > /dev/null
+cat "$output"
+
+rm -rf "$output_dir"

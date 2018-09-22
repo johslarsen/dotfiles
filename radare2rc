@@ -1,0 +1,40 @@
+eco solarized
+
+#e anal.a2f = true # tends to miss function frames
+e anal.autoname = true
+#e anal.calls = true
+# e anal.jmptbl = true # tends to think things are jmptpl, not functions
+#e anal.pushret = true
+#e anal.strings = true
+
+e asm.bbline = true
+e asm.bytes = false
+e asm.indent = true
+e asm.hints = true
+e asm.invhex = true
+e asm.lines.ret = true
+e asm.pseudo = true
+e asm.varsum = true
+
+e cfg.newtab = true
+
+"e cmd.graph = ag $$ > a.dot; !dot -Tpdf -oa.pdf a.dot; !zathura --fork a.pdf"
+
+e dbg.bep = main
+
+e graph.gv.current = true
+e graph.refs = true
+e graph.nodejmps = false
+
+e hex.pairs = false
+
+e http.ui = p
+
+e io.aslr = false
+
+e prj.git = true
+
+e scr.utf8 = true
+e scr.utf8.curvy = true
+#e scr.wheelnkey = true
+e scr.truecolor = 1

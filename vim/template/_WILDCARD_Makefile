@@ -1,0 +1,15 @@
+CC := gcc
+LD := ld
+RM := rm -rf
+
+CFLAGS := -Wall -Werror -g
+LDFLAGS := 
+
+#CURSOR#
+
+.PHONY: all clean distclean
+all:
+
+clean:
+
+distclean: clean

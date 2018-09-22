@@ -1,0 +1,5 @@
+#!/bin/bash -
+[ "$-" == "${-//i/}" ] && return 1 # Check if it is running interactive ($- includes i if it is), if not die
+for f in ~/.bashrc_interactive.d/*; do
+	[ -e "$f" ] && . "$f"
+done

@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+require 'set'
+require 'optparse'
+require 'ostruct'
+
+Signal.trap("SIGPIPE", "SYSTEM_DEFAULT")
+
+c = OpenStruct.new
+OptionParser.new do |o|
+  o.banner = "USAGE: #{$0} [options] [FILE]..."
+
+  c.markers = Set.new
+  o.on("-m", "--markers I[,J[,...]]", Array, "Marks Ith, Jth, ... fields") do |a|
+    c.markers = Set.new(a.map{|i| i.to_i})
+  end
+
+  c.prefix = STDOUT.isatty ? "\e[7m" : ">"
+  o.on("-p", "--prefix STR", "Prefix marked fields with STR") do |s|
+    c.prefix = s
+  end
+  c.suffix = STDOUT.isatty ? "\e[0m" : "<"
+  o.on("-s", "--suffix STR", "Suffix marked fields with STR") do |s|
+    c.suffix = s
+  end
+
+  c.fs = /\s+/
+  o.on("-F", "--field-separator REGEXP", Regexp, "Use REGEXP as field separator") do |r|
+    c.fs = r
+  end
+end.parse!
+ARGF.each do |l|
+  tokens = l.split(/(#{c.fs.to_s})/)
+  c.markers.each do |i|
+    fi = 2*i # split with grouping yields field0, sep0, field1, sep1, ...
+    break if fi >= tokens.length
+    tokens[fi] = c.prefix + tokens[fi] + c.suffix
+  end
+  puts tokens.join("")
+end

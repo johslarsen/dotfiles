@@ -1,0 +1,36 @@
+#!/bin/bash
+
+die() {
+	echo "Usage: `basename "$0"` [-s SERVICESFILE] HOSTS"
+	exit 1
+}
+
+SHIFT=0
+while getopts 's:?' OPTION; do
+	case $OPTION in
+		's') 
+			[ -f "$OPTARG" ] && servicesFile=$OPTARG || echo "'$OPTARG': No such file"
+			((SHIFT+=2));;
+		*) die;;
+	esac
+done
+shift $SHIFT
+
+servicesFile=${servicesFile:-/etc/services}
+
+services=`grep -v '^#' "$servicesFile" | grep -v '^$' | awk '{print $1 ":" $2}' | cut -d/ -f1 | uniq`
+for host in $@; do
+	echo -n "$host:"
+	if ping -c1 -W1 "$host" &> /dev/null; then
+		for i in $services;do
+			service=${i/:*/}
+			port=${i/*:/}
+			nc -zw1 "$host" $port &> /dev/null && echo -n " $port($service)"
+		done
+		echo
+	else echo -n $'\r'
+	fi 
+done
+echo -n $'\r'
+tput el
+echo -n $'\r'

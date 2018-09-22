@@ -1,0 +1,5 @@
+keymap F SUBMIT
+keymap t TAB_LINK
+keymap C-f NEXT_PAGE
+keymap C-b PREV_PAGE
+keymap C-g DISPLAY_IMAGE

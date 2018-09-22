@@ -1,0 +1,37 @@
+xterm*termName: xterm-256color
+xterm*locale: true
+xterm*utf8Title: true
+
+xterm*selectToClipboard: true
+
+xterm*metaSendsEscape: true
+xterm*bellIsUrgent: true
+
+xterm*saveLines:       65536
+xterm*scrollBar:       false
+xterm*scrollKey:       true
+xterm*scrollTtyOutput: false
+
+xterm*foreground: rgb:00/ff/00
+xterm*background: rgb:00/00/00
+
+xterm*faceName: mono
+xterm*faceSize:   8
+xterm*faceSize1:  2
+xterm*faceSize2:  5
+xterm*faceSize3:  7
+xterm*faceSize4: 12
+xterm*faceSize5: 16
+xterm*faceSize6: 24
+
+xterm*vt100.Translations: #override\
+  ~Ctrl ~Shift Meta <Btn1Down>:   popup-menu(vtMenu)\n\
+   Ctrl ~Shift Meta <Btn1Down>:   popup-menu(fontMenu)\n\
+   Ctrl  Shift Meta <Btn1Down>:   popup-menu(tekMenu)\n\
+   Ctrl  Shift      <KeyPress> v: insert-selection(CLIPBOARD, CUT_BUFFER0)\n\
+   Ctrl ~Shift Meta <KeyPress> v: insert-selection(PRIMARY, CUT_BUFFER0)\n\
+   Ctrl  Shift      <KeyPress> -: set-vt-font(1)\n\
+   Ctrl ~Shift      <KeyPress> -: smaller-vt-font()\n\
+   Ctrl             <KeyPress> 0: set-vt-font(d)\n\
+   Ctrl ~Shift      <KeyPress> +: larger-vt-font()\n\
+   Ctrl  Shift      <KeyPress> +: set-vt-font(6)\n

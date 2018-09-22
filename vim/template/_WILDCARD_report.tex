@@ -1,0 +1,80 @@
+\documentclass[english,a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+\newcommand{\documentdate}{#=strftime("\%Y-\%m")#-#DATE#}
+\newcommand{\documentauthorname}{Johannes Arctander Larsen}
+\newcommand{\documentauthormail}{jla038@post.uit.no}
+\newcommand{\documentauthor}{\documentauthorname{} \href{mailto:\documentauthormail}{\texttt{<\documentauthormail>}}}
+\newcommand{\documentdepartment}{Department of Computer Science}
+\newcommand{\documentinstitution}{UiT The Arctic University of Norway}
+\newcommand{\documentinstitute}{\documentdepartment, \\ \documentinstitution}
+\newcommand{\documenttitle}{#SUBJECT# --- #TITLE#}
+\newcommand{\documentcclicense}{by-sa}
+
+%\usepackage{amsmath} % advance mathmatics
+%\usepackage{amsfonts} % mainly \mathbb (black board bold}
+%\usepackage{amssymb} % more math symbols
+
+\usepackage{graphicx} % images (LaTeX: *.ps, *.eps; PDFLaTeX: *.pdf, *.png, *.jpg)
+%\usepackage{subfig} % figures within figures
+%\usepackage{wrapfig} % wrapping text around figures
+%\usepackage{multirow} % rowspan in tables
+
+\usepackage{color} % text coloring
+%\usepackage{textcomp} % additional symbols
+
+%-citation---------------------
+\usepackage[fixlanguage]{babelbib}
+\bibliographystyle{babplain-fl} % "{firstname} {lastname}", because babplain fails to emphasize lastname
+
+%-layout-----------------------
+\usepackage{fullpage} % smaller margins
+\usepackage{lastpage}
+
+%-header/footer----------------
+\usepackage{fancyhdr}
+\setlength{\voffset}{-15pt}
+\setlength{\headsep}{25pt}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy} % default header: chaptertitle (left), sectiontitle (right); footer: pagenumber (center)
+
+\fancyhf{}
+\lhead{\documentauthor}
+\rhead{\documentdate}
+\lfoot{\href{http://creativecommons.org/licenses/\documentcclicense/3.0/}{\includegraphics[height=20pt]{$HOME/common/doc/\documentcclicense}}}
+\rfoot{\thepage/\pageref{LastPage}\vspace*{\fill}}
+
+%-pdf-properties
+\usepackage{hyperref}
+\hypersetup
+{
+	pdfauthor={\documentauthorname}
+	pdfsubject={},
+	pdftitle={\documenttitle},
+	pdfkeywords={#KEYWORDS#},
+	colorlinks=true,
+	urlcolor=blue,
+	citecolor=red,
+	linkcolor=black,
+}
+
+\begin{document}
+\title{\documenttitle}
+\date{\documentdate}
+\author{
+	\documentauthor,\\
+	\documentinstitute
+}
+\maketitle
+
+\section{Introduction}
+\section{Technical background}
+\section{Design}
+\section{Implementation}
+\section{Discussion}
+\section{Conclusion}
+
+\bibliography{bibliography/bibliography}
+
+\end{document}

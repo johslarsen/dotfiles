@@ -1,0 +1,5 @@
+dns-resolution: yes
+line-display: two-line
+max-bandwidth: 10M
+port-display: on
+port-resolution: yes

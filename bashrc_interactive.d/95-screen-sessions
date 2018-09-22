@@ -1,0 +1,9 @@
+#!/bin/bash -
+if type screen &>/dev/null; then
+	screen -qls > /dev/null
+	if [ $? -gt 9 ]; then
+		echo $'Screens:'
+		screen -ls | grep ^$'\t'
+		echo
+	fi
+fi

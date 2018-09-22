@@ -1,0 +1,10 @@
+set advance-pages-per-view true
+set scroll-page-aware false
+set selection-clipboard clipboard
+set zoom-center true
+
+set window-title-home-tilde true
+set status-bar-home-tilde true
+
+map <BackSpace> navigate previous
+map <Return> navigate next

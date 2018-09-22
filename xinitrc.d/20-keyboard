@@ -1,0 +1,6 @@
+#!/bin/bash -
+setxkbmap no
+setxkbmap -option terminate:ctrl_alt_bksp
+
+[ -d ~/.Xmodmap.d ] && xmodmap ~/.Xmodmap.d/*
+[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap

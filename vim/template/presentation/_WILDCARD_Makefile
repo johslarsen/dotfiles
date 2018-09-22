@@ -1,0 +1,44 @@
+GIT := git
+PDFLATEX := pdflatex -interaction=nonstopmode -file-line-error
+PDFVIEWER := zathura
+PS2PDF := epstopdf
+RM := rm -f
+SED := sed
+
+OUTPUT := #CURSOR#
+
+GENERATED_RESOURCES :=
+
+.PHONY: all clean distclean view
+all: $(OUTPUT:%.pdf=%_notes_right.pdf)
+
+.PRECIOUS: $(GENERATED_RESOURCES)
+
+.EXPORT_ALL_VARIABLES:
+env:
+	env
+
+%_notes.tex: %.tex
+	$(SED) 's/^\\documentclass.*$$/\0\n\\usepackage{pgfpages}\n\\setbeameroption{show only notes}/g' $^ > $@
+%_notes_interleaved.tex: %.tex
+	$(SED) 's/^\\documentclass.*$$/\0\n\\usepackage{pgfpages}\n\\setbeameroption{show notes}/g' $^ > $@
+
+# e.g. %_notes_left.tex
+$(addprefix %_notes_, $(addsuffix .tex, left right top bottom)): %.tex
+	$(SED) 's/^\\documentclass.*$$/\0\n\\usepackage{pgfpages}\n\\setbeameroption{show notes on second screen=$(basename $(subst $(basename $^)_notes_,, $@))}/g' $^ > $@
+
+%.pdf: %.tex $(GENERATED_RESOURCES)
+	$(PDFLATEX) $<
+	$(PDFLATEX) $<
+
+%.pdf: %.ps
+	$(PS2PDF) $<
+
+view: $(OUTPUT)
+	$(PDFVIEWER) $< &> /dev/null &
+
+clean:
+	$(RM) *.aux *.lof *.log *.lot *.fls *.out *.toc *.bbl *.bcf *.blg *-blx.aux *-blx.bib *.brf *.run.xml *.nav *.snm *.vrb *.acn *.acr *.glg *.glo *.gls *.brf $(OUTPUT:%.pdf=%*.pdf) $(GENERATED_RESOURCES) $(GENERATED_RESOURCES:%.pdf=%.ps)
+
+distclean: clean
+	$(RM) *.log

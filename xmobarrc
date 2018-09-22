@@ -1,0 +1,23 @@
+Config {
+	  font = "xft:DejaVu Sans Mono:bold:pixelsize=12"
+	, bgColor = "black"
+	, fgColor = "grey"
+	, position = TopW L 100
+	, persistent = True
+	, commands = [
+			  Run Cpu ["-L","20","-H","60","-l","#00cc00","-n","#cccc00","-h","#cc0000","-t","C<total>","-S","True","-w","2"] 10
+			, Run MultiCpu ["-L","20","-H","60","-l","#00cc00","-n","#cccc00","-h","#cc0000","-t","<autototal>","-S","True","-w","2"] 10
+			, Run Memory ["-L","20","-H","60","-l","#00cc00","-n","#cccc00","-h","#cc0000","-t","M<usedratio>","-S","True","-w","2"] 10
+			, Run DynNetwork ["-L","250000","-H","1000000","-l","#00cc00","-n","#cccc00","-h","#cc0000","-t","R<rx>T<tx>","-w","6"] 10
+			, Run Com "/usr/bin/date" ["+W#%V:%u %Y-%m-%d %H:%M:%S%:::z"] "date" 10
+			, Run Weather "ENTC" ["-t","TOS <tempC>C"] 3000
+			, Run Com ".bin/mpd_status.sh" [] "mpd" 10
+			, Run Com ".bin/current_ip.sh" [] "ip" 10
+			, Run Com ".bin/pa-vol.sh" ["xmobar"] "vol" 10
+			, Run Com ".bin/loadstatus.sh" [] "load" 10
+			, Run StdinReader
+	]
+	, sepChar = "%"
+	, alignSep = "}{"
+	, template = "%StdinReader% }{<fc=#9999ff>%mpd%</fc> %cpu%(%multicpu%) %memory% %load% %dynnetwork% <fc=#8888ff>%ip%</fc> %vol% <fc=#99ff99>%ENTC%</fc> <fc=#ee9a00>%date%</fc>"
+}

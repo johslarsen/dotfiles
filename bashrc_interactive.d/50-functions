@@ -1,0 +1,82 @@
+#!/bin/bash -
+cr2tojpg() {
+	for i in "$@"; do
+		dcraw -c -a  -h "$i" | ppm2tiff -c jpeg "${i%.*}.jpg"
+	done
+}
+
+ddgo() {
+	w3m "https://duckduckgo.com/?q=$*"
+}
+rfc() {
+	w3m "https://tools.ietf.org/html/$1"
+}
+
+moviemerge() { # Merge two or more moviefile using mencoder (mplayer coder)
+	[ $# -lt "3" ] && echo "Usage: #moviemerge output file1 file2 ..." || mencoder -oac copy -ovc copy -o "$@"
+}
+
+mp3() { # Convert everything to mp3
+	for i in "$@"; do
+		name=${i%.*}
+		[ $OSTYPE == "linux-gnu" ] && acodec=libmp3lame || acodec=mp3
+		ffmpeg -i "$i" -acodec $acodec -ac 2 -ab 320k -vn "$name.mp3"
+	done
+}
+
+ogg() { # convert anything to ogg
+	for i in "$@"; do
+		name=${i%.*}
+		ffmpeg -i "$i" -acodec libvorbis -ac 2 -ab 320k -vn "$name.ogg"
+	done
+}
+
+mkvtoogg() { # extract ogg vorbis from mkv-file, assuming track 2 is ogg vorbis audio
+	for i in "$@"; do
+		name=${i%.*}
+		mkvextract tracks "$i" "2:$name.ogg"
+	done
+}
+
+wscreen() {
+	screen -S "${2:-$1}" "$1"
+}
+sscreen() {
+	ssh -Y -t $1 "LANG='$LANG' screen -rD $2"
+	echo -n $'\a'
+}
+stmux() {
+	ssh -Y -t $1 "LANG='$LANG' tmux attach-session -t $2"
+	echo -n $'\a'
+}
+stmuxe() {
+	ssh -Y -t $1 "LANG='$LANG' tmux attach-session -dt $2"
+	echo -n $'\a'
+}
+sxclip() {
+	clipboard=${2:-clipboard}
+	ssh $1 "DISPLAY=:0 xclip -o -selection '$clipboard'" | xclip -i -selection "$clipboard"
+}
+
+cds() {
+	cd "$(find "${1:-.}" -type d | selecta)"
+}
+sr() {
+	find "$@" | selecta
+}
+fw() {
+	find -iname "*$1*"
+}
+fs() {
+	find -iname "*$1"
+}
+fp() {
+	find -iname "$1*"
+}
+
+gitrgrep() {
+	for f in **/.git; do
+		wd="$(dirname "$f")"
+		git --git-dir="$f" --work-tree="$wd" grep --recurse-submodules "$@" | awk '$0="'"$wd"':"$0'
+	done
+}

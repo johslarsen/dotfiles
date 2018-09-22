@@ -1,0 +1,8 @@
+#!/bin/bash -
+clipboard=${2:-clipboard}
+if [[ "$1" ]]; then
+	url="$(ssh "$1" DISPLAY=:0 xclip -o -session "$clipboard")"
+else
+	url="$(xclip -o -session "$clipboard")"
+fi
+mpv --no-ytdl "$url"

@@ -1,0 +1,2 @@
+#!/bin/bash -
+[ -x /usr/bin/ccze ] && tail -F $@ | ccze -A || tail -F $@

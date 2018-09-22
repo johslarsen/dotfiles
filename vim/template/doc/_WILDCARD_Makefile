@@ -1,0 +1,38 @@
+PDFLATEX := pdflatex -interaction=nonstopmode
+BIBTEX := bibtex
+PDFVIEWER := zathura
+RM := rm -f
+GIT := git
+
+GIT_DIR := ../.git
+BIBLIOGRAPHY := bibliography/bibliography.bib
+OUTPUT := #CURSOR#
+
+GENERATED_RESOURCES :=
+
+.PHONY: all clean view
+all: $(OUTPUT)
+
+.PRECIOUS: %.bbl %.aux $(GENERATED_RESOURCES)
+
+.EXPORT_ALL_VARIABLES:
+env:
+	env
+
+$(BIBLIOGRAPHY): $(GIT_DIR)
+	$(GIT) --git-dir=$< submodule update --init $@
+
+%.pdf: %.tex $(BIBLIOGRAPHY) $(GENERATED_RESOURCES)
+	$(PDFLATEX) $<
+	$(BIBTEX) $(<:.tex=.aux)
+	$(PDFLATEX) $<
+	$(PDFLATEX) $<
+
+%:: %_generator.sh
+	./$< > $@
+
+view: $(OUTPUT)
+	$(PDFVIEWER) $+ &> /dev/null &
+
+clean:
+	$(RM) *.aux *.lof *.log *.lot *.fls *.out *.toc *.bbl *.bcf *.blg *-blx.aux *-blx.bib *.brf *.run.xml *.nav *.snm *.vrb *.acn *.acr *.glg *.glo *.gls *.brf $(OUTPUT) $(GENERATED_RESOURCES) $(GENERATED_RESOURCES:%.pdf=%.ps)

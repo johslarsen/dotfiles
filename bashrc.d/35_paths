@@ -1,0 +1,11 @@
+#!/bin/bash -
+path_append PATH /opt/local/sbin /etc/smallsoft/sbin /opt/local/bin ~/bin ~/.local/bin ~/.bin "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
+path_append LD_LIBRARY_PATH ~/lib
+
+path_prepend MANPATH ~/share/man ~/man
+
+if [ -d ~/.gem ]; then
+	for ruby_version in ~/.gem/ruby/*; do
+		[ -f "$ruby_version/NO_PATH" ] || path_append PATH "$ruby_version/bin"
+	done
+fi

@@ -1,0 +1,20 @@
+mpd_music_dir =                "~/.mpd/music"
+
+system_encoding =              "utf8"
+
+mouse_list_scroll_whole_page = "no"
+lines_scrolled =               "32"
+
+header_text_scrolling =        "no"
+playlist_separate_albums =     "yes"
+playlist_display_mode =        "columns"
+search_engine_display_mode =   "columns"
+user_interface =               "alternative"
+regular_expressions =          "extended"
+ignore_leading_the =           "yes"
+display_bitrate =              "yes"
+
+default_find_mode =            "wrapped"
+
+external_editor =              "vim"
+use_console_editor =           "yes"

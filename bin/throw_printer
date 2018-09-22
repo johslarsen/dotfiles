@@ -1,0 +1,43 @@
+#!/bin/bash -
+dir="/dev/shm/$(basename "$0")_$$"
+cleanup() {
+	rm -rf "$dir"
+}
+trap cleanup INT TERM EXIT
+mkdir -p "$dir"
+
+cat >"$dir/commands.gdb" <<EOF
+python
+class Try(gdb.Command):
+  def __init__(self):
+    super(Try, self).__init__('try', gdb.COMMAND_OBSCURE, gdb.COMPLETE_SYMBOL)
+  def invoke(self, args, from_tty):
+    try:
+      gdb.execute(args, from_tty)
+    except:
+      pass
+Try()
+end
+set pagination off
+catch throw
+commands
+  silent
+  echo \n\n\n
+  shell date "+%Y-%m-%d %H:%M:%S %z"
+  echo throw:\n
+  try print \$_exception
+  try print ((std::exception*)obj)->what()
+  frame 1
+  backtrace full
+  continue
+end
+catch catch
+commands
+  silent
+  echo \ncatch:\n
+  frame 1
+  continue
+end
+run ${*:2}
+EOF
+gdb -batch -x "$dir/commands.gdb" "$1"

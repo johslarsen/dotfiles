@@ -1,0 +1,62 @@
+#!/bin/bash -
+# ls
+alias ls='ls -F --color=auto --time-style=+"%Y-%m-%d %H:%M:%S %:::z"'
+alias la='ls -a'
+alias l1='ls -1'
+alias ll='ls -lh'
+alias lla='ls -lah'
+alias lr='ls -R'
+alias llr='ls -lhR'
+alias llR='ls -R | grep ":$" | sed -e "s/:$//" -e "s/[^-][^\/]*\//--/g" -e "s/^/ /" -e "s/-/|/"'
+alias lsd='ls -l | grep ^d'
+
+# du
+alias duh='du -h'
+alias dush='du -sh'
+alias dusck='du -sck * | sort -rn'
+
+# cd
+alias ..='cd ..'
+
+# grep
+alias grep='grep --color'
+alias gv='grep -v'
+alias gi='grep -i'
+alias giv='grep -iv'
+alias gR='grep -R'
+alias gr='grep -r'
+
+# pager
+alias mo='more'
+alias less=$PAGER
+
+# Misc
+alias datestamp='date +"%Y%m%d"'
+alias timestamp='date +"%Y%m%d%H%M%S"'
+alias ds='datestamp'
+alias ts='timestamp'
+alias h='history'
+alias dh='df -h'
+alias psgrep='ps aux | grep'
+alias psgi='ps aux | gi'
+alias mpdir='mkdir -p'
+alias 0get='wget -O/dev/null'
+alias journalcolor='journalctl -af | ccze -A'
+alias dstat_extensive='dstat -f -Tcmsdgilnpy --fs --ipc --lock --socket --vm'
+alias whois='whois -H'
+alias cy='cal -y'
+alias tget='torsocks wget'
+alias t3m='torsocks w3m'
+alias turl='torsocks curl'
+alias mkvmerge='mkvmerge --default-language eng'
+alias ncpaste='nc termbin.com 9999'
+alias vim='vim 2>/dev/null'
+
+# Typos
+alias sudp='sudo'
+alias cd..='cd ..'
+alias xs='cd'
+alias vf='cd'
+alias cde='cd'
+alias ks='ls'
+alias ka='ls'

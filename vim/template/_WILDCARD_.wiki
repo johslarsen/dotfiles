@@ -1,0 +1,4 @@
+:silent %s/#TITLE#/\=RPath('%:t:r')/g
+= #TITLE# =
+
+#CURSOR#

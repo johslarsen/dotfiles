@@ -1,0 +1,10 @@
+Lint/IneffectiveAccessModifier:
+    Enabled: false
+Lint/Loop:
+    Enabled: false
+Lint/ScriptPermission:
+    Enabled: false
+Lint/StringConversionInInterpolation:
+    Enabled: false
+Lint/UselessAccessModifier:
+    Enabled: false

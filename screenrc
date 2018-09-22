@@ -1,0 +1,14 @@
+escape y
+shell -$SHELL
+
+defscrollback 30000
+startup_message off
+
+backtick 1 0 60 /bin/date +%:::z
+hardstatus alwayslastline "%{= kc}%w%=%{= .m}%H (%l)  %Y%m%d %0c:%s %1`"
+
+vbell off
+
+bell_msg "^GBell in window %n"
+
+term screen-256color

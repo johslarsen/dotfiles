@@ -1,0 +1,3 @@
+function! getopts#includeCurrentHeaders#getopts()
+  let b:clang_user_options = '-include '.expand('%:r').'.hpp'
+endfunction

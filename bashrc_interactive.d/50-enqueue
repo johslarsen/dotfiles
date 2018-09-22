@@ -1,0 +1,21 @@
+#!/bin/bash -
+queued_tasls=("${queued_tasls[@]}")
+queued_task_sentinel="$'\1\3\3\7'"
+
+enqueue() {
+	queued_tasls=("$@" "$queued_task_sentinel" "${queued_tasls[@]}")
+}
+
+execute_queued_tasks() {
+	cmd=()
+	for arg in "${queued_tasls[@]}"; do
+		if [[ "$arg" == "$queued_task_sentinel" ]]; then
+			"${cmd[@]}"
+			cmd=()
+		else
+			cmd=("${cmd[@]}" "$arg")
+		fi
+	done
+	queued_tasls=()
+}
+trap execute_queued_tasks INT TERM EXIT

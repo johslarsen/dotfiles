@@ -1,0 +1,26 @@
+#!/bin/bash -
+path_remove() {
+	if [ "${!1}" == "$2" ]; then
+		export "$1="
+	else
+		export "$1=${!1%:$2}"
+		export "$1=${!1#$2:}"
+		export "$1=${!1//:$2:/:}"
+	fi
+}
+path_append() {
+	for dir in "${@:2}"; do
+		if [ -d "$dir" ]; then
+			path_remove "$1" "$dir"
+			[ "${!1}" ] && export "$1=${!1}:$dir" || export "$1=$dir"
+		fi
+	done
+}
+path_prepend() {
+	for dir in "${@:2}"; do
+		if [ -d "$dir" ]; then
+			path_remove "$1" "$dir"
+			[ "${!1}" ] && export "$1=$dir:${!1}" || export "$1=$dir"
+		fi
+	done
+}

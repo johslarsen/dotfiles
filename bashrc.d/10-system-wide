@@ -1,0 +1,4 @@
+#!/bin/bash -
+for f in /etc/{bashrc,bash.bashrc}; do
+	[ -f "$f" ] && . "$f"
+done
