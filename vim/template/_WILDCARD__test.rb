@@ -9,7 +9,7 @@ require 'minitest/autorun'
 
 require '#SOURCE#'
 #MODULE_DECL#
-#MI#class #CLASS# < MiniTest::Test
+#MI#class #CLASS# < Minitest::Test
 #MI##I#def setup
 #MI##I#end
 

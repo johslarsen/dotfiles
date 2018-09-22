@@ -1,10 +1,10 @@
 nnoremap <silent> <leader>ye    :MiniTestToggle<cr>
-nnoremap <silent> <leader>yy    :RakeTest '**/*_test.rb' '//'<cr>
-nnoremap          <leader>yY    :RakeTest '**/*_test.rb' '//'<Right><Right>
+nnoremap <silent> <leader>yy    :RakeTest * '//'<cr>
+nnoremap          <leader>yY    :RakeTest * '//'<Left><Left>
 nnoremap <silent> <leader>yf    :RakeTest % '//'<cr>
-nnoremap <silent> <leader>yF    :RakeTest % '//'<Right><Right>
+nnoremap <silent> <leader>yF    :RakeTest % '//'<Left><Left>
 nnoremap <silent> <leader>yt    :RakeTest % <C-r>=MiniTestName()<CR><CR>
-nnoremap          <leader>yT    :RakeTest '**/*_test.rb' /<C-r>=MiniTestName()<CR>/
+nnoremap          <leader>yT    :RakeTest * '/<C-r>=MiniTestName()<CR>/'<Left><Left>
 
 if !exists("*_MiniTestToggle")
   command MiniTestToggle call _MiniTestToggle()
@@ -23,7 +23,7 @@ if !exists("*MiniTestName")
     while l:i > 0
       let l:match = matchlist(getline(l:i), '^[[:space:]]*def[[:space:]]\+\([^[:space:]]\+\)')
       if !empty(l:match)
-        return ModuleAndClass().'\#'.l:match[1]
+        return l:match[1]
       endif
       let l:i -= 1
     endwhile
@@ -33,10 +33,16 @@ endif
 if !exists("*_RakeTest")
   command -nargs=+ RakeTest call _RakeTest(<f-args>)
   function _RakeTest(file_pattern, method_pattern)
-    if !filereadable('Rakefile')
+    if filereadable('Rakefile')
+      let l:rakefile = 'Rakefile'
+    elseif filereadable('test/Rakefile')
+      let l:rakefile = 'test/Rakefile'
+    else
       exec 'MakeCheckGTest' a:method_pattern
       return
     endif
+
+    let l:fp = a:file_pattern == '*' ? fnamemodify(l:rakefile, ':h').'/**/*_test.rb' : a:file_pattern
 
     let l:makeprg=&makeprg
     let &makeprg='rake'
@@ -75,7 +81,7 @@ if !exists("*_RakeTest")
     let &errorformat  .= ',%C%m'
     let &errorformat  .= ',%C%p'
 
-    exec 'Make' 'test' 'TEST='.a:file_pattern.'' "TESTOPTS=-n".a:method_pattern
+    exec 'Make' '-f'.l:rakefile 'test' 'TEST='.l:fp.'' "TESTOPTS=-n".a:method_pattern
     let &errorformat=l:errorformat
     let &makeprg=l:makeprg
   endfunction
