@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require 'base64'
+require 'fileutils'
+require 'time'
+require_relative '../lib/prefix'
+
+TPBDUMP = ENV["TPBDUMP"] || File.expand_path('~/.local/lib/torrent_dump_full.csv.gz')
+unless File.exist? TPBDUMP
+  FileUtils.mkdir_p File.dirname(TPBDUMP)
+  system "curl", "-o", TPBDUMP, "https://thepiratebay.org/static/dump/csv/torrent_dump_full.csv.gz"
+end
+
+IO.popen(["zgrep", "-a", *ARGV, TPBDUMP]) do |io|
+  io.each_line do |l|
+    t = l.match(/^([^;]*);([^;]*);"(.*)";([^;]*)$/)
+    magnet = Base64.decode64(t[2]).unpack("H*").first
+    uploaded = Time.parse(t[1]).strftime("%Y-%m-%d %H:%M:%S")
+    size = Prefix.bin(t[4].to_r, nil, format: "%3.1f")
+    puts "%s %s %6s %s" % [magnet, uploaded, size, t[3]]
+  end
+end
