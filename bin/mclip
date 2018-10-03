@@ -1,8 +1,8 @@
 #!/bin/bash -
 clipboard=${2:-clipboard}
 if [[ "$1" ]]; then
-	url="$(ssh "$1" DISPLAY=:0 xclip -o -session "$clipboard")"
+	url="$(ssh "$1" DISPLAY=:0 xclip -o -session "$clipboard" | xargs echo)"
 else
-	url="$(xclip -o -session "$clipboard")"
+	url="$(xclip -o -session "$clipboard" | xargs echo)"
 fi
 mpv --no-ytdl "$url"
