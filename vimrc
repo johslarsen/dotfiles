@@ -31,6 +31,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'nixon/vim-vmath'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim' " undo history
+Plugin 'stevearc/vim-arduino'
 Plugin 'sunaku/vim-ruby-minitest'
 Plugin 'thinca/vim-template'
 "Plugin 'tpope/vim-abolish'
@@ -281,6 +282,8 @@ let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
 
 let g:DVB_TrimWS = 1
+
+let g:arduino_dir = '/usr/share/arduino' " location on archlinux
 
 let g:calendar_mark = 'left-fit'
 let g:calendar_monday = 1
