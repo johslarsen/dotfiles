@@ -29,6 +29,7 @@ Plugin 'mattn/calendar-vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'mileszs/ack.vim'
 Plugin 'nixon/vim-vmath'
+Plugin 'saltstack/salt-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim' " undo history
 Plugin 'stevearc/vim-arduino'
