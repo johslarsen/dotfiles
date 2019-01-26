@@ -1,5 +1,5 @@
 #!/bin/bash -
-path_append PATH /opt/local/sbin /etc/smallsoft/sbin /opt/local/bin ~/bin ~/.local/bin ~/.bin ~/.toolboxes/*/bin "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
+path_append PATH /opt/local/sbin /etc/smallsoft/sbin /opt/local/bin ~/bin ~/.local/bin ~/.bin ~/.toolboxes/*/bin ~/.cargo/bin "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
 path_append LD_LIBRARY_PATH ~/lib
 
 path_prepend MANPATH ~/share/man ~/man

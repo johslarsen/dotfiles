@@ -80,3 +80,19 @@ gitrgrep() {
 		git --git-dir="$f" --work-tree="$wd" grep --recurse-submodules "$@" | awk '$0="'"$wd"':"$0'
 	done
 }
+
+qnl2x() {
+	awk -v OFS="${OFS:-\\\\n}" -F${FS:-\"} '!(NF%2){s=$0;getline;$0=s OFS $0}1' "$@"
+}
+qcsv2csv() {
+	fs=${FS:-,}
+	tfs=${TFS:-$'\x1e'} # ASCII Record Separator
+	qfs=${QFS:-?}
+	xsv fmt -d $fs -t $tfs "$@" | sed "s/[$fs]/\\$qfs/g" | xsv fmt -d $tfs -t $fs
+}
+tsv() {
+	xsv "$@" -d $'\t'
+}
+psv() {
+	xsv "$@" -d '|'
+}

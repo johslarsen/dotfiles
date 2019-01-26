@@ -9,6 +9,7 @@ Plugin 'Ron89/thesaurus_query.vim' " ,cs
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'alepez/vim-gtest' " does not work that well
+Plugin 'chrisbra/csv.vim'
 Plugin 'ciaranm/googletest-syntax'
 Plugin 'confluencewiki.vim'
 Plugin 'csexton/trailertrash.vim'
@@ -298,6 +299,10 @@ let g:clang_jumpto_declaration_in_preview_key = '<C-W>}'
 let g:clang_snippets = 1
 let g:clang_trailing_placeholder = 1
 let g:clang_user_options = "-std=c++14 -Idefs -Iinclude -I. -L."
+
+let g:csv_comment = '#'
+let g:csv_end = 10
+let g:csv_nl = 1
 
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_escape_grep = 1
