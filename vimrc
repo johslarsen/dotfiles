@@ -290,7 +290,7 @@ let g:calendar_mark = 'left-fit'
 let g:calendar_monday = 1
 let g:calendar_weeknm = 5
 
-let g:clang_auto_user_options = 'includeCurrentHeaders,.clang_complete,path'
+let g:clang_auto_user_options = 'includeHeaderFromIppTpp,.clang_complete,path'
 let g:clang_close_preview = 1
 let g:clang_complete_macros = 1
 let g:clang_complete_optional_args_in_snippets = 0
