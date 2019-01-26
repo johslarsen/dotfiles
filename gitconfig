@@ -109,9 +109,9 @@
 	rba = rebase --abort
 	rbc = rebase --continue
 	rbs = rebase -i --autosquash
-	ch = cherry-pick
-	cha = cherry-pick --abort
-	chc = cherry-pick --continue
+	p = cherry-pick
+	pa = cherry-pick --abort
+	pc = cherry-pick --continue
 
 	big = bisect good
 	bib = bisect bad
