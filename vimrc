@@ -100,7 +100,7 @@ nnoremap <silent> <leader>m     :Make -j=g:number_of_processors<cr><cr>
 nnoremap          <leader>M     :Make -j=g:number_of_processors<cr><space>
 nnoremap <silent> <leader><c-m> :CMake<cr>
 nnoremap <silent> <leader>n     :nohlsearch<cr>
-nnoremap <silent> <leader>N     :set invnumber invrelativenumber<cr>
+nnoremap <silent> <leader>N     :set invnumber invrelativenumber signcolumn==&signcolumn=="auto"?"no":"auto"<cr><cr>
 nnoremap          <leader>o     :call SelectaCommand("~/.bin/findSourceFiles.sh", "", ":e")<cr>
 nnoremap          <leader>O     :call SelectaCommand("~/.bin/findSourceFiles.sh", "", ":vsplit")<cr>
 nnoremap          <leader><C-o> :call SelectaCommand("~/.bin/findSourceFiles.sh", "", ":split")<cr>
@@ -146,6 +146,8 @@ nmap <silent> coa :let b:syntastic_mode = SyntasticIsPassive() ? 'active' : 'pas
 nnoremap Q <nop>
 nnoremap <space> za
 
+nnoremap <silent> zp :GitGutterFold<cr>
+
 " Norwegian keyboard layout requires AltGr for lots of useful buttons, so remap the characters that are on the location that these are in the US keyboard layout
 noremap § ~
 noremap ¤ $
@@ -163,10 +165,13 @@ nnoremap <C-e> :buffer #<CR>
 " Movement {{{2
 noremap <NL> gj
 
-nnoremap <silent> [G gg:keeppatterns /^TEST<cr>
-nnoremap <silent> [g   :keeppatterns ?^TEST<cr>
-nnoremap <silent> ]g   :keeppatterns /^TEST<cr>
-nnoremap <silent> ]G  G:keeppatterns ?^TEST<cr>
+nmap <silent> [g <Plug>GitGutterPrevHunk
+nmap <silent> ]g <Plug>GitGutterNextHunk
+
+onoremap ic <Plug>GitGutterTextObjectInnerPending
+onoremap ac <Plug>GitGutterTextObjectOuterPending
+xnoremap ic <Plug>GitGutterTextObjectInnerVisual
+xnoremap ac <Plug>GitGutterTextObjectOuterVisual
 
 nnoremap <silent> <c-g>      :call ChangeNextPlaceholder()<cr>
 inoremap <silent> <c-g> <ESC>:call ChangeNextPlaceholder()<cr>
