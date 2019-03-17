@@ -82,7 +82,7 @@ gitrgrep() {
 }
 
 qnl2x() {
-	awk -v OFS="${OFS:-\\\\n}" -F${FS:-\"} '!(NF%2){s=$0;getline;$0=s OFS $0}1' "$@"
+	awk -v OFS="${OFS:-\\\\n}" -F${FS:-\"} 'NF%2==0{do{s=$0;getline;$0=s OFS $0} while (split($0,f,FS)%2 == 0)}1' "$@"
 }
 qcsv2csv() {
 	fs=${FS:-,}
