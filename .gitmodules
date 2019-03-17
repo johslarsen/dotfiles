@@ -4,3 +4,6 @@
 [submodule "toolboxes/binops"]
 	path = toolboxes/binops
 	url = ../binops
+[submodule "toolboxes/jrb"]
+	path = toolboxes/jrb
+	url = ../jrb
