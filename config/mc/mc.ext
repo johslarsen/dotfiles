@@ -546,7 +546,7 @@ shell/.abw
 	Open=(abiword %f &)
 
 # Microsoft Word Document
-regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$
+regex/\.([Dd][oO][cCtT]x?|[Ww][rR][iI])$
 	Include=libreoffice
 type/^Microsoft\ Word
 	Include=libreoffice
@@ -556,7 +556,7 @@ regex/\.([rR][tT][fF])$
 	Include=libreoffice
 
 # Microsoft Excel Worksheet
-regex/\.([xX][lL][sSwW])$
+regex/\.([xX][lL][sSwW]x?)$
 	Include=libreoffice
 type/^Microsoft\ Excel
 	Include=libreoffice
@@ -566,7 +566,7 @@ type/^Microsoft\ Office\ Document
 	Include=libreoffice
 
 include/libreoffice
-	Open=libreoffice %f &
+	Open=libreoffice --norestore --nolockcheck --nologo %f &
 
 # Framemaker
 type/^FrameMaker

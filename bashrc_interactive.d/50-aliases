@@ -53,6 +53,8 @@ alias turl='torsocks curl'
 alias mkvmerge='mkvmerge --default-language eng'
 alias ncpaste='nc termbin.com 9999'
 alias vim='vim 2>/dev/null'
+alias ledit='libreoffice --norestore --nolockcheck --nologo'
+alias lview='ledit --view'
 
 # Typos
 alias sudp='sudo'
