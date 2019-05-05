@@ -222,6 +222,11 @@ set nojoinspaces
 set background=dark
 colorscheme badwolf
 
+highlight Normal ctermfg=darkgreen
+highlight Special ctermfg=lightgreen
+
+highlight DiffText ctermfg=darkgreen cterm=bold ctermbg=darkblue
+
 highlight SpellBad term=reverse cterm=bold,underline
 highlight SpellLocal term=reverse cterm=underline ctermfg=brown ctermbg=NONE
 highlight SpellRare term=reverse cterm=underline ctermfg=yellow ctermbg=NONE
