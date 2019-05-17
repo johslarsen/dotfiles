@@ -12,3 +12,7 @@ define frame
   info args
   info locals
 end
+
+define rbbt
+  call (void)rb_backtrace()
+end
