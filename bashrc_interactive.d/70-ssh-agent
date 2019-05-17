@@ -12,7 +12,7 @@ function start_agent {
 if [ ! -f ~/.ssh/no_agent ]; then
 	if [ -f "${SSH_ENV}" ]; then
 		. "${SSH_ENV}" > /dev/null
-		ps ${SSH_AGENT_PID} &>/dev/null || {
+		ps ${SSH_AGENT_PID} | grep "ssh-agent" &>/dev/null || {
 			start_agent;
 		}
 	else
