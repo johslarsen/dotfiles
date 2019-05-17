@@ -1,0 +1,4 @@
+.include /etc/pulse/default.pa
+
+# always switch to latest connected device (e.g. useful when switching between multiple bluetooth devices)
+load-module module-switch-on-connect
