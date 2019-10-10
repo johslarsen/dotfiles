@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'shellwords'
+OptionParser.new do |o|
+  o.on "-t", "--time=[STRFTIME]", "Parse x-axis as a time of type STRFTIME"
+  o.on "-f", "--fmty=PRINTF", "Print y axis tic values with the PRINTF format"
+  o.on "-F", "--fmtx=PRINTF", "Print x axis tic values with the PRINTF format"
+  o.on "-l", "--logy=[BASE]", Integer, "Use logscale for y axis"
+  o.on "-L", "--logx=[BASE]", Integer, "Use logscale for x axis"
+  o.on "-x", "--cols=SIZE", Integer, "Write output with SIZE columns"
+  o.on "-y", "--lines=SIZE", Integer, "Write output with SIZE lines"
+
+  o.on "-s", "--style=WITH", "Customize the plot style, see http://gnuplot.sourceforge.net/docs_4.2/node145.html"
+  o.on "-p", "--plot=STATEMENT", "Customize what/how to plot (overrides --style), see http://gnuplot.sourceforge.net/docs_4.2/node100.html"
+end.permute!(into: $opts||={})
+gp = ["set terminal dumb #{$opts[:cols] || `tput cols`.chomp} #{$opts[:lines] ||`tput lines`.chomp}",
+      "set nokey"]
+if $opts.has_key?(:time)
+  gp << "set timefmt '#{$opts[:time] || "%Y-%m-%dT%H:%M:%S"}'"
+  gp << "set xdata time"
+end
+[:x, :y].each do |d|
+  gp << "set logscale #{d} #{$opts[:"log#{d}"]}" if $opts.has_key?(:"log#{d}")
+  gp << %Q{set format #{d} "#{Shellwords.escape $opts[:"fmt#{d}"]}"} if $opts[:"fmt#{d}"]
+end
+gp.concat(ARGV)
+gp << "plot #{$opts[:plot] || "'-' using 1:2 with #{$opts[:style] || "linespoints"}"}"
+puts gp if $DEBUG
+exec("gnuplot", "-e", gp.join(";"))
