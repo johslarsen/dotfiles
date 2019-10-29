@@ -1,0 +1,3 @@
+printf "explicit    %d\n" "$(pacman -Qet 2>/dev/null | wc -l)"
+printf "orphan      %d\n" "$(pacman -Qdt 2>/dev/null | wc -l)"
+printf "upgradeable %d\n" "$(checkupdates 2>/dev/null | wc -l)"
