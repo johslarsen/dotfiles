@@ -1,5 +1,6 @@
 Config {
 	  font = "xft:DejaVu Sans Mono:bold:size=10"
+	, additionalFonts = ["xft:DejaVu Sans Mono:bold:size=16"]
 	, bgColor = "black"
 	, fgColor = "grey"
 	, position = TopW L 100
@@ -14,7 +15,7 @@ Config {
 			, Run Com ".bin/mpd_status.sh" [] "mpd" 10
 			, Run Com ".bin/current_ip.sh" [] "ip" 60
 			, Run Com ".bin/wifi_status.sh" [] "wifi" 60
-			, Run Com ".bin/pa-vol.sh" ["xmobar"] "vol" 10
+			, Run ComX ".bin/pa-vol.sh" ["xmobar"] "V<fc=#cc0000>--</fc>" "vol" 10
 			, Run Com ".bin/acstatus.sh" [] "acstatus" 10
 			, Run Com ".bin/loadstatus.sh" [] "load" 10
 			, Run StdinReader

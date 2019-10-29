@@ -1,5 +1,6 @@
 Config {
 	  font = "xft:DejaVu Sans Mono:bold:pixelsize=12"
+	, additionalFonts = ["xft:DejaVu Sans Mono:bold:size=16"]
 	, bgColor = "black"
 	, fgColor = "grey"
 	, position = TopW L 100
@@ -13,7 +14,7 @@ Config {
 			, Run Weather "ENTC" ["-t","TOS <tempC>C"] 3000
 			, Run Com ".bin/mpd_status.sh" [] "mpd" 10
 			, Run Com ".bin/current_ip.sh" [] "ip" 10
-			, Run Com ".bin/pa-vol.sh" ["xmobar"] "vol" 10
+			, Run ComX ".bin/pa-vol.sh" ["xmobar"] "V<fc=#cc0000>--</fc>" "vol" 10
 			, Run Com ".bin/loadstatus.sh" [] "load" 10
 			, Run StdinReader
 	]
