@@ -1,0 +1,3 @@
+#!/bin/bash -
+shopt -s nocaseglob nullglob globstar
+"${1:-mpv}" "${2:-.}"/**/*.{mp4,mkv,avi,webm,m4v,wmv,mov,divx,flv}
