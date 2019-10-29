@@ -1,0 +1,2 @@
+#!/bin/bash -
+find "$@" -type f -printf "%f\n" | sed 's/.*\.//g' | sort | uniq -c | sort -n
