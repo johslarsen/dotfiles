@@ -288,7 +288,7 @@ set history=1000
 set undolevels=1000
 "}}}
 " Plugins (alphabetized) {{{
-let g:AutoPairsShortcutBackInsert = '<C-b>'
+let g:AutoPairsShortcutBackInsert = '<C-?>' " ctrl + backspace
 let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
