@@ -11,7 +11,6 @@ Config {
 			, Run Memory ["-L","20","-H","60","-l","#00cc00","-n","#cccc00","-h","#cc0000","-t","M<usedratio>","-S","True","-w","2"] 10
 			, Run DynNetwork ["-L","250000","-H","1000000","-l","#00cc00","-n","#cccc00","-h","#cc0000","-t","R<rx>T<tx>","-w","6"] 10
 			, Run Com "/usr/bin/date" ["+W#%V:%u %Y-%m-%d %H:%M:%S%:::z"] "date" 10
-			, Run Weather "ENTC" ["-t","TOS <tempC>C"] 3000
 			, Run Com ".bin/mpd_status.sh" [] "mpd" 10
 			, Run Com ".bin/current_ip.sh" [] "ip" 10
 			, Run ComX ".bin/pa-vol.sh" ["xmobar"] "V<fc=#cc0000>--</fc>" "vol" 10
@@ -20,5 +19,5 @@ Config {
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = "%StdinReader% }{<fc=#9999ff>%mpd%</fc> %cpu%(%multicpu%) %memory% %load% %dynnetwork% <fc=#8888ff>%ip%</fc> %vol% <fc=#99ff99>%ENTC%</fc> <fc=#ee9a00>%date%</fc>"
+	, template = "%StdinReader% }{<fc=#9999ff>%mpd%</fc> %cpu%(%multicpu%) %memory% %load% %dynnetwork% <fc=#8888ff>%ip%</fc> %vol% <fc=#ee9a00>%date%</fc>"
 }
