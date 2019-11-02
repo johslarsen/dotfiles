@@ -76,7 +76,9 @@
 	cim = commit -m
 	cia = commit -a
 	fix = commit --fixup
+	fixs = !git commit --fixup `git fzf`
 	squash = commit --squash
+	squashs = !git commit --squash `git fzf`
 	amend = commit --amend
 
 	l = log
@@ -113,10 +115,21 @@
 	rbi = rebase -i
 	rba = rebase --abort
 	rbc = rebase --continue
-	rbs = rebase -i --autosquash
+	rbf = rebase -i --autosquash
 	p = cherry-pick
 	pa = cherry-pick --abort
 	pc = cherry-pick --continue
+
+	fzf = !set -o pipefail && git rdl --all --color | fzf-tmux +s -m --layout reverse --ansi --preview-window=down --preview 'git ps --color {1}' | cut -d' ' -f1
+	refs = !set -o pipefail && git reflog --color   | fzf-tmux +s -m --layout reverse --ansi --preview-window=down --preview 'git ps --color {1}' | cut -d' ' -f1
+
+	ffs = !r=`git fzf` && git ff $r
+	rbs = !r=`git fzf` && git rebase -i $r
+	rbfs = !r=`git fzf` && git rebase -i --autosquash $r
+	resets = !r=`git fzf` && git reset $r
+	reseth = !r=`git fzf` && git reset --hard $r
+	resetf = !r=`git refs` && git reset --hard $r
+	picks = !rs=`git fzf` && git cherry-pick $rs
 
 	big = bisect good
 	bib = bisect bad
@@ -129,6 +142,7 @@
 	co = checkout
 	cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n100 {}'`
 	cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n100 {}'`
+	coc = !git checkout `git fzf`
 
 	submaster = submodule foreach --recursive git checkout master
 	subpull = submodule foreach --recursive git rpull
