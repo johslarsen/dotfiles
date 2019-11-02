@@ -82,7 +82,7 @@ nnoremap <silent> <leader><C-f> :call SelectaCommand('ag -lw "<C-r><C-w>"', '', 
 vnoremap <silent> <leader><C-f> "vy:call SelectaCommand('ag -l "<C-r>v"', '', ':vsplit')<cr>
 nnoremap <silent> <leader>g     :vimgrep /\<<C-r><C-w>\>/gj %<cr>
 vnoremap <silent> <leader>g     "vy:vimgrep /<C-r>v/gj %<cr>
-nnoremap <silent> <leader>G     :Ggrep! -E "\\<<C-r><C-w>\\>"<cr><cr>
+nnoremap <silent> <leader>G     :Ggrep! -E "\<<C-r><C-w>\>"<cr><cr>
 vnoremap <silent> <leader>G     "vy:Ggrep! -E "<C-r>v"<cr><cr>
 nnoremap <silent> <leader><C-g> :Ack! -w '<C-r><C-w>'<cr>
 vnoremap <silent> <leader><C-g> "vy:Ack! '<C-r>v'<cr>
