@@ -12,6 +12,7 @@ export MANPAGER=$PAGER
 export PROMPT_DIRTRIM=3
 export NMON=lmd
 export LS_COLORS+=":di=01;37;40"
+export FZF_DEFAULT_COMMAND="fd -Ebuild/"
 
 [ -z "$MANPATH" ] && export MANPATH=$(manpath)
 [ -z "$GOMAXPROCS" ] && export GOMAXPROCS=$(grep "^processor" /proc/cpuinfo | wc -l)

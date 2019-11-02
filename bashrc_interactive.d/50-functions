@@ -59,10 +59,7 @@ sxclip() {
 }
 
 cds() {
-	cd "$(find "${1:-.}" -type d | selecta)"
-}
-sr() {
-	find "$@" | selecta
+	cd "$(find "${1:-.}" -type d -not -path .git | fzf --preview 'ls {}')"
 }
 fw() {
 	find -iname "*$1*"

@@ -44,6 +44,7 @@
 [pretty]
 	r = %C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s
 	rd = %C(yellow)%h%C(auto)%d %C(cyan)%ai %C(magenta)%aE %C(green)%s
+	rc = %C(cyan)%ad %C(green)%s
 
 [pull]
 	ff = only
@@ -90,6 +91,7 @@
 	r10 = log --format=r -n10
 	r40 = log --format=r -n40
 	rl0 = log --format=r --compact-summary -U0
+	rcl = log --date=short --format=format:'%C(cyan)%ad %C(green)%s'
 	rdl = log --format=rd
 	rgl = log --graph --all --format=rd
 	rsgl = log --compact-summary --graph --all --format=rd
@@ -125,8 +127,8 @@
 
 	rclone = clone --recurse-submodules
 	co = checkout
-	cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | selecta`
-	cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | selecta`
+	cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n100 {}'`
+	cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n100 {}'`
 
 	submaster = submodule foreach --recursive git checkout master
 	subpull = submodule foreach --recursive git rpull

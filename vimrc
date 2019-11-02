@@ -23,12 +23,12 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'johslarsen/clang_complete' " fix <CR> mapping
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-hashrocket'
+Plugin 'junegunn/fzf.vim'
 Plugin 'jmirabel/vim-cmake'
 Plugin 'lervag/vimtex'
 Plugin 'majutsushi/tagbar' " ctag source browser
 Plugin 'mattn/calendar-vim'
 Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'mileszs/ack.vim'
 Plugin 'nixon/vim-vmath'
 Plugin 'saltstack/salt-vim'
 Plugin 'scrooloose/syntastic'
@@ -65,7 +65,7 @@ nnoremap          <leader>a     :Gstatus<cr>
 nnoremap          <leader>A     :SyntasticCheck<cr>
 nnoremap          <leader><C-a> :SyntasticCheck<Space>
 nnoremap          <leader>b     :buffers<cr>:buffer<Space>
-nnoremap          <leader>B     :call SelectaBuffer()<cr>
+nnoremap          <leader>B     :Buffers<cr>
 nnoremap          <leader><C-b> :buffers!<cr>:buffer<Space>
 nnoremap <silent> <leader>c     :e $MYVIMRC<cr>:keeppatterns /^" Keyboard Shortcuts<cr>zo:nohlsearch<cr>
 nnoremap <silent> <leader>C     :so $MYVIMRC<cr>
@@ -77,16 +77,16 @@ nnoremap <silent> <leader>e     :Explore<cr>
 nnoremap <silent> <leader>E     :Vexplore<cr>
 nnoremap <silent> <leader><c-e> :Sexplore<cr>
 nnoremap <silent> <leader>f     :set invcursorline invcursorcolumn<cr>
-nnoremap <silent> <leader>F     :call SelectaCommand('git grep -lE "\\<<C-r><C-w>\\>"', '', ':vsplit')<cr>
-vnoremap <silent> <leader>F     "vy:call SelectaCommand('git grep -lE "<C-r>v"', '', ':vsplit')<cr>
-nnoremap <silent> <leader><C-f> :call SelectaCommand('ag -lw "<C-r><C-w>"', '', ':vsplit')<cr>
-vnoremap <silent> <leader><C-f> "vy:call SelectaCommand('ag -l "<C-r>v"', '', ':vsplit')<cr>
+nnoremap <silent> <leader>F     :Tags <C-r><C-w><cr>
+vnoremap <silent> <leader>F     "vy:Tags <C-r>v<cr>
+nnoremap <silent> <leader><C-f> :Tags <C-r><C-w>
+vnoremap <silent> <leader><C-f> "vy:Tags <C-r>v
 nnoremap <silent> <leader>g     :vimgrep /\<<C-r><C-w>\>/gj %<cr>
 vnoremap <silent> <leader>g     "vy:vimgrep /<C-r>v/gj %<cr>
-nnoremap <silent> <leader>G     :Ggrep! -E "\<<C-r><C-w>\>"<cr><cr>
-vnoremap <silent> <leader>G     "vy:Ggrep! -E "<C-r>v"<cr><cr>
-nnoremap <silent> <leader><C-g> :Ack! -w '<C-r><C-w>'<cr>
-vnoremap <silent> <leader><C-g> "vy:Ack! '<C-r>v'<cr>
+nnoremap <silent> <leader>G     :GGrep \<<C-r><C-w>\><cr>
+vnoremap <silent> <leader>G     "vy:GGrep <C-r>v<cr>
+nnoremap <silent> <leader><C-g> :Ag <C-r><C-w><cr>
+vnoremap <silent> <leader><C-g> "vy:Ag <C-r>v<cr>
 nnoremap <silent> <leader>h     :FSHere<cr>
 nnoremap <silent> <leader>H     :FSSplitLeft<cr>
 nnoremap <silent> <leader><c-h> :FSSplitAbove<cr>
@@ -102,9 +102,8 @@ nnoremap          <leader>M     :Make -j=g:number_of_processors<cr><space>
 nnoremap <silent> <leader><c-m> :CMake<cr>
 nnoremap <silent> <leader>n     :nohlsearch<cr>
 nnoremap <silent> <leader>N     :set invnumber invrelativenumber signcolumn==&signcolumn=="auto"?"no":"auto"<cr><cr>
-nnoremap          <leader>o     :call SelectaCommand("~/.bin/findSourceFiles.sh", "", ":e")<cr>
-nnoremap          <leader>O     :call SelectaCommand("~/.bin/findSourceFiles.sh", "", ":vsplit")<cr>
-nnoremap          <leader><C-o> :call SelectaCommand("~/.bin/findSourceFiles.sh", "", ":split")<cr>
+nnoremap          <leader>o     :Files<cr>
+nnoremap          <leader>O     :Filetypes<cr>
 nnoremap          <leader>p     :help<space>
 vnoremap <silent> <leader>p     "vy:help <C-r>v<cr>
 nnoremap <silent> <leader>P     :helpclose<cr>
@@ -319,6 +318,17 @@ let g:csv_comment = '#'
 let g:csv_end = 10
 let g:csv_nl = 1
 
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0,
+  \                   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                   <bang>0)
+
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_map_keys = 0
@@ -480,26 +490,6 @@ endfunction
 
 function! RetabIndents()
   execute '%s@^\(\ \{'.&ts.'\}\)\+@\=repeat("\t", len(submatch(0))/'.&ts.')@e'
-endfunction
-
-function! SelectaBuffer()
-  let bufnrs = filter(range(1, bufnr("$")), 'buflisted(v:val)')
-  let buffers = map(bufnrs, 'bufname(v:val)')
-  call SelectaCommand('echo "' . join(buffers, "\n") . '"', "", ":b")
-endfunction
-
-
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
-    " leftovers from selecta on the screen
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
 endfunction
 
 function! SlashToColons(path)
