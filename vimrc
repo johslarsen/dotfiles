@@ -228,7 +228,7 @@ highlight Special ctermfg=lightgreen
 
 highlight DiffText ctermfg=darkgreen cterm=bold ctermbg=darkblue
 
-highlight SpellBad term=reverse cterm=bold,underline
+highlight SpellBad term=reverse cterm=bold,underline ctermbg=NONE
 highlight SpellLocal term=reverse cterm=underline ctermfg=brown ctermbg=NONE
 highlight SpellRare term=reverse cterm=underline ctermfg=yellow ctermbg=NONE
 
