@@ -61,7 +61,6 @@ filetype plugin indent on
 let mapleader="," " WARN: must precede <leader> mappings
 noremap <c-,> ,
 
-nnoremap          <leader>a     :Gstatus<cr>
 nnoremap          <leader>A     :SyntasticCheck<cr>
 nnoremap          <leader><C-a> :SyntasticCheck<Space>
 nnoremap          <leader>b     :buffers<cr>:buffer<Space>
@@ -133,7 +132,7 @@ nnoremap          <leader>7     :call ToggleStaticColorcolumn(73)<cr>
 nnoremap          <leader>8     :call ToggleStaticColorcolumn(81)<cr>
 nnoremap          <leader>%     :%s//gc<Left><Left><Left>
 nnoremap          <leader>"     :call AutoPairsToggle()<CR>
-nnoremap          <leader>+     :Gstatus<cr>
+nnoremap <silent> <leader>+     :call GFileStatus(expand('%'))<cr>
 nnoremap          <leader>?     :Glog<cr>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
@@ -441,6 +440,11 @@ function! _GTestCaseToggle()
   endif
   s/\(TEST.*([^,]*,[ \t\n]*\)\(DISABLED_\)\?/\=submatch(1).ToggleEmptyOr('DISABLED_', submatch(2))/
   call setpos('.', l:cursor)
+endfunction
+
+function! GFileStatus(file)
+  :Gstatus
+  call search(" ".a:file."$")
 endfunction
 
 function! IndentationString(indentation_level)
