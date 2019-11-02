@@ -35,6 +35,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim' " undo history
 Plugin 'stevearc/vim-arduino'
 Plugin 'sunaku/vim-ruby-minitest'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'thinca/vim-template'
 "Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-apathy'
