@@ -1,0 +1,2 @@
+#!/bin/bash -
+clang-reorder-fields -p build/ "$@"

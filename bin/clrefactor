@@ -1,0 +1,2 @@
+#!/bin/bash -
+clang-refactor -p build/ "$@"

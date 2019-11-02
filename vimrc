@@ -63,6 +63,7 @@ noremap <c-,> ,
 
 nnoremap          <leader>a     :Gstatus<cr>
 nnoremap          <leader>A     :SyntasticCheck<cr>
+nnoremap          <leader><C-a> :SyntasticCheck<Space>
 nnoremap          <leader>b     :buffers<cr>:buffer<Space>
 nnoremap          <leader>B     :call SelectaBuffer()<cr>
 nnoremap          <leader><C-b> :buffers!<cr>:buffer<Space>
@@ -308,7 +309,11 @@ let g:clang_complete_optional_args_in_snippets = 0
 let g:clang_jumpto_declaration_in_preview_key = '<C-W>}'
 let g:clang_snippets = 1
 let g:clang_trailing_placeholder = 1
-let g:clang_user_options = "-std=c++14 -Idefs -Iinclude -I. -L."
+if filereadable('CMakeLists.txt')
+  let g:clang_compilation_database = "build/"
+else
+  let g:clang_user_options = "-std=c++14 -Idefs -Iinclude -I. -L."
+endif
 
 let g:csv_comment = '#'
 let g:csv_end = 10
@@ -339,13 +344,24 @@ let s:W .= ' -Wformat=2 -Wformat-overflow=2 -Wwrite-strings'
 let s:W .= ' -Wnull-dereference -fcheck-pointer-bounds -mmpx -Wchkp'
 let s:W .= ' -Wsuggest-override -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn'
 let s:W .= ' -Wswitch-default -Wduplicated-branches -Wduplicated-cond'
-let s:W .= ' -Wtrampolines -Wfloat-equal -Wlogical-op -Wshadow=global'
-let s:W .= ' -Wrestrict -Winline'
-let s:W .= ' -Wstack-protector -fstack-protector'
+let s:W .= ' -Wtrampolines -Wfloat-equal -Wlogical-op -Wshadow'
+let s:W .= ' -Wrestrict -Winline -fstack-protector'
 "let s:W .= ' -Weffc++ -Wpadded'
 let g:syntastic_c_compiler_options = s:W . ' -std=c11 -Wbad-function-cast -Wstrict-prototypes -Wold-style-definition -Wc++-compat'
 let g:syntastic_cpp_compiler_options = s:W . ' -std=c++14 -Wregister -Wstrict-null-sentinel -Wold-style-cast -Wzero-as-null-pointer-constant'
 let g:syntastic_cpp_check_header = 1
+let g:syntastic_c_clang_check_post_args = ""
+let g:syntastic_cpp_clang_check_post_args = ""
+let g:syntastic_c_clang_tidy_post_args = ""
+let g:syntastic_cpp_clang_tidy_post_args = ""
+let g:syntastic_cpp_clang_check_args = '-p build/ '.substitute(s:W, " ", " --extra-arg=", "g")
+let g:syntastic_c_clang_check_args = g:syntastic_cpp_clang_check_args
+let g:syntastic_cpp_clang_tidy_args = '-p build/'
+let g:syntastic_c_clang_tidy_args = g:syntastic_cpp_clang_tidy_args
+if filereadable('CMakeLists.txt')
+  let g:syntastic_cpp_checkers = ["clang_check"]
+  let g:syntastic_c_checkers = ["clang_check"]
+endif
 
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python2'
