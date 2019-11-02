@@ -85,7 +85,10 @@
 	gl = log --graph --all
 	hl = log --format=format:'%H %s'
 	fl = log --format=fuller
+	ol = log --oneline
 	rl = log --format=r
+	r10 = log --format=r -n10
+	r40 = log --format=r -n40
 	rl0 = log --format=r --compact-summary -U0
 	rdl = log --format=rd
 	rgl = log --graph --all --format=rd
