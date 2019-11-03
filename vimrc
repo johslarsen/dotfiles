@@ -52,6 +52,7 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-tbone' " tmux :Tyank, :Tput
 Plugin 'tpope/vim-unimpaired' " lots of shortcuts
 "Plugin 'tpope/vim-vinegar' " extended filebrowser, WARN: causes problem with block completion <NL> mapping
+Plugin 'wellle/targets.vim'
 Plugin 'yssl/QFEnter' " QF: prev:<CR>/<2-LeftMouse> |:<leader><CR> -:<leaeder><Space> tab:<leader><Tab>
 
 " colorschemes
