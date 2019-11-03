@@ -66,8 +66,7 @@ noremap <c-,> ,
 
 nnoremap          <leader>A     :SyntasticCheck<cr>
 nnoremap          <leader><C-a> :SyntasticCheck<Space>
-nnoremap          <leader>b     :buffers<cr>:buffer<Space>
-nnoremap          <leader>B     :Buffers<cr>
+nnoremap          <leader>b     :Buffers<cr>
 nnoremap          <leader><C-b> :buffers!<cr>:buffer<Space>
 nnoremap <silent> <leader>c     :e $MYVIMRC<cr>:keeppatterns /^" Keyboard Shortcuts<cr>zo:nohlsearch<cr>
 nnoremap <silent> <leader>C     :so $MYVIMRC<cr>
@@ -81,8 +80,7 @@ nnoremap <silent> <leader><c-e> :Sexplore<cr>
 nnoremap <silent> <leader>f     :set invcursorline invcursorcolumn<cr>
 nnoremap <silent> <leader>F     :Tags <C-r><C-w><cr>
 vnoremap <silent> <leader>F     "vy:Tags <C-r>v<cr>
-nnoremap <silent> <leader><C-f> :Tags <C-r><C-w>
-vnoremap <silent> <leader><C-f> "vy:Tags <C-r>v
+nnoremap <silent> <leader><C-f> :Lines <C-r><C-w><cr>
 nnoremap <silent> <leader>g     :vimgrep /\<<C-r><C-w>\>/gj %<cr>
 vnoremap <silent> <leader>g     "vy:vimgrep /<C-r>v/gj %<cr>
 nnoremap <silent> <leader>G     :GGrep \<<C-r><C-w>\><cr>
@@ -104,9 +102,10 @@ nnoremap          <leader>M     :Make -j=g:number_of_processors<cr><space>
 nnoremap <silent> <leader><c-m> :CMake<cr>
 nnoremap <silent> <leader>n     :nohlsearch<cr>
 nnoremap <silent> <leader>N     :set invnumber invrelativenumber signcolumn==&signcolumn=="auto"?"no":"auto"<cr><cr>
-nnoremap          <leader>o     :Files<cr>
-nnoremap          <leader>O     :Filetypes<cr>
-nnoremap          <leader>p     :help<space>
+nnoremap          <leader>o     :GFiles<cr>
+nnoremap          <leader>O     :Files<cr>
+nnoremap          <leader><C-o> :call AllFiles('.')<cr>
+nnoremap          <leader>p     :Helptags<cr>
 vnoremap <silent> <leader>p     "vy:help <C-r>v<cr>
 nnoremap <silent> <leader>P     :helpclose<cr>
 nnoremap          <leader><C-p> :lhelpgrep<space>
@@ -123,6 +122,8 @@ nnoremap <silent> <leader>T     :vsplit =ToggleSourceTestFilename()<cr><cr>
 nnoremap <silent> <leader><c-t> :split =ToggleSourceTestFilename()<cr><cr>
 nnoremap <silent> <leader>u     :call g:ClangUpdateQuickFix()<cr>
 nnoremap <silent> <leader>U     :GundoToggle<CR>
+nnoremap          <leader>v     :Commits<cr>
+nnoremap          <leader>V     :BCommits<cr>
 nnoremap <silent> <leader>w     :lopen 4<cr>
 nnoremap <silent> <leader>W     :lclose<cr>:llist<cr>
 nnoremap <silent> <leader>ye    :GTestCaseToggle<cr>
@@ -430,6 +431,13 @@ augroup vimrc
 
 augroup END
 " Functions (alphabetized) {{{1
+function! AllFiles(directory)
+  let l:fzf_default_command = $FZF_DEFAULT_COMMAND
+  let $FZF_DEFAULT_COMMAND = 'fd -IH'
+  exec ':Files '.a:directory
+  let $FZF_DEFAULT_COMMAND = l:fzf_default_command
+endfunction
+
 function! ColonsToSlash(namespace)
   return substitute(a:namespace, '::', '\/', 'g')
 endfunction
