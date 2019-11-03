@@ -171,7 +171,8 @@ map Æ }
 " toggle between this and previous buffer
 nnoremap <C-e> :buffer #<CR>
 " Movement {{{2
-noremap <NL> gj
+noremap <C-Up> gk
+noremap <C-Down> gj
 
 nmap <silent> [g <Plug>GitGutterPrevHunk
 nmap <silent> ]g <Plug>GitGutterNextHunk
@@ -194,6 +195,11 @@ inoremap <c-c> <Esc>
 
 " custom completion, neatly located between ^n (next, completion) and ^p (previous)
 inoremap <c-k> <c-x><c-o>
+
+" mimic UltiSnips behavior for clang_complete snippets
+nmap <C-j> <Tab>
+smap <C-j> <ESC><Tab>
+imap <C-j> <C-g><Tab>
 
 " nbsp = space
 inoremap   <Space>
@@ -278,7 +284,9 @@ set hlsearch
 set ignorecase
 set smartcase
 
-set completeopt=menu,preview
+set previewheight=5
+
+set completeopt=menu
 set completefunc=syntaxcomplete#Complete
 highlight Pmenu ctermfg=white ctermbg=blue
 highlight PmenuSel ctermfg=blue ctermbg=white
