@@ -52,6 +52,7 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-tbone' " tmux :Tyank, :Tput
 Plugin 'tpope/vim-unimpaired' " lots of shortcuts
 "Plugin 'tpope/vim-vinegar' " extended filebrowser, WARN: causes problem with block completion <NL> mapping
+Plugin 'tweekmonster/local-indent.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'yssl/QFEnter' " QF: prev:<CR>/<2-LeftMouse> |:<leader><CR> -:<leaeder><Space> tab:<leader><Tab>
 
@@ -249,6 +250,8 @@ set listchars=eol:$,tab:>-,nbsp:%,precedes:<,extends:>
 highlight NonText    cterm=bold ctermfg=magenta
 highlight SpecialKey cterm=NONE ctermfg=black ctermbg=brown
 
+highlight LocalIndentGuide ctermbg=234
+
 set laststatus=2
 set statusline=%< " truncate from left
 set statusline+=%#ErrorMsg#%{SyntasticStatuslineFlag()}%{SyntasticIsPassive()?'[PASSIVE]':''}%*
@@ -416,6 +419,7 @@ augroup vimrc
   au VimEnter * if filereadable('CMakeLists.txt') | let &makeprg='cmake --build '.shellescape(get(g:, 'cmake_build_dir', 'build')).' --' | endif
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " jump to last position
   au User plugin-template-loaded call s:template_init()
+  au FileType * LocalIndentGuide +hl
 
   " no folding whilst inserting text (mostly relevant for TeX)
   au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
