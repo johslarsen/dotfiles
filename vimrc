@@ -2,79 +2,86 @@
 set nocompatible " explicitly get out of vi-compatible mode
 filetype off
 
-if has('python3') | endif
+if has('python3') | endif " make sure none loads python2 accidentally
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Ron89/thesaurus_query.vim' " ,cs
-Plugin 'SirVer/ultisnips'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'alepez/vim-gtest' " does not work that well
+
+" Syntax/Language {{{2
 Plugin 'andrewstuart/vim-kubernetes'
-Plugin 'c9s/helper.vim'
-Plugin 'c9s/treemenu.vim'
-Plugin 'c9s/vikube.vim'
 Plugin 'chrisbra/csv.vim'
 Plugin 'ciaranm/googletest-syntax'
 Plugin 'confluencewiki.vim'
-Plugin 'csexton/trailertrash.vim'
-"Plugin 'dajero/VimLab' " MATLAB
-Plugin 'derekwyatt/vim-fswitch'
-"Plugin 'elixir-lang/vim-elixir'
-"Plugin 'ervandew/screen' " VimLab dependency
-Plugin 'gavinbeatty/dragvisuals.vim'
 Plugin 'fatih/vim-go'
-Plugin 'gnupg'
-Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'jmirabel/vim-cmake'
+Plugin 'lervag/vimtex'
+"Plugin 'mzlogin/vim-markdown-toc'
+Plugin 'rust-lang/rust.vim'
+Plugin 'saltstack/salt-vim'
+Plugin 'sirtaj/vim-openscad'
+Plugin 'stevearc/vim-arduino'
+Plugin 'sunaku/vim-ruby-minitest'
+
+" IDE-like {{{2
 Plugin 'johslarsen/clang_complete' " fix <CR> mapping
 Plugin 'johslarsen/vim-clang-format'
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
-Plugin 'johslarsen/vim-hashrocket'
 Plugin 'johslarsen/vim-racer'
 Plugin 'johslarsen/vim-testcov'
-Plugin 'junegunn/fzf.vim'
-Plugin 'jmirabel/vim-cmake'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-function'
-Plugin 'lervag/vimtex'
 Plugin 'majutsushi/tagbar' " ctag source browser
-Plugin 'mattn/calendar-vim'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'nixon/vim-vmath'
-Plugin 'rust-lang/rust.vim'
-Plugin 'saltstack/salt-vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'sirtaj/vim-openscad'
-Plugin 'sjl/gundo.vim' " undo history
-Plugin 'stevearc/vim-arduino'
-Plugin 'sunaku/vim-ruby-minitest'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'thinca/vim-template'
-"Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-apathy'
-Plugin 'tpope/vim-dadbod'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-dispatch' " :Make
+Plugin 'tpope/vim-apathy' " more sane include++ path defaults
+
+" Version control {{{2
+Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive' " git
 Plugin 'tpope/vim-rhubarb' " github
-Plugin 'tpope/vim-sensible' " lots of defaults
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-tbone' " tmux :Tyank, :Tput
-Plugin 'tpope/vim-unimpaired' " lots of shortcuts
-"Plugin 'tpope/vim-vinegar' " extended filebrowser, WARN: causes problem with block completion <NL> mapping
-Plugin 'tweekmonster/local-indent.vim'
-Plugin 'wellle/targets.vim'
-Plugin 'wellle/visual-split.vim'
-Plugin 'yssl/QFEnter' " QF: prev:<CR>/<2-LeftMouse> |:<leader><CR> -:<leaeder><Space> tab:<leader><Tab>
 
-" colorschemes
+" Buffer management {{{2
+Plugin 'derekwyatt/vim-fswitch' " .c/.h toggle
+Plugin 'junegunn/fzf.vim'
+Plugin 'mattn/calendar-vim'
+Plugin 'wellle/visual-split.vim' " vip,s: split with the selected paragraph
+Plugin 'ronakg/quickr-preview.vim' " quick/loc: ,<space>: preview
+
+" Text objects {{{2
+Plugin 'michaeljsmith/vim-indent-object' " ii
+Plugin 'wellle/targets.vim' " 2i(: nth enclosing (), n(: following (...)
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-function' " if: within def, aF: def + space, iF: space +def
+Plugin 'tpope/vim-commentary' " gcip toggle comment on paragraph
+Plugin 'tpope/vim-speeddating' " d<C-a>: replace with UTC, d<C-x>: replace with local time
+Plugin 'tpope/vim-tbone' " tmux :Tyank, :Tput
+
+" Visual indicators {{{2
+Plugin 'csexton/trailertrash.vim'
+Plugin 'tweekmonster/local-indent.vim' " highlight column spanning current indent
+
+" Snippets {{{2
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'thinca/vim-template'
+
+" Colorschemes {{{2
 Plugin 'sjl/badwolf'
-Plugin 'tomasr/molokai'
-Plugin 'altercation/Vim-colors-solarized'
+
+" Miscellaneous {{{2
+Plugin 'sjl/gundo.vim' " undo history
+Plugin 'tpope/vim-sensible' " lots of defaults
+Plugin 'tpope/vim-unimpaired' " lots of shortcuts
+
+Plugin 'gnupg'
+Plugin 'tpope/vim-eunuch' " :SudoWrite
+Plugin 'tpope/vim-dadbod' " in *.sql, e.g. :!DB mysql://
+Plugin 'nixon/vim-vmath' " vip++: sum/avg/... of numbers in paragraph
+
+Plugin 'c9s/helper.vim'
+Plugin 'c9s/treemenu.vim'
+Plugin 'c9s/vikube.vim'
+
+
 call vundle#end()
 filetype plugin indent on
 " Keyboard Shortcuts {{{1
@@ -212,11 +219,6 @@ onoremap ac <Plug>GitGutterTextObjectOuterPending
 xnoremap ic <Plug>GitGutterTextObjectInnerVisual
 xnoremap ac <Plug>GitGutterTextObjectOuterVisual
 
-vmap <expr> D       DVB_Duplicate()
-vmap <expr> <s-LEFT>  DVB_Drag('left')
-vmap <expr> <s-DOWN>  DVB_Drag('down')
-vmap <expr> <s-UP>    DVB_Drag('up')
-vmap <expr> <s-RIGHT> DVB_Drag('right')
 " Insert {{{2
 inoremap <c-c> <Esc>
 
@@ -338,8 +340,6 @@ let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
 
-let g:DVB_TrimWS = 1
-
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger = '<C-l>' " default <C-k> conflicts with my omni-complete hotkey
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
@@ -388,6 +388,8 @@ let g:gitgutter_sign_priority = 5
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1="inc"
 let g:html_indent_style1="inc"
+
+let g:quickr_preview_size = 5
 
 let g:racer_experimental_completer = 1
 let g:racer_insert_paren = 1
