@@ -1,0 +1,11 @@
+snippet TEST "Google standalone test case"
+TEST(`!v GTestContext()[0]`, $1) {
+	$2
+}
+endsnippet
+
+snippet TEST_F "Google fixture test case"
+TEST_F(`!v GTestContext()[0]`, $1) {
+	$2
+}
+endsnippet

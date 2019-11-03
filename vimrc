@@ -6,6 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Ron89/thesaurus_query.vim' " ,cs
+Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'alepez/vim-gtest' " does not work that well
@@ -19,6 +20,7 @@ Plugin 'derekwyatt/vim-fswitch'
 "Plugin 'ervandew/screen' " VimLab dependency
 Plugin 'gavinbeatty/dragvisuals.vim'
 Plugin 'gnupg'
+Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'johslarsen/clang_complete' " fix <CR> mapping
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
@@ -126,6 +128,10 @@ nnoremap <silent> <leader>W     :lclose<cr>:llist<cr>
 nnoremap <silent> <leader>ye    :GTestCaseToggle<cr>
 nnoremap <silent> <leader>yy    :MakeCheckGTest *<cr>
 nnoremap          <leader>yY    :MakeCheckGTest *
+nnoremap          <leader>yf    :MakeCheckGTest <C-r>=GTestContext()[0]<cr>.*<cr>
+nnoremap          <leader>yF    :MakeCheckGTest <C-r>=GTestContext()[0]<cr>.*
+nnoremap          <leader>yt    :MakeCheckGTest <C-r>=join(GTestContext(),'.')<cr><cr>
+nnoremap          <leader>yT    :MakeCheckGTest <C-r>=join(GTestContext(),'.')<cr>
 nnoremap          <leader>x     :Dispatch<space>
 nnoremap          <leader>X     :Dispatch!<space>
 nnoremap          <leader><C-x> :Start!<space>
@@ -391,6 +397,8 @@ let g:tex_fold_enabled = 1
 
 let g:tq_use_vim_autocomplete=0
 
+let g:UltiSnipsExpandTrigger="<tab>"
+
 let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
 " Autocommands {{{1
 let g:number_of_processors = system('nproc')+0
@@ -441,6 +449,16 @@ function! _GTestCaseToggle()
   endif
   s/\(TEST.*([^,]*,[ \t\n]*\)\(DISABLED_\)\?/\=submatch(1).ToggleEmptyOr('DISABLED_', submatch(2))/
   call setpos('.', l:cursor)
+endfunction
+
+function! GTestContext()
+  let l:pattern = 'TEST[^(]*(\([^ ,]\+\), \([^ ,)]\+\)'
+  let l:pos = search(l:pattern, 'bcnw')
+  if (l:pos == 0)
+    return ['', '']
+  endif
+  let l:match = matchlist(getline(l:pos), l:pattern)
+  return [l:match[1], l:match[2]]
 endfunction
 
 function! GFileStatus(file)
