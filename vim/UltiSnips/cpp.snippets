@@ -1,9 +1,14 @@
+priority 20
+
+snippet cerr "std::cerr << ... << std::endl;"
+std::cerr << $1 << std::endl;
+endsnippet
+
 snippet TEST "Google standalone test case"
 TEST(`!v GTestContext()[0]`, $1) {
 	$2
 }
 endsnippet
-
 snippet TEST_F "Google fixture test case"
 TEST_F(`!v GTestContext()[0]`, $1) {
 	$2

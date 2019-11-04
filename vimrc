@@ -144,6 +144,7 @@ nnoremap          <leader>%     :%s//gc<Left><Left><Left>
 nnoremap          <leader>"     :call AutoPairsToggle()<CR>
 nnoremap <silent> <leader>+     :call GFileStatus(expand('%'))<cr>
 nnoremap          <leader>?     :Glog<cr>
+nnoremap          <leader><Tab> :Snippets<cr>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap        ++ vip++
@@ -201,6 +202,8 @@ inoremap <c-k> <c-x><c-o>
 nmap <C-j> <Tab>
 smap <C-j> <ESC><Tab>
 imap <C-j> <C-g><Tab>
+
+inoremap <silent> <S-Tab> <C-\><C-o>:Snippets<cr>
 
 " nbsp = space
 inoremap   <Space>
