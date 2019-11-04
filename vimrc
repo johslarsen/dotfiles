@@ -171,7 +171,11 @@ nmap <CR> <c-]>
 nmap <C-w><C-t> <C-w>}
 " these are just very close
 map ø [
+map øø [[
+map øæ []
+map æø ][
 map æ ]
+map ææ ]]
 map Ø {
 map Æ }
 
