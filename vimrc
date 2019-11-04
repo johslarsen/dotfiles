@@ -54,6 +54,7 @@ Plugin 'tpope/vim-unimpaired' " lots of shortcuts
 "Plugin 'tpope/vim-vinegar' " extended filebrowser, WARN: causes problem with block completion <NL> mapping
 Plugin 'tweekmonster/local-indent.vim'
 Plugin 'wellle/targets.vim'
+Plugin 'wellle/visual-split.vim'
 Plugin 'yssl/QFEnter' " QF: prev:<CR>/<2-LeftMouse> |:<leader><CR> -:<leaeder><Space> tab:<leader><Tab>
 
 " colorschemes
@@ -145,6 +146,10 @@ nnoremap          <leader>"     :call AutoPairsToggle()<CR>
 nnoremap <silent> <leader>+     :call GFileStatus(expand('%'))<cr>
 nnoremap          <leader>?     :Glog<cr>
 nnoremap          <leader><Tab> :Snippets<cr>
+
+vnoremap <silent> <leader>r     :VSResize<cr>
+vnoremap <silent> <leader>s     :VSSplitAbove<cr>
+vnoremap <silent> <leader>S     :VSSplitBelow<cr>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap        ++ vip++
