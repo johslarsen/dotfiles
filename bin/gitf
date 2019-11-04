@@ -1,0 +1,5 @@
+#!/bin/bash -
+set -o pipefail
+git_cmd=( git log --graph --format="format:%C(yellow)%h%C(auto)%d %C(cyan)%ai %C(magenta)%aE %C(green)%s" --color "${@:---all}")
+fzf_cmd=( fzf-tmux --ansi +s -m --layout reverse --preview-window=down --preview "git show -p --color --compact-summary \$(echo {} | awk 'match(\$0,/([0-9a-z]+) /,m){print m[1]}')" )
+"${git_cmd[@]}" | "${fzf_cmd[@]}" | awk 'match($0,/([0-9a-z]+) /,m){print m[1]}'
