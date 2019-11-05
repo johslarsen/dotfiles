@@ -322,14 +322,19 @@ set noswapfile
 set backupdir=~/tmp,/tmp
 set history=1000
 set undolevels=1000
+
 "}}}
 " Plugins (alphabetized) {{{
-let g:AutoPairsShortcutBackInsert = '<C-?>' " ctrl + backspace
+let g:AutoPairsShortcutBackInsert = '<C-b>' " ctrl + backspace
 let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
 
 let g:DVB_TrimWS = 1
+
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = '<C-l>' " default <C-k> conflicts with my omni-complete hotkey
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 
 let g:arduino_dir = '/usr/share/arduino' " location on archlinux
 
@@ -429,8 +434,6 @@ let g:tex_flavor = "latex"
 let g:tex_fold_enabled = 1
 
 let g:tq_use_vim_autocomplete=0
-
-let g:UltiSnipsExpandTrigger="<tab>"
 
 let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
 " Autocommands {{{1
