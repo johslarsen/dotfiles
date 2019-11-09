@@ -1,0 +1,12 @@
+snippet #!
+#!/bin/gnuplot
+endsnippet
+
+snippet gpps "GnuPlot PostScript example"
+set term post landscape size 29cm,21cm color enhanced
+set output "${1:`!v expand('%:t:r')`}.ps"
+set title "${2:title}";
+set xlabel "${3:x}";
+set ylabel "${4:y}";
+plot "${5:-}"
+endsnippet

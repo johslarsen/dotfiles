@@ -1,0 +1,21 @@
+snippet cl "class ... def initialize ..."
+class ${1:`!v ToCamel(RPath('%:t:r'))`}
+	def initialize(${2:*args})
+		$3
+	end
+end
+endsnippet
+
+snippet tc "class ... < Minitest::Test" m
+class ${1:`!v ToCamel(RPath('%:t:r'))`} < Minitest::Test
+	def setup
+	end
+
+	def teardown
+	end
+
+	def test_${2:foo}
+		$3
+	end
+end
+endsnippet

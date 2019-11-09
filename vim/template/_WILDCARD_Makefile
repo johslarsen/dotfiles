@@ -3,7 +3,7 @@ LD := ld
 RM := rm -rf
 
 CFLAGS := -Wall -Werror -g
-LDFLAGS := 
+LDFLAGS :=
 
 #CURSOR#
 

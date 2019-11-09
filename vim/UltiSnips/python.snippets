@@ -1,0 +1,22 @@
+snippet cl "class Foo: ..."
+class ${1:`!v ToCamel(RPath('%:t:r'))`}(${2:object})
+	def __init__(self, ${3:args}):
+		super($1, self).__init__()
+		${4:pass}
+endsnippet
+
+snippet tc "class TestFoo(unittest.TestCase)" m
+class ${1:Test`!v ToCamel(RPath('%:t:r'))`}(unittest.TestCase):
+	def setUp(self):
+		pass
+	def tearDown(self):
+		pass
+
+	def test_${2:foo}(self):
+		${3:pass}
+endsnippet
+
+snippet ifunit "if __main__: unittest.main()"
+if __name__ == "__main__":
+	unittest.main()
+endsnippet

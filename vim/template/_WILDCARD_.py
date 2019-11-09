@@ -1,20 +1,8 @@
-#:%s/#CLASS#/\=ToCamel(RPath('%:t:r'))/g
-#!/usr/bin/env python2
+#!#SNIPPET#
 import unittest
 
-class #CLASS#(object):
+cl#SNIPPET_ACTIVE#
 
-	def __init__(self):
-		#CURSOR#
+tc#SNIPPET#
 
-class Test#CLASS#(unittest.TestCase):
-
-	def setUp(self):
-		pass
-
-	def tearDown(self):
-		pass
-
-
-if __name__ == "__main__":
-	unittest.main()
+ifunit#SNIPPET#

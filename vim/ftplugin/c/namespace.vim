@@ -6,6 +6,12 @@ if !exists("*NamespaceString")
     return substitute(substitute(a:dirname, "+", "", "g"), '\/', '::', 'g')
   endfunction
 endif
+if !exists("*NamespaceColons")
+  function NamespaceColons(dirname)
+    let l:namespace = NamespaceString(a:dirname)
+    return l:namespace == "" ? "" : l:namespace."::"
+  endfunction
+endif
 if !exists("*NamespaceDeclaration")
   function NamespaceDeclaration()
     if (expand("%:p:h") == getcwd())
@@ -35,11 +41,7 @@ if !exists("*NamespaceUsing")
 endif
 if !exists("*NamespaceAndClass")
   function NamespaceAndClass()
-    if (NamespaceString(RPath("%:h")) == "")
-      return RPath('%:t:r')
-    else
-      return NamespaceString(RPath("%:h"))."::".RPath('%:t:r')
-    endif
+    return NamespaceColons(RPath('%:h')).RPath('%:t:r')
   endfunction
 endif
 function! NamespaceInject(prefix, namespace)

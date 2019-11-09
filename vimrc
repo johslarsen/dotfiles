@@ -209,9 +209,6 @@ onoremap ac <Plug>GitGutterTextObjectOuterPending
 xnoremap ic <Plug>GitGutterTextObjectInnerVisual
 xnoremap ac <Plug>GitGutterTextObjectOuterVisual
 
-nnoremap <silent> <c-g>      :call ChangeNextPlaceholder()<cr>
-inoremap <silent> <c-g> <ESC>:call ChangeNextPlaceholder()<cr>
-
 vmap <expr> D       DVB_Duplicate()
 vmap <expr> <s-LEFT>  DVB_Drag('left')
 vmap <expr> <s-DOWN>  DVB_Drag('down')
@@ -491,13 +488,6 @@ function! ColonsToSlash(namespace)
   return substitute(a:namespace, '::', '\/', 'g')
 endfunction
 
-function! ChangeNextPlaceholder()
-  if search('#\u\+#', 'w')
-    echo matchlist(getline('.'), '#\([A-Z]\+\)#')[1]
-    execute 'normal!' "cf#"
-  endif
-endfunction
-
 command! GTestCaseToggle call _GTestCaseToggle()
 function! _GTestCaseToggle()
   let l:cursor = getcurpos()
@@ -512,7 +502,7 @@ function! GTestContext()
   let l:pattern = 'TEST[^(]*(\([^ ,]\+\), \([^ ,)]\+\)'
   let l:pos = search(l:pattern, 'bcnw')
   if (l:pos == 0)
-    return ['', '']
+    return [substitute(RPathSrc("%:r"), "/", "_", "g"), '']
   endif
   let l:match = matchlist(getline(l:pos), l:pattern)
   return [l:match[1], l:match[2]]
@@ -568,6 +558,11 @@ function! RPath(path)
   return fnamemodify(expand(a:path),":~:.")
 endfunction
 
+function! RPathSrc(path)
+  let l:no_prefix = substitute(RPath(a:path), '.*test/', '', 'g')
+  return substitute(l:no_prefix, 'test\(\.[^.]*\)\?$', '\1', 'g')
+endfunction
+
 function! RetabIndents()
   execute '%s@^\(\ \{'.&ts.'\}\)\+@\=repeat("\t", len(submatch(0))/'.&ts.')@e'
 endfunction
@@ -599,13 +594,17 @@ function! ToggleStaticColorcolumn(width)
 endfunction
 
 function! s:template_init()
-  silent %s/#=\(.\{-\}\)#/\=eval(submatch(1))/ge
-  silent %s/\t/\=IndentationString(1)/ge
-  :0
   execute 'set nofoldenable'
-  syntax match Todo "#\u\+#" containedin=ALL
-  if search('#CURSOR#')
-    execute 'normal! "_df#'
+  :0
+  while search('#SNIPPET#', 'W')
+    silent! execute "normal! \"_cf#\<C-r>=UltiSnips#ExpandSnippet()\<CR>"
+    silent! execute "normal! \e\e"
+  endwhile
+  if search("#SNIPPET_ACTIVE#")
+    silent! execute 'normal! "_df#'
+    silent! execute 'call feedkeys("a\'.g:UltiSnipsExpandTrigger.'")'
+  elseif search('#CURSOR#')
+    execute 'call feedkeys("\"_cf#")'
   endif
 endfunction
 " }}}

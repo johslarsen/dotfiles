@@ -6,3 +6,12 @@ endsnippet
 snippet #I "#include ̈́'..."
 #include "$1
 endsnippet
+
+snippet guard "#ifndef GUARD"
+#ifndef ${1:`!v toupper(substitute(RPath('%:r'), "/", "_", "g")."_".expand('%:e'))`}
+#define $1
+
+$2
+
+#endif /*$1*/
+endsnippet

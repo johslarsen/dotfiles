@@ -14,3 +14,48 @@ TEST_F(`!v GTestContext()[0]`, $1) {
 	$2
 }
 endsnippet
+
+snippet once "#pragma once"
+#pragma once
+endsnippet
+
+snippet ns "namespace ... { ... }"
+namespace ${1:`!v NamespaceString(RPath('%:h'))`} {
+	$2
+}
+endsnippet
+
+global !p
+def add_forward_declaration_and_join_namespace_class():
+	if snip.tabstop == 3:
+		ns = list(filter(None, snip.tabstops[2].current_text.split("::")))
+		if not ns:
+			return
+		tab = vim.eval('IndentationString(1)')
+		l = [tab*i +"namespace "+ t + " {" for i,t in enumerate(ns)]
+		l += [tab*len(ns) + "class " + snip.tabstops[1].current_text + ";"]
+		l += [tab*(len(ns)-i-1) + "}" for i,_ in enumerate(ns)]
+		l += [""]
+		# TODO: clear from where snippet initially started in case of back and forth jumps
+		snip.buffer[snip.snippet_start[0]:snip.tabstops[1].start[0]] = l
+	elif snip.tabstop == 0:
+		cl = snip.tabstops[1]
+		ns = snip.tabstops[2]
+		l = snip.buffer[cl.start[0]]
+		snip.buffer[cl.start[0]] = l[0:ns.end[1]] + l[cl.start[1]:cl.end[1]]
+endglobal
+
+post_jump "add_forward_declaration_and_join_namespace_class()"
+snippet cl "class"
+$5class ${2:`!v NamespaceColons(RPath('%:h'))`} ${1:`!v RPath('%:t:r')`}
+{
+public:
+	$1($4) = default;
+	virtual ~$1() = default;
+
+	$1(const $1&) = default;
+	$1& operator=(const $1&) = default;
+private:
+	$3
+};
+endsnippet

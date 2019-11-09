@@ -1,0 +1,44 @@
+snippet min
+cmake_minimum_required (VERSION ${1:3.2.0})
+endsnippet
+snippet proj
+project(${1:`!v expand('%:p:h:t')`} VERSION 0.1.0 LANGUAGES ${2:CXX C})
+endsnippet
+
+snippet stdc
+set(CMAKE_C_STANDARD ${1:11})
+set(CMAKE_C_STANDARD_REQUIRED ON)
+endsnippet
+snippet stdcxx
+set(CMAKE_CXX_STANDARD ${1:17})
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+endsnippet
+snippet ecc
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+endsnippet
+
+snippet wextra
+add_definitions(-Wall -fno-omit-frame-pointer
+	-Wextra -pedantic
+	-Wnull-dereference -Wformat=2 -Wwrite-strings
+	-Wswitch-default -Wduplicated-branches -Wduplicated-cond
+	-Wfloat-equal -Winline -fstack-protector
+)
+endsnippet
+
+snippet subtest
+enable_testing()
+add_subdirectory(${1:test})
+endsnippet
+
+snippet gtest
+find_package(GTest REQUIRED)
+add_executable(run_test test.cpp
+	${1:Test.cpp}
+)
+target_link_libraries(run_test ${GTEST_BOTH_LIBRARIES})
+target_include_directories(run_test PRIVATE ${GTEST_INCLUDE_DIRS})
+add_test(all_tests run_test --gtest_color=yes)
+
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --verbose)
+endsnippet

@@ -1,22 +1,13 @@
-:silent %s/#PROJECT#/\=expand('%:p:h:t')/g
-cmake_minimum_required (VERSION 3.2.0)
+min#SNIPPET#
 
-project(#PROJECT# VERSION 0.1.0 LANGUAGES CXX C)
+proj#SNIPPET#
 
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+stdc#SNIPPET#
+stdcxx#SNIPPET#
+ecc#SNIPPET#
 
-add_definitions(-Wall -fno-omit-frame-pointer
-  -Wextra -pedantic
-  -Wnull-dereference -Wformat=2 -Wwrite-strings
-  -Wswitch-default -Wduplicated-branches -Wduplicated-cond
-  -Wfloat-equal -Winline -fstack-protector
-)
+wextra#SNIPPET#
 
-enable_testing()
-add_subdirectory(test)
+subtest#SNIPPET#
 
-add_executable(#CURSOR#)
+bin#SNIPPET_ACTIVE#

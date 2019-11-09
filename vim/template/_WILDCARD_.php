@@ -1,5 +1,1 @@
-<?php
-
-#CURSOR#
-
-?>
+?#SNIPPET_ACTIVE#
