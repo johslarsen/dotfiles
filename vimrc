@@ -206,7 +206,7 @@ inoremap <c-k> <c-x><c-o>
 " mimic UltiSnips behavior for clang_complete snippets
 nmap <C-j> <Tab>
 smap <C-j> <ESC><Tab>
-imap <C-j> <C-g><Tab>
+imap <C-j> <ESC><Tab>
 
 inoremap <silent> <S-Tab> <C-\><C-o>:Snippets<cr>
 
@@ -297,7 +297,7 @@ set smartcase
 
 set previewheight=5
 
-set completeopt=menu
+set completeopt=menu,longest
 set completefunc=syntaxcomplete#Complete
 highlight Pmenu ctermfg=white ctermbg=blue
 highlight PmenuSel ctermfg=blue ctermbg=white
