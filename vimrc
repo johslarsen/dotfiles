@@ -359,6 +359,7 @@ command! -bang -nargs=* GGrep
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_map_keys = 0
+let g:gitgutter_sign_priority = 5
 
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1="inc"
