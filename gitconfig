@@ -38,7 +38,7 @@
 	keepTemporaries = false
 
 [mergetool.vim]
-	cmd = vim +Gdiff $MERGED
+	cmd = vim '+Gvdiffsplit!' $MERGED
 
 
 [pretty]
