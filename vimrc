@@ -339,8 +339,10 @@ let g:clang_complete_optional_args_in_snippets = 0
 let g:clang_jumpto_declaration_in_preview_key = '<C-W>}'
 let g:clang_snippets = 1
 let g:clang_trailing_placeholder = 1
-if filereadable('CMakeLists.txt')
+if filereadable('build/compile_commands.json')
   let g:clang_compilation_database = "build/"
+elseif  filereadable('compile_commands.json')
+  let g:clang_compilation_database = "./"
 else
   let g:clang_user_options = "-std=c++14 -Idefs -Iinclude -I. -L."
 endif
