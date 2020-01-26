@@ -2,6 +2,8 @@
 set nocompatible " explicitly get out of vi-compatible mode
 filetype off
 
+if has('python3') | endif
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
