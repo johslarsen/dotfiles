@@ -5,4 +5,8 @@ if [[ "$1" ]]; then
 else
 	url="$(xclip -o -session "$clipboard" | xargs echo)"
 fi
-mpv --no-ytdl "$url"
+if [ -t 1 ]; then
+	mpv --no-ytdl "$url"
+else
+	mpv --no-ytdl "$url" &>/dev/null
+fi
