@@ -27,6 +27,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'johslarsen/clang_complete' " fix <CR> mapping
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-hashrocket'
+Plugin 'johslarsen/vim-testcov'
 Plugin 'junegunn/fzf.vim'
 Plugin 'jmirabel/vim-cmake'
 Plugin 'lervag/vimtex'
@@ -138,6 +139,8 @@ nnoremap          <leader>yf    :MakeCheckGTest <C-r>=GTestContext()[0]<cr>.*<cr
 nnoremap          <leader>yF    :MakeCheckGTest <C-r>=GTestContext()[0]<cr>.*
 nnoremap          <leader>yt    :MakeCheckGTest <C-r>=join(GTestContext(),'.')<cr><cr>
 nnoremap          <leader>yT    :MakeCheckGTest <C-r>=join(GTestContext(),'.')<cr>
+nnoremap <silent> <leader>yc    :TestcovMark<cr>
+nnoremap <silent> <leader>yC    :TestcovRefresh<cr>
 nnoremap          <leader>x     :Dispatch<space>
 nnoremap          <leader>X     :Dispatch!<space>
 nnoremap          <leader><C-x> :Start!<space>
