@@ -31,10 +31,13 @@ end
 
 OVERRIDE_SUFFIX = "@#{Socket.gethostname}"
 overridden = Set.new
+Dir.glob(File.join($opts[:root], "**", "*@*")).each do |target|
+  l = link_for target
+  FileUtils.mkdir_p File.dirname(l), verbose: true unless Dir.exist?(File.dirname(l))
+end
 Dir.glob(File.join($opts[:root], "**", "*#{OVERRIDE_SUFFIX}")).each do |target|
   overridden << (t = target[0..-OVERRIDE_SUFFIX.length-1])
   l = link_for t
-  FileUtils.mkdir_p File.dirname(l), verbose: true unless Dir.exist?(File.dirname(l))
   FileUtils.ln_s target, l, verbose: true unless File.exist? l
 end
 
