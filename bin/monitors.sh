@@ -1,23 +1,20 @@
 #!/bin/bash -
 
 declare -A monitors
-monitors[iostat]="iostat -dNm 1"
+disks=
+monitors[dstat]="while true; do disks=; DSTAT_TIMEFMT=%H:%M:%S dstat -f -tlcmn --socket -d -D \"\$(\\ls -1 /dev/nvme?n? /dev/[hs]d? /dev/mmcblk? 2>/dev/null | tr $'\n' ,)\" --fs --lock -pygi 10 3; done"
 monitors[iotop]="sudo iotop"
 monitors[iftop]="sudo iftop"
 monitors[htop]="htop"
 monitors[journal]="journalctl -af | ccze -A"
 
-case "$HOSTNAME" in
-	trx) monitors[iftop]+=" -i wls4"
-esac
-
 if ! tmux list-sessions 2>/dev/null | grep '^monitor:' &>/dev/null; then
-	tmux new -d -n main -s monitor "${monitors[journal]}"
+	tmux new -x$(tput cols) -y$(tput lines) -d -n main -s monitor "${monitors[dstat]}"
 	tmux select-pane -t monitor
-	tmux split -h "${monitors[htop]}"
-	tmux split -v -p 62 "${monitors[iftop]}"
-	tmux split -v -p 67 "${monitors[iotop]}"
-	tmux split -v "${monitors[iostat]}"
+	tmux split -vp 90 "${monitors[journal]}"
+	tmux split -vp 75 "${monitors[htop]}"
+	tmux split -h -p 50 "${monitors[iftop]}"
+	tmux split -v -p 50 "${monitors[iotop]}"
 fi
 
 tmux attach -t monitor
