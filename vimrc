@@ -12,6 +12,10 @@ Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'alepez/vim-gtest' " does not work that well
+Plugin 'andrewstuart/vim-kubernetes'
+Plugin 'c9s/helper.vim'
+Plugin 'c9s/treemenu.vim'
+Plugin 'c9s/vikube.vim'
 Plugin 'chrisbra/csv.vim'
 Plugin 'ciaranm/googletest-syntax'
 Plugin 'confluencewiki.vim'
@@ -183,6 +187,8 @@ map æ ]
 map ææ ]]
 map Ø {
 map Æ }
+map ØØ {{
+map ÆÆ }}
 
 " toggle between this and previous buffer
 nnoremap <C-e> :buffer #<CR>
