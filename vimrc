@@ -29,11 +29,14 @@ Plugin 'gnupg'
 Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'johslarsen/clang_complete' " fix <CR> mapping
+Plugin 'johslarsen/vim-clang-format'
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-hashrocket'
 Plugin 'johslarsen/vim-testcov'
 Plugin 'junegunn/fzf.vim'
 Plugin 'jmirabel/vim-cmake'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-function'
 Plugin 'lervag/vimtex'
 Plugin 'majutsushi/tagbar' " ctag source browser
 Plugin 'mattn/calendar-vim'
@@ -390,6 +393,9 @@ let g:html_indent_style1="inc"
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
+
+let g:clang_format#code_style="Google"
+let g:clang_format#style_options={"ColumnLimit": 0, "AllowShortCaseLabelsOnASingleLine": "true"}
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
