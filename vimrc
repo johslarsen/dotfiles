@@ -25,6 +25,7 @@ Plugin 'derekwyatt/vim-fswitch'
 "Plugin 'elixir-lang/vim-elixir'
 "Plugin 'ervandew/screen' " VimLab dependency
 Plugin 'gavinbeatty/dragvisuals.vim'
+Plugin 'fatih/vim-go'
 Plugin 'gnupg'
 Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
