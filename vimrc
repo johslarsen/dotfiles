@@ -168,7 +168,8 @@ vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap        ++ vip++
 
 " unimpaired-like {{{2
-nmap <silent> coa :let b:syntastic_mode = SyntasticIsPassive() ? 'active' : 'passive'<CR>
+nmap <silent> yoa :let b:syntastic_mode = SyntasticIsPassive() ? 'active' : 'passive'<CR>
+nmap <silent> yof :setlocal foldmethod=<C-r>=&foldmethod != 'syntax' ? 'syntax' : 'indent'<CR><CR>
 
 " Convenience {{{2
 nnoremap Q <nop>
@@ -248,9 +249,6 @@ set softtabstop=0
 set tabstop=4
 set shiftwidth=4
 set cindent
-
-set foldmethod=syntax
-set foldlevel=0
 
 set spell
 set spelllang=en_us
@@ -477,6 +475,8 @@ augroup vimrc
 
   au! BufEnter fugitive:/* setl statusline=%{fugitive#statusline()}%<\ %f\ %=0x%B
   au! BufEnter *.fugitiveblame setl statusline=%f
+
+  au! BufWinEnter * if &previewwindow | setl foldlevel=99 | endif
 
 augroup END
 " Functions (alphabetized) {{{1
