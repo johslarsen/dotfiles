@@ -1,0 +1,18 @@
+defaults
+tls on
+tls_starttls off
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+keep off
+
+account johslarsen
+host pop3.johslarsen.net
+user johs
+passwordeval pass show sasl/johslarsen.net 2>/dev/null
+delivery maildir ~/mail/johslarsen.net
+
+account gmail
+host pop.gmail.com
+port 995
+user johs.a.larsen@gmail.com
+passwordeval pass show sasl/johs.a.larsen@gmail.com 2>/dev/null
+delivery maildir ~/mail/gmail

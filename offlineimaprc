@@ -1,0 +1,25 @@
+[general]
+accounts = gmail
+ui = ttyui
+pythonfile=~/.offlineimaprc.helpers.py
+
+[Account gmail]
+localrepository = gmail-local
+remoterepository = gmail-remote
+
+[Repository gmail-local]
+quick = -1
+type = Maildir
+localfolders = ~/mail/
+nametrans = lambda folder: {'gmail': '[Google Mail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository gmail-remote]
+type = Gmail
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remoteuser = johs.a.larsen@gmail.com
+remotepasseval = pass_show("sasl/johs.a.larsen@gmail.com")
+nametrans = lambda folder: {'[Google Mail]/All Mail': 'gmail',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder == '[Google Mail]/All Mail'

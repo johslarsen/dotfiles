@@ -1,0 +1,3 @@
+text/html; sh -c 'CHARSET=%{charset} html2txt.sh | mail_body_coloring.gawk'; copiousoutput
+text/plain; mail_body_coloring.sh %{charset}; filepath=.txt; copiousoutput
+application/pdf; nvim %s; needsterminal

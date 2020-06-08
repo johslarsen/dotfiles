@@ -1,0 +1,2 @@
+set use_mouse=true
+set index_format=" {name:22} {email:40} {mobile:12|phone|workphone}"

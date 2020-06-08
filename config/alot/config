@@ -1,0 +1,120 @@
+attachment_prefix = ~/download
+bug_on_exit = True
+edit_headers_blacklist = Content-Type,MIME-Version
+envelope_headers_blacklist =
+followup_to = True
+handle_mouse = True
+honor_followup_to = True
+msg_summary_hides_threadwide_tags = False
+theme = johs
+thread_authors_replace_me = False
+timestamp_format = %Y-%m-%d %H:%M:%S
+
+[accounts]
+	[[johslarsen]]
+		realname = Johannes Larsen
+		address = mail@johslarsen.net
+		alias_regexp = .*@johslarsen\.net
+		gpg_key = B26FAB26
+		sign_by_default = True
+		signature = /home/johs/.signature
+		sendmail_command = /usr/bin/msmtp -t --read-envelope-from
+		sent_box = maildir:///home/johs/mail/sent
+		draft_box = maildir:///home/johs/mail/draft
+		draft_tags = draft,inbox
+		[[[abook]]]
+			type = abook
+
+[bindings]
+	P = call settings.get_hook("loop_hook")(ui)
+	ctrl f = move page down
+	ctrl b = move page up
+	u = toggletags unread
+	[[search]]
+		enter = select; fold *; fold *; unfold tag:unread; move newest; unfold; move first; move next unfolded
+		A = toggletags inbox,unread
+		s = toggletags spam; move down
+		L = prompt 'search tag:'
+	[[thread]]
+	    a = bclose; toggletags inbox; select
+		l = retagprompt
+	    p = pipeto --format filepath less
+		U = fold not tag:unread; unfold tag:unread
+		! = toggletags flagged
+	    ' ' = move next unfolded
+
+[tags]
+	[[flagged]]
+		translated = ⚑
+		normal = '','','brown','','brown',''
+		focus = '','','brown','','brown',''
+	[[i/download]]
+		normal = '','','brown','','brown',''
+		focus = '','','brown','','brown',''
+	[[i/license]]
+		normal = '','','brown','','brown',''
+		focus = '','','brown','','brown',''
+	[[i/lostfound]]
+		normal = '','','brown','','brown',''
+		focus = '','','brown','','brown',''
+	[[i/travel]]
+		translated = ✈
+		normal = '','','brown','','brown',''
+		focus = '','','brown','','brown',''
+
+	[[inbox]]
+		translated = ≚
+		normal = '','','dark gray','','dark gray',''
+		focus = '','','dark gray','','dark gray',''
+	[[unread]]
+		translated = ✉
+		normal = '','','light green','','light green',''
+		focus = '','','light green','','light green',''
+
+	[[draft]]
+		translated = ✎
+		normal = '','','dark red','','dark red',''
+		focus = '','','dark red','','dark red',''
+	[[killed]]
+		translated = ☠
+		normal = '','','dark red','','dark red',''
+		focus = '','','dark red','','dark red',''
+	[[spam]]
+		translated = ☢
+		normal = '','','light red','','light red',''
+		focus = '','','light red','','light red',''
+
+	[[sent]]
+		translated = ⊳
+		normal = '','','dark gray','','dark gray',''
+		focus = '','','dark gray','','dark gray',''
+	[[replied]]
+		translated = ↶
+		normal = '','','dark cyan','','dark cyan',''
+		focus = '','','dark cyan','','dark cyan',''
+	[[forwarded]]
+		translated = ⋙
+		normal = '','','dark cyan','','dark cyan',''
+		focus = '','','dark cyan','','dark cyan',''
+	[[n/undelivered]]
+		translated = ↻
+		normal = '','','dark cyan','','dark cyan',''
+		focus = '','','dark cyan','','dark cyan',''
+
+	[[signed]]
+		translated = ✍
+		normal = '','','light cyan','','light cyan',''
+		focus = '','','light cyan','','light cyan',''
+	[[encrypted]]
+		translated = ♜
+		normal = '','','light cyan','','light cyan',''
+		focus = '','','light cyan','','light cyan',''
+	[[attachment]]
+		translated = ♬
+		normal = '','','light cyan','','light cyan',''
+		focus = '','','light cyan','','light cyan',''
+
+	[[n/cron]]
+		translated = ☭
+	[[z/news]]
+		translated = 𝄛

@@ -1,0 +1,23 @@
+[database]
+path=/home/johs/mail
+
+[user]
+name=Johannes Larsen
+primary_email=mail@johslarsen.net
+other_email=johs@smallsoft.com
+
+[new]
+tags=unread;inbox;new
+ignore=.snapshot
+
+[search]
+exclude_tags=spam;killed
+
+[maildir]
+synchronize_flags=true
+
+[crypto]
+gpg_path=gpg
+
+[index]
+decrypt=false

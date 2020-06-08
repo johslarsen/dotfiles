@@ -1,0 +1,109 @@
+[global]
+    footer = 'standout','','dark green,bold','dark blue','dark green,bold','dark blue'
+    body = 'default','','dark green','black','dark green','black'
+    notify_error = 'standout','','white','dark red','white','dark red'
+    notify_normal = 'default','','black','light gray','black','light gray'
+    prompt = 'default','','dark green','black','dark green','black'
+    tag = 'default','','dark magenta','','dark magenta',''
+    tag_focus = 'standout,bold','','dark magenta','','dark magenta',''
+[help]
+    text = 'default','','dark cyan','black','dark cyan','black'
+    section = 'underline','','dark cyan,bold,underline','black','dark cyan,bold,underline','black'
+    title = 'standout','','dark cyan,bold','black','dark cyan,bold,underline','black'
+[bufferlist]
+    line_focus = 'standout','','dark green','dark blue','dark green','dark blue'
+    line_even = 'default','','dark green','black','dark green','black'
+    line_odd = 'default','','dark green','black','dark green','black'
+[namedqueries]
+    line_even = '','','light gray','black','light gray','g0'
+    line_odd = '','','light gray','black','light gray','g0'
+    line_focus = 'standout','','black','dark cyan','black','dark cyan'
+[taglist]
+    line_focus = 'standout','','dark green','dark blue','dark green','dark blue'
+    line_even = 'default','','dark green','black','dark green','black'
+    line_odd = 'default','','dark green','black','dark green','black'
+[envelope]
+    body = 'default','','dark green','black','dark green','black'
+    header = 'default','','black','light green','black','light green'
+    header_key = 'default','','dark gray','light green','dark gray','light green'
+    header_value = 'default','','dark blue','light green','dark blue','light green'
+[thread]
+    arrow_heads = '','','dark red','','dark red',''
+    arrow_bars = '','','dark red','','dark red',''
+    attachment = 'default','','dark blue','light green','dark blue','light green'
+    attachment_focus = 'underline','','dark blue','light blue','dark blue','light blue'
+    body = 'default','','dark green','black','dark green','black'
+    body_focus = 'standout','','dark green','dark blue','dark green','dark blue'
+    header = 'default','','light green','black','light green','black'
+    header_key = 'default','','brown','black','brown','black'
+    header_value = 'default','','light blue','black','light blue','black'
+    [[summary]]
+        even = 'default','','light green','black','light green','black'
+        odd = 'default','','light green','black','light green','black'
+        focus = 'standout','','light green','dark blue','light green','dark blue'
+[search]
+    [[threadline]]
+        normal = 'default','','dark green','black','dark green','black'
+        focus = 'standout','','dark green','dark blue','dark green','dark blue'
+        parts = date,authors,mailcount,tags,subject,content
+        [[[date]]]
+            normal = 'default','','dark green','black','dark green','black'
+            focus = 'standout','','dark green','dark blue','dark green','dark blue'
+            width = 'fit',19,19
+        [[[authors]]]
+            normal = 'default,underline','','dark green','black','dark green','black'
+            focus = 'standout,underline','','dark green','dark blue','dark green','dark blue'
+            width = 'fit',20,20
+        [[[mailcount]]]
+            normal = 'default','','light blue','black','light blue','black'
+            focus = 'standout','','light blue','dark blue','light blue','dark blue'
+            width = 'fit',4,4
+            alignment = 'right'
+        [[[tags]]]
+            normal = 'default','','dark magenta','black','dark magenta','black'
+            focus = 'standout','','dark magenta','dark blue','dark magenta','dark blue'
+			width = 'fit',0,40
+        [[[subject]]]
+            normal = 'default','','dark green','black','dark green','black'
+            focus = 'standout','','dark green','dark blue','dark green','dark blue'
+			width = 'fit',0,80
+        [[[content]]]
+            normal = 'default','','dark gray','black','dark gray','default'
+            focus = 'standout','','dark gray','dark blue','dark gray','dark blue'
+			width = 'weight',1
+
+    [[threadline-flagged-unread]]
+        tagged_with = 'flagged','unread'
+        [[[authors]]]
+            normal = 'default,underline,bold','','yellow,bold','black','yellow,bold','black'
+            focus = 'standout,underline,bold','','yellow,bold','dark blue','yellow,bold','dark blue'
+        [[[subject]]]
+            normal = 'default,bold','','yellow,bold','black','yellow,bold','black'
+            focus = 'standout,bold','','yellow,bold','dark blue','yellow,bold','dark blue'
+
+    [[threadline-flagged]]
+        tagged_with = 'flagged'
+        [[[authors]]]
+            normal = 'default,underline','','brown','black','brown','black'
+            focus = 'standout,underline','','brown','dark blue','brown','dark blue'
+        [[[subject]]]
+            normal = 'default','','brown','black','brown','black'
+            focus = 'standout','','brown','dark blue','brown','dark blue'
+
+    [[threadline-unread]]
+        tagged_with = 'unread'
+        [[[authors]]]
+            normal = 'default,underline,bold','','dark green,bold','black','dark green,bold','black'
+            focus = 'standout,underline,bold','','dark green,bold','dark blue','dark green,bold','dark blue'
+        [[[subject]]]
+            normal = 'default,bold','','dark green,bold','black','dark green,bold','black'
+            focus = 'standout,bold','','dark green,bold','dark blue','dark green,bold','dark blue'
+
+    [[threadline-draft]]
+        tagged_with = 'draft'
+        [[[authors]]]
+            normal = 'default,underline','','dark red','black','dark red','black'
+            focus = 'standout,underline','','dark red','dark blue','dark red','dark blue'
+        [[[subject]]]
+            normal = 'default','','dark red','black','dark red','black'
+            focus = 'standout','','dark red','dark blue','dark red','dark blue'
