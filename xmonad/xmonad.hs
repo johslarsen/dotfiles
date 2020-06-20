@@ -179,6 +179,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm.|.controlMask                      , xK_y     ), spawn "mpc &>/dev/null single") -- mpd toggle single repeat mode
 	, ((modm.|.controlMask            .|.altMask, xK_r     ), spawn "mpc &>/dev/null consume") -- mpd toggle consume mode, remove song from playlist after completion
 	, ((modm.|.controlMask                      , xK_s     ), spawn "~/.bin/resync_bluez_sound_card.sh")
+	, ((modm.|.controlMask                      , xK_v     ), spawn "~/.bin/mclip") -- play video URL in clipboard
 
 	, ((modm              .|.shiftMask.|.altMask, xK_0     ), spawn "~/.bin/dual_screen_put_primary_in_relation_to_secondary.sh o")
 	, ((modm              .|.shiftMask.|.altMask, xK_y     ), spawn "~/.bin/dual_screen_put_primary_in_relation_to_secondary.sh lt")
