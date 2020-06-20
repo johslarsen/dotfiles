@@ -65,3 +65,6 @@ alias vf='cd'
 alias cde='cd'
 alias ks='ls'
 alias ka='ls'
+
+# FPGA
+alias icestat="awk '/Device utilisation/,!\$1; /Max frequency/'"
