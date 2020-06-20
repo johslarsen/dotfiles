@@ -1,0 +1,3 @@
+#!/bin/bash -
+unit=${1:?USAGE: $0 unit.service [journalctl options]}
+journalctl _SYSTEMD_INVOCATION_ID=$(systemctl show --value -p InvocationID "$unit") "${@:2:$#}"
