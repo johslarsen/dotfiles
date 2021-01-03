@@ -47,6 +47,7 @@ Plugin 'nixon/vim-vmath'
 Plugin 'rust-lang/rust.vim'
 Plugin 'saltstack/salt-vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'sirtaj/vim-openscad'
 Plugin 'sjl/gundo.vim' " undo history
 Plugin 'stevearc/vim-arduino'
 Plugin 'sunaku/vim-ruby-minitest'
