@@ -1,0 +1,14 @@
+snippet cp "Cargo [package]"
+[package]
+name = "${1:`!v expand('%:p:h:t')`}"
+version = "${2:0.1.0}"
+endsnippet
+
+snippet cd "Cargo dependencies"
+[dependencies]
+$1
+endsnippet
+
+snippet cf "<pkg> = { ... features = [...] }"
+${1:pkg} = { version = "${2:0.1.0}", features = ["$3"] }
+endsnippet

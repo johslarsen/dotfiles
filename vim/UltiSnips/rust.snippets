@@ -1,0 +1,18 @@
+snippet fnr "fn main() -> Result<(), Box<dyn std::error::Error>> {}"
+fn ${1:main}($2) -> Result<${3:()}, ${4:Box<dyn std::error::Error>>} {
+	$0
+	Ok($3)
+}
+endsnippet
+
+snippet testr "fn ?_test() -> Result<(), Box<dyn std::error::Error>> {}"
+#[test]
+fn ${1:name}_test() -> Result<(), ${2:Box<dyn std::error::Error>>} {
+	$0
+	Ok(())
+}
+endsnippet
+
+snippet r# "raw string literal" i
+r#"$0"#
+endsnippet

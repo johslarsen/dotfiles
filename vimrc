@@ -33,6 +33,7 @@ Plugin 'johslarsen/clang_complete' " fix <CR> mapping
 Plugin 'johslarsen/vim-clang-format'
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-hashrocket'
+Plugin 'johslarsen/vim-racer'
 Plugin 'johslarsen/vim-testcov'
 Plugin 'junegunn/fzf.vim'
 Plugin 'jmirabel/vim-cmake'
@@ -43,6 +44,7 @@ Plugin 'majutsushi/tagbar' " ctag source browser
 Plugin 'mattn/calendar-vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'nixon/vim-vmath'
+Plugin 'rust-lang/rust.vim'
 Plugin 'saltstack/salt-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim' " undo history
@@ -386,9 +388,14 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1="inc"
 let g:html_indent_style1="inc"
 
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
+
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
+
+let g:rust_cargo_check_tests = 1
 
 let g:clang_format#code_style="Google"
 let g:clang_format#style_options={"ColumnLimit": 0, "AllowShortCaseLabelsOnASingleLine": "true"}
@@ -430,6 +437,12 @@ let g:syntastic_python_python_exec = 'python2'
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_ruby_rubocop_args = '-l'
+
+if filereadable('Cargo.toml')
+  let g:syntastic_rust_checkers = ['cargo']
+else
+  let g:syntastic_rust_checkers = ['rustc']
+endif
 
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
