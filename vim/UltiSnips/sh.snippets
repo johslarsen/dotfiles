@@ -1,0 +1,10 @@
+snippet #! "#!/bin/bash -"
+#!/bin/bash -
+endsnippet
+
+snippet rel "rel=$(dirname $0)"
+${1:rel}=$(dirname "\$0")
+endsnippet
+snippet me "me=$(basename $0)"
+${1:me}=$(basename "\$0")
+endsnippet
