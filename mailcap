@@ -1,3 +1,7 @@
-text/html; sh -c 'CHARSET=%{charset} html2txt.sh | mail_body_coloring.gawk'; copiousoutput
-text/plain; mail_body_coloring.sh %{charset}; filepath=.txt; copiousoutput
-application/pdf; nvim %s; needsterminal
+text/html; sh -c 'html_prefix_blockquotes.gawk | CHARSET=%{charset} html2txt.sh | mail_body_coloring.gawk'; copiousoutput
+text/plain; mail_body_coloring.sh %{charset}; nametemplate=.txt; copiousoutput
+application/pdf; sh -c 'cat %s | pdftohtmlpipe | w3m -T text/html'; nametemplate=.pdf; needsterminal
+application/msword; sh -c 'cat %s | doctohtml | w3m -T text/html'; nametemplate=.doc; needsterminal
+application/vnd.oasis.opendocument.text; sh -c 'cat %s | doctohtml | w3m -T text/html'; nametemplate=.doc; needsterminal
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; sh -c 'cat %s | doctohtml | w3m -T text/html'; nametemplate=.doc; needsterminal
+application/zip; nvim %s; nametemplate=.zip; needsterminal

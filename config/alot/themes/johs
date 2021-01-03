@@ -62,15 +62,15 @@
         [[[tags]]]
             normal = 'default','','dark magenta','black','dark magenta','black'
             focus = 'standout','','dark magenta','dark blue','dark magenta','dark blue'
-			width = 'fit',0,40
+            width = 'fit',0,40
         [[[subject]]]
             normal = 'default','','dark green','black','dark green','black'
             focus = 'standout','','dark green','dark blue','dark green','dark blue'
-			width = 'fit',0,80
+            width = 'fit',0,80
         [[[content]]]
             normal = 'default','','dark gray','black','dark gray','default'
             focus = 'standout','','dark gray','dark blue','dark gray','dark blue'
-			width = 'weight',1
+            width = 'weight',1
 
     [[threadline-flagged-unread]]
         tagged_with = 'flagged','unread'

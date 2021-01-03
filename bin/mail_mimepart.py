@@ -24,8 +24,9 @@ if len(argv) == 1:
     mimetree(mail, summary)
 else:
     with fdopen(stdout.fileno(), 'wb') as raw_stdout:
+        dump_all = "*" in argv[1:]
         def dump_by_id(path, part):
-            if path not in argv[1:]:
+            if not dump_all and path not in argv[1:]:
                 return
             decoded = part.get_payload(decode=True)
             raw_stdout.write(decoded if decoded else part.as_bytes())

@@ -14,7 +14,9 @@ def name_addr(realname, address):
 
 ANSI_ESCAPE = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/ ]*[@-~])')
 def text_quote(message):
-    return re.sub("^", "> ", ANSI_ESCAPE.sub('', message), 0, re.MULTILINE)
+    no_formatting = ANSI_ESCAPE.sub('', message)
+    reply_and_nl = re.sub(r'^(>|$)', r'>\1', no_formatting, 0, re.MULTILINE)
+    return re.sub(r'^([^>])', r'> \1', reply_and_nl, 0, re.MULTILINE)
 
 def reply_prefix(realname, address, timestamp, message=None, ui=None, dbm=None):
     return "%s, %s wrote:\n"%(timestamp.strftime("%Y-%m-%d %H:%M:%S%Z"), name_addr(realname, address))
