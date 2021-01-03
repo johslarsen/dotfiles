@@ -1,0 +1,9 @@
+#!/bin/bash -
+set -e
+url=$1
+name=$2
+
+ssh "${url%%:*}" "git init --bare '${url#*:}'"
+
+[[ "$name" ]] && git remote add "$name" "$url"
+git push "$url"
