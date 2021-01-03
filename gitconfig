@@ -23,6 +23,9 @@
 	indentHeuristic
 	colorMoved
 
+[init]
+	defaultBranch = master
+
 [interactive]
 	singleKey
 
