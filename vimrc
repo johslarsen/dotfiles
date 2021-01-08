@@ -256,6 +256,7 @@ set spell
 set spelllang=en_us
 set spellfile= " '': <runtimepath>/behaviour/<lang>.<encoding>.add
 set spellcapcheck=
+set thesaurus=~/.vim/thesaurus/english.txt
 
 set formatoptions-=t " do not wrap by default
 set nrformats=hex,alpha
