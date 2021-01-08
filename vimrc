@@ -370,6 +370,7 @@ let g:csv_comment = '#'
 let g:csv_end = 10
 let g:csv_nl = 1
 
+let g:fzf_layout = { 'down': '33%' }
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
