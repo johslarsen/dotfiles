@@ -24,7 +24,7 @@ Plugin 'stevearc/vim-arduino'
 Plugin 'sunaku/vim-ruby-minitest'
 
 " IDE-like {{{2
-Plugin 'johslarsen/clang_complete' " fix <CR> mapping
+Plugin 'neoclide/coc.nvim'
 Plugin 'johslarsen/vim-clang-format'
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-racer'
@@ -49,8 +49,6 @@ Plugin 'ronakg/quickr-preview.vim' " quick/loc: ,<space>: preview
 " Text objects {{{2
 Plugin 'michaeljsmith/vim-indent-object' " ii
 Plugin 'wellle/targets.vim' " 2i(: nth enclosing (), n(: following (...)
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-function' " if: within def, aF: def + space, iF: space +def
 Plugin 'tpope/vim-commentary' " gcip toggle comment on paragraph
 Plugin 'tpope/vim-speeddating' " d<C-a>: replace with UTC, d<C-x>: replace with local time
 Plugin 'tpope/vim-tbone' " tmux :Tyank, :Tput
@@ -80,7 +78,6 @@ Plugin 'nixon/vim-vmath' " vip++: sum/avg/... of numbers in paragraph
 Plugin 'c9s/helper.vim'
 Plugin 'c9s/treemenu.vim'
 Plugin 'c9s/vikube.vim'
-
 
 call vundle#end()
 filetype plugin indent on
@@ -114,8 +111,20 @@ vnoremap <silent> <leader><C-g> "vy:Ag <C-r>v<cr>
 nnoremap <silent> <leader>h     :FSHere<cr>
 nnoremap <silent> <leader>H     :FSSplitLeft<cr>
 nnoremap <silent> <leader><c-h> :FSSplitAbove<cr>
-nnoremap <silent> <leader>i     gg=G
-nnoremap <silent> <leader>I     :call g:retab_indents()<cr>
+nmap     <silent> <leader>id    <plug>(coc-definition)
+nnoremap <silent> <leader>iD    :call CocAction('jumpDefinition', 'pedit')<CR>
+nmap     <silent> <leader>i<C-d> :call CocAction('jumpDeclaration', 'pedit')<CR>
+nmap     <silent> <leader>iw    <plug>(coc-type-definition)
+nmap     <silent> <leader>ie    <plug>(coc-type-implementation)
+nmap     <silent> <leader>if    <plug>(coc-format)
+nmap     <silent> <leader>iF    <plug>(coc-format-selected)
+xmap     <silent> <leader>iF    <plug>(coc-format-selected)
+nmap     <silent> <leader>il    <plug>(coc-references)
+nnoremap <silent> <leader>it    :call CocActionAsync('highlight')<CR>
+nmap     <silent> <leader>iL    <plug>(coc-references-used)
+nmap     <silent> <leader>ir    <plug>(coc-rename)
+nmap     <silent> <leader>i<C-r> <plug>(coc-refactor)
+nnoremap <silent> <leader>I     gg=G
 nnoremap <silent> <leader>k     :psearch <C-r><C-w><cr>
 nnoremap <silent> <leader>K     :psearch <C-r><C-a><cr>
 nnoremap <silent> <leader>l     :TagbarToggle<cr>
@@ -144,7 +153,6 @@ nnoremap          <leader>S     :vsplit<Space>
 nnoremap <silent> <leader>t     :edit =ToggleSourceTestFilename()<cr><cr>
 nnoremap <silent> <leader>T     :vsplit =ToggleSourceTestFilename()<cr><cr>
 nnoremap <silent> <leader><c-t> :split =ToggleSourceTestFilename()<cr><cr>
-nnoremap <silent> <leader>u     :call g:ClangUpdateQuickFix()<cr>
 nnoremap <silent> <leader>U     :GundoToggle<CR>
 nnoremap          <leader>v     :Commits<cr>
 nnoremap          <leader>V     :BCommits<cr>
@@ -211,19 +219,36 @@ nnoremap <C-e> :buffer #<CR>
 noremap <C-Up> gk
 noremap <C-Down> gj
 
+nmap <silent> [i <Plug>(coc-diagnostic-prev)
+nmap <silent> ]i <Plug>(coc-diagnostic-next)
+nmap <silent> [I <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]I <Plug>(coc-diagnostic-next-error)
+
 nmap <silent> [g <Plug>GitGutterPrevHunk
 nmap <silent> ]g <Plug>GitGutterNextHunk
 
-onoremap ic <Plug>GitGutterTextObjectInnerPending
-onoremap ac <Plug>GitGutterTextObjectOuterPending
-xnoremap ic <Plug>GitGutterTextObjectInnerVisual
-xnoremap ac <Plug>GitGutterTextObjectOuterVisual
+onoremap ih <Plug>GitGutterTextObjectInnerPending
+onoremap ah <Plug>GitGutterTextObjectOuterPending
+xnoremap ih <Plug>GitGutterTextObjectInnerVisual
+xnoremap ah <Plug>GitGutterTextObjectOuterVisual
+
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " Insert {{{2
 inoremap <c-c> <Esc>
 
 " custom completion, neatly located between ^n (next, completion) and ^p (previous)
 inoremap <c-k> <c-x><c-o>
+
+nnoremap <silent>       <c-@> :call CocActionAsync('doHover')<CR>
+inoremap <silent><expr> <c-@> coc#refresh()
 
 " mimic UltiSnips behavior for clang_complete snippets
 nmap <C-j> <Tab>
@@ -279,6 +304,7 @@ highlight NonText    cterm=bold ctermfg=magenta
 highlight SpecialKey cterm=NONE ctermfg=black ctermbg=brown
 
 highlight LocalIndentGuide ctermbg=234
+highlight CocHoverRange ctermbg=234
 
 set laststatus=2
 set statusline=%< " truncate from left
@@ -319,13 +345,15 @@ set previewheight=5
 
 set completeopt=menu,longest
 set completefunc=syntaxcomplete#Complete
-highlight Pmenu ctermfg=white ctermbg=blue
-highlight PmenuSel ctermfg=blue ctermbg=white
+set shortmess+=c " no "Match N of M" when i_<C-n/p>
 
 set concealcursor=nv
 set conceallevel=2
 
 set diffopt=vertical
+
+set updatetime=300 " speed up CursorHold feedback
+
 " Buffers {{{1
 set hidden " instead of closing buffers
 
@@ -350,21 +378,6 @@ let g:arduino_dir = '/usr/share/arduino' " location on archlinux
 let g:calendar_mark = 'left-fit'
 let g:calendar_monday = 1
 let g:calendar_weeknm = 5
-
-let g:clang_auto_user_options = 'includeHeaderFromIppTpp,.clang_complete,path'
-let g:clang_close_preview = 1
-let g:clang_complete_macros = 1
-let g:clang_complete_optional_args_in_snippets = 0
-let g:clang_jumpto_declaration_in_preview_key = '<C-W>}'
-let g:clang_snippets = 1
-let g:clang_trailing_placeholder = 1
-if filereadable('build/compile_commands.json')
-  let g:clang_compilation_database = "build/"
-elseif  filereadable('compile_commands.json')
-  let g:clang_compilation_database = "./"
-else
-  let g:clang_user_options = "-std=c++14 -Idefs -Iinclude -I. -L."
-endif
 
 let g:csv_comment = '#'
 let g:csv_end = 10
@@ -496,6 +509,7 @@ augroup vimrc
 
   au! BufWinEnter * if &previewwindow | setl foldlevel=99 | endif
 
+  au CursorHold * silent call CocActionAsync('highlight')
 augroup END
 " Functions (alphabetized) {{{1
 function! AllFiles(directory)
