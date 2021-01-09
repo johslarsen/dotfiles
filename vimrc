@@ -394,6 +394,7 @@ let g:html_indent_script1="inc"
 let g:html_indent_style1="inc"
 
 let g:quickr_preview_size = 5
+let g:quickr_preview_keymaps = 0
 
 let g:racer_experimental_completer = 1
 let g:racer_insert_paren = 1
