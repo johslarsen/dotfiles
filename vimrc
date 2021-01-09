@@ -387,6 +387,8 @@ let g:gitgutter_escape_grep = 1
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_priority = 5
 
+let g:gundo_prefer_python3 = 1
+
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1="inc"
 let g:html_indent_style1="inc"
