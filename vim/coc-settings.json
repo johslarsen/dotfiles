@@ -1,4 +1,7 @@
 {
 	"clangd.compilationDatabasePath": "build/",
-	"rust-client.disableRustup": true
+	"clangd.fallbackFlags": ["-std=c++17", "-Idefs", "-Iinclude", "-I.", "-L.", "-Wall"],
+	"clangd.semanticHighlighting": true,
+	"rust-client.disableRustup": true,
+	"solargraph.promptDownload": false
 }

@@ -24,12 +24,13 @@ Plugin 'stevearc/vim-arduino'
 Plugin 'sunaku/vim-ruby-minitest'
 
 " IDE-like {{{2
-Plugin 'neoclide/coc.nvim'
+Plugin 'jackguo380/vim-lsp-cxx-highlight'
 Plugin 'johslarsen/vim-clang-format'
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-racer'
 Plugin 'johslarsen/vim-testcov'
 Plugin 'majutsushi/tagbar' " ctag source browser
+Plugin 'neoclide/coc.nvim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-dispatch' " :Make
 Plugin 'tpope/vim-apathy' " more sane include++ path defaults
@@ -90,6 +91,7 @@ nnoremap          <leader><C-a> :SyntasticCheck<Space>
 nnoremap          <leader>b     :Buffers<cr>
 nnoremap          <leader><C-b> :buffers!<cr>:buffer<Space>
 nnoremap <silent> <leader>c     :e $MYVIMRC<cr>:keeppatterns /^" Keyboard Shortcuts<cr>zo:nohlsearch<cr>
+nnoremap <silent> <leader>ce    :SyntasticToggleMode<CR>
 nnoremap <silent> <leader>C     :so $MYVIMRC<cr>
 nnoremap <silent> <leader>CAL   :CalendarVR<cr>
 nnoremap <silent> <leader>d     :Gblame<cr>
@@ -114,13 +116,11 @@ nnoremap <silent> <leader><c-h> :FSSplitAbove<cr>
 nmap     <silent> <leader>id    <plug>(coc-definition)
 nnoremap <silent> <leader>iD    :call CocAction('jumpDefinition', 'pedit')<CR>
 nmap     <silent> <leader>i<C-d> :call CocAction('jumpDeclaration', 'pedit')<CR>
-nmap     <silent> <leader>iw    <plug>(coc-type-definition)
-nmap     <silent> <leader>ie    <plug>(coc-type-implementation)
+nnoremap <silent> <leader>ie    :exec g:coc_enabled ? 'CocDisable' : 'CocEnable'<CR>
 nmap     <silent> <leader>if    <plug>(coc-format)
 nmap     <silent> <leader>iF    <plug>(coc-format-selected)
 xmap     <silent> <leader>iF    <plug>(coc-format-selected)
 nmap     <silent> <leader>il    <plug>(coc-references)
-nnoremap <silent> <leader>it    :call CocActionAsync('highlight')<CR>
 nmap     <silent> <leader>iL    <plug>(coc-references-used)
 nmap     <silent> <leader>ir    <plug>(coc-rename)
 nmap     <silent> <leader>i<C-r> <plug>(coc-refactor)
@@ -438,7 +438,7 @@ let s:W .= ' -Wtrampolines -Wfloat-equal -Wlogical-op -Wshadow'
 let s:W .= ' -Wrestrict -Winline -fstack-protector'
 "let s:W .= ' -Weffc++ -Wpadded'
 let g:syntastic_c_compiler_options = s:W . ' -std=c11 -Wbad-function-cast -Wstrict-prototypes -Wold-style-definition -Wc++-compat'
-let g:syntastic_cpp_compiler_options = s:W . ' -std=c++14 -Wregister -Wstrict-null-sentinel -Wold-style-cast -Wzero-as-null-pointer-constant'
+let g:syntastic_cpp_compiler_options = s:W . ' -std=c++17 -Wregister -Wstrict-null-sentinel -Wold-style-cast -Wzero-as-null-pointer-constant'
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_c_clang_check_post_args = ""
 let g:syntastic_cpp_clang_check_post_args = ""
@@ -517,6 +517,11 @@ function! AllFiles(directory)
   let $FZF_DEFAULT_COMMAND = 'fd -IH'
   exec ':Files '.a:directory
   let $FZF_DEFAULT_COMMAND = l:fzf_default_command
+endfunction
+
+command! CocInstallJohs call _CocInstallJohs()
+function! _CocInstallJohs()
+  call coc#util#install_extension(['coc-clangd', 'coc-cmake', 'coc-go', 'coc-python', 'coc-rls', 'coc-sh', 'coc-solargraph', 'coc-vimlsp', 'coc-yaml'])
 endfunction
 
 function! ColonsToSlash(namespace)
