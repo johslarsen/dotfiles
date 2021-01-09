@@ -55,7 +55,7 @@ alias ncpaste='nc termbin.com 9999'
 alias vim='TERM=screen-256color vim'
 alias ledit='libreoffice --norestore --nolockcheck --nologo'
 alias lview='ledit --view'
-alias bmake='cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -H. -Bbuild/ && cmake --build build/ -- -j$(nproc)'
+alias bmake='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -H. -Bbuild/ && cmake --build build/ -- -j$(nproc)'
 
 # Typos
 alias sudp='sudo'
