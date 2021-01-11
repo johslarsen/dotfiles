@@ -108,6 +108,7 @@
 	ns = show --name-status
 	ps = show -p --compact-summary
 	ss = show --compact-summary
+	ws = show -w --compact-summary
 
 	ff = merge --ff-only
 	rpull = pull --rebase
