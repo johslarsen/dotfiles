@@ -257,6 +257,8 @@ imap <C-j> <ESC><Tab>
 
 inoremap <silent> <S-Tab> <C-\><C-o>:Snippets<cr>
 
+imap <C-l> <C-y> " accept selected completion item
+
 " nbsp = space
 inoremap   <Space>
 " Command Line {{{2
