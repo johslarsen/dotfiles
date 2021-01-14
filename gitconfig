@@ -86,6 +86,7 @@
 
 	l = log
 	pl = log --compact-summary -p
+	wl = log --compact-summary -pw
 	sl = log --compact-summary
 	sgl = log --graph --all --compact-summary
 	gl = log --graph --all
@@ -108,7 +109,7 @@
 	ns = show --name-status
 	ps = show -p --compact-summary
 	ss = show --compact-summary
-	ws = show -w --compact-summary
+	ws = show -pw --compact-summary
 
 	ff = merge --ff-only
 	rpull = pull --rebase
