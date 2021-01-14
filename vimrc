@@ -195,6 +195,8 @@ nnoremap <space> za
 
 nnoremap <silent> zp :GitGutterFold<cr>
 
+nnoremap Y y$ " consistent behavior with D, C
+
 " Norwegian keyboard layout requires AltGr for lots of useful buttons, so remap the characters that are on the location that these are in the US keyboard layout
 noremap § ~
 noremap ¤ $
