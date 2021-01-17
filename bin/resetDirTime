@@ -1,0 +1,5 @@
+#!/bin/bash -
+while IFS= read -r -d '' dir; do
+	read -r first < <(\ls ${LS_ARGS:=-t} "$dir")
+	touch -r "$dir/$first" "$dir"
+done < <(find "$@" -depth -type d -print0)
