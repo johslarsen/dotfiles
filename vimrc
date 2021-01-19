@@ -404,6 +404,8 @@ let g:gitgutter_escape_grep = 1
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_priority = 5
 
+let g:go_template_autocreate = 0
+
 let g:gundo_prefer_python3 = 1
 
 let g:html_indent_inctags = "html,body,head,tbody"

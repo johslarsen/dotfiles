@@ -1,0 +1,29 @@
+snippet pkg "package ..." m
+package ${1:`!v expand('%') == '.' || expand('%') =~ '^cmd/' ? 'main' : fnamemodify(expand('%:p:h'), ':t')`}
+${0}
+endsnippet
+
+snippet importAssert "import( testing, ..., testify/assert )"
+import (
+	"testing"
+${1}
+	"github.com/stretchr/testify/assert"
+)
+${0}
+endsnippet
+
+snippet aeq "assert.Equal(t, ..., ...)"
+assert.Equal(t, ${1}, ${2})${0}
+endsnippet
+snippet ane "assert.NotEqual(t, ..., ...)"
+assert.NotEqual(t, ${1}, ${2})${0}
+endsnippet
+snippet aer "assert.Error(t, ..., ...)"
+assert.Error(t, ${1:err}, ${2})${0}
+endsnippet
+snippet anil "assert.Nil(t, ..., ...)"
+assert.Nil(t, ${1:err}, ${2})${0}
+endsnippet
+snippet ann "assert.NotNil(t, ..., ...)"
+assert.NotNil(t, ${1:err}, ${2})${0}
+endsnippet
