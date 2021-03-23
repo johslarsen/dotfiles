@@ -38,7 +38,5 @@ add_executable(run_test test.cpp
 )
 target_link_libraries(run_test ${GTEST_BOTH_LIBRARIES})
 target_include_directories(run_test PRIVATE ${GTEST_INCLUDE_DIRS})
-add_test(all_tests run_test --gtest_color=yes)
-
-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --verbose)
+add_test(all_tests run_test)
 endsnippet

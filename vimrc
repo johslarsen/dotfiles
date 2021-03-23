@@ -570,11 +570,7 @@ endfunction
 
 command! -nargs=* MakeCheck call _MakeCheck(<f-args>)
 function! _MakeCheck(...)
-  let l:target = 'check'
-  if filereadable('CMakeLists.txt')
-    let l:target = 'test ARGS=-V'
-  endif
-  exec 'Make' l:target join(a:000)
+  exec 'Make test ARGS=-V GTEST_COLOR=0' join(a:000)
 endfunction
 command! -nargs=1 MakeCheckGTest call _MakeCheckGTest(<f-args>)
 function! _MakeCheckGTest(filter)
