@@ -91,7 +91,7 @@ nnoremap          <leader><C-a> :SyntasticCheck<Space>
 nnoremap          <leader>b     :Buffers<cr>
 nnoremap          <leader><C-b> :buffers!<cr>:buffer<Space>
 nnoremap <silent> <leader>c     :e $MYVIMRC<cr>:keeppatterns /^" Keyboard Shortcuts<cr>zo:nohlsearch<cr>
-nnoremap <silent> <leader>ce    :SyntasticToggleMode<CR>
+nnoremap <silent> <leader>ce    :let b:syntastic_mode = exists('b:syntastic_mode') && b:syntastic_mode == 'passive' ? 'active' : 'passive'<cr>
 nnoremap <silent> <leader>C     :so $MYVIMRC<cr>
 nnoremap <silent> <leader>CAL   :CalendarVR<cr>
 nnoremap <silent> <leader>d     :Gblame<cr>
@@ -516,6 +516,7 @@ augroup vimrc
   au! BufWinEnter * if &previewwindow | setl foldlevel=99 | endif
 
   au CursorHold * silent call CocActionAsync('highlight')
+  au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
 " Functions (alphabetized) {{{1
 function! AllFiles(directory)
