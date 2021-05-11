@@ -93,3 +93,10 @@ tsv() {
 psv() {
 	xsv "$@" -d '|'
 }
+
+bmake() {
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RelWithDebInfo} -GNinja -H. -Bbuild/ && cmake --build build/ -- -j$(nproc) "$@"
+}
+bbmake() {
+    PATH=/usr/lib/ccache/bin:$PATH bmake "$@"
+}
