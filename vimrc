@@ -588,6 +588,7 @@ function! _MakeCheckGTest(filter)
 
   let $GTEST_COLOR='no' " causes problems in output
   let $GTEST_FILTER=a:filter
+  let $ASAN_OPTIONS='coverage=1'
   let $CTEST_OUTPUT_ON_FAILURE='1'
   call _MakeCheck()
   let &errorformat=l:errorformat
