@@ -570,21 +570,16 @@ endfunction
 
 command! -nargs=* MakeCheck call _MakeCheck(<f-args>)
 function! _MakeCheck(...)
-  exec 'Make test ARGS=-V GTEST_COLOR=0' join(a:000)
+  exec 'Make test' join(a:000)
 endfunction
 command! -nargs=1 MakeCheckGTest call _MakeCheckGTest(<f-args>)
 function! _MakeCheckGTest(filter)
   let l:errorformat=&errorformat
 
-  let s:ctest_prefix=''
-  if filereadable('CMakeLists.txt')
-    let s:ctest_prefix='%c: ' " might as well show ctest id, so put it as column number
-  endif
-
-  let &errorformat  =  s:ctest_prefix.'%.%#: %f:%l: %m' " C/C++ assertions
-  let &errorformat .= ',%A'.s:ctest_prefix.'%f:%l: %t%[ar]%[ir]%[lo]%[ur]%.%#'
-  let &errorformat .= ',%Z'.s:ctest_prefix.'[%.%#] %m'
-  let &errorformat .= ',%C'.s:ctest_prefix.'%m'
+  let &errorformat  =  '%.%#: %f:%l: %m' " C/C++ assertions
+  let &errorformat .= ',%A%f:%l: %t%[ar]%[ir]%[lo]%[ur]%.%#'
+  let &errorformat .= ',%Z[%.%#] %m'
+  let &errorformat .= ',%C%m'
 
   " NOTE: ctest specific
   let &errorformat .= ',%E%c/%l Test #%\d%#: %f .%#***%m' " hacky way to catch segfault errors++
@@ -593,6 +588,7 @@ function! _MakeCheckGTest(filter)
 
   let $GTEST_COLOR='no' " causes problems in output
   let $GTEST_FILTER=a:filter
+  let $CTEST_OUTPUT_ON_FAILURE='1'
   call _MakeCheck()
   let &errorformat=l:errorformat
 endfunction
