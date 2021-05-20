@@ -1,11 +1,12 @@
 #!/bin/bash -
-path_append PATH /opt/local/sbin /etc/smallsoft/sbin /usr/local/sbin /usr/sbin /sbin /opt/local/bin ~/bin ~/.local/bin ~/.bin ~/.toolboxes/*/bin ~/.cargo/bin "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
-path_append LD_LIBRARY_PATH ~/lib
+path_append PATH /etc/smallsoft/sbin "$HOME/bin" "$HOME/.local/bin" "$HOME/.bin" "$HOME/.toolboxes"/*/bin "$HOME/.cargo/bin" "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
+path_prepend PATH /opt/local/sbin /sbin /usr/sbin /usr/local/sbin /opt/local/sbin /usr/lib64/ccache /usr/lib/ccache/bin
+path_append LD_LIBRARY_PATH "$HOME/lib"
 
-path_prepend MANPATH ~/share/man ~/man
+path_prepend MANPATH "$HOME/share/man" "$HOME/man"
 
 if [ -d ~/.gem ]; then
-	for ruby_version in ~/.gem/ruby/*; do
+	for ruby_version in "$HOME/.gem/ruby/"*; do
 		[ -f "$ruby_version/NO_PATH" ] || path_append PATH "$ruby_version/bin"
 	done
 fi
