@@ -95,8 +95,14 @@ psv() {
 }
 
 bmake() {
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RelWithDebInfo} -H. -Bbuild/ && cmake --build build/ -- -j$(nproc) "$@"
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-Debug} -H. -Bbuild/ && cmake --build build/ -- -j$(nproc) "$@"
 }
-bbmake() {
-    PATH=/usr/lib/ccache/bin:$PATH bmake "$@"
+abmake() {
+    CC=${CC:-clang} CXX=${CXX:-clang++} CXXFLAGS=${CXXFLAGS:--fsanitize=undefined,address -fsanitize-coverage=trace-pc-guard -g3} CFLAGS=${CFLAGS:-$CXXFLAGS} LDFALGS=${LDFLAGS:-$CXXFLAGS} bmake "$@"
+}
+tbmake() {
+    CC=${CC:-clang} CXX=${CXX:-clang++} CXXFLAGS=${CXXFLAGS:--fsanitize=undefined,thread -g3} CFLAGS=${CFLAGS:-$CXXFLAGS} LDFALGS=${LDFLAGS:-$CXXFLAGS} bmake "$@"
+}
+ncbmake() {
+    PATH=$(path_without PATH /usr/lib{,64}/ccache/bin) bmake "$@"
 }
