@@ -1,12 +1,16 @@
 #!/bin/bash -
+path_without() {
+    path=${!1}
+    for dir in "${@:2}"; do
+        [ "$path" == "$dir" ] && path=""
+        path=${path%:$dir}
+        path=${path#$dir:}
+        path=${path//:$dir:/:}
+    done
+    echo $path
+}
 path_remove() {
-	if [ "${!1}" == "$2" ]; then
-		export "$1="
-	else
-		export "$1=${!1%:$2}"
-		export "$1=${!1#$2:}"
-		export "$1=${!1//:$2:/:}"
-	fi
+    export "$1=$(path_without "$1" "${@:2}")"
 }
 path_append() {
 	for dir in "${@:2}"; do
