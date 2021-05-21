@@ -1,0 +1,78 @@
+snippet pkgbuild-git "variables for ...-git pkg (PKGBUILD-vcs.proto)"
+# Maintainer: Johannes Larsen <mail@johslarsen.net>
+pkgname=${1:`!v expand('%:p:h:t')`}-git
+pkgver=${4:0.1}
+pkgrel=1
+pkgdesc="${8}"
+arch=('${5|x86_64,any|}')
+url="${2:https://github.com/$3}"
+license=('${6|MIT,Apache,Unlicense,GPL,LGPL,unknown|}')
+groups=()
+depends=()
+makedepends=('git')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+replaces=()
+backup=()
+options=()
+install=
+source=("${pkgname%-git}::git+${7:$url}")
+noextract=()
+md5sums=('SKIP')
+endsnippet
+
+snippet pkgver-git "pkgver() { /* v1.2.3-rSHA1 */ }"
+pkgver() {
+	cd "${1:$srcdir/${pkgname%-git}}"
+	printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+}
+endsnippet
+
+snippet pkgver-git-tagless "pkgver() { /* rSHA1 */ }"
+pkgver() {
+	cd "${1:$srcdir/${pkgname%-git}}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+endsnippet
+
+snippet prepare "prepare() { /* extract/patch */ }"
+prepare() {
+	cd "${1:$srcdir/${pkgname${2:%-git}}}"
+	${0:patch -p1 -i "$1${3:.patch}"}
+}
+endsnippet
+
+snippet check "prepare() { /* make check */ }"
+check() {
+	cd "${1:$srcdir/${pkgname${2:%-git}}}"
+	${0:make -k check}
+}
+endsnippet
+
+snippet build "build() { /* autogen.sh; ./configure; make */ }"
+build() {
+	cd "${1:$srcdir/${pkgname${2:%-git}}}"
+	${0:./autogen.sh
+	./configure --prefix=/usr
+	make}
+}
+endsnippet
+
+snippet package "package() { /* make install */ }"
+package() {
+	cd "${1:$srcdir/${pkgname${2:%-git}}}"
+	${0:make DESTDIR="$pkgdir/" install}
+}
+endsnippet
+
+snippet bin "install /usr/bin/..."
+install -Dm755 "${1:${pkgname${2:%-git}}}" "$pkgdir/usr/bin/$1"
+endsnippet
+
+snippet license "install .../LICENSE"
+install -Dm644 ${1:LICENSE} "$pkgdir/usr/share/licenses/${pkgname${2:%-git}}/LICENSE"
+endsnippet
+
+snippet cd "cd ...%-git}"
+cd "$srcdir/${pkgname${1:%-git}}"
+endsnippet
