@@ -3,6 +3,10 @@
 	email = mail@johslarsen.net
 	signingkey = B26FAB26
 
+[gitget]
+	root = .
+	skip-host = true
+
 [blame]
 	showEmail
 
