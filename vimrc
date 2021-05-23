@@ -65,6 +65,7 @@ Plugin 'thinca/vim-template'
 
 " Colorschemes {{{2
 Plugin 'sjl/badwolf'
+Plugin 'altercation/vim-colors-solarized'
 
 " Miscellaneous {{{2
 Plugin 'sjl/gundo.vim' " undo history
@@ -93,6 +94,8 @@ nnoremap          <leader><C-b> :buffers!<cr>:buffer<Space>
 nnoremap <silent> <leader>c     :e $MYVIMRC<cr>:keeppatterns /^" Keyboard Shortcuts<cr>zo:nohlsearch<cr>
 nnoremap <silent> <leader>ce    :let b:syntastic_mode = exists('b:syntastic_mode') && b:syntastic_mode == 'passive' ? 'active' : 'passive'<cr>
 nnoremap <silent> <leader>C     :so $MYVIMRC<cr>
+nnoremap <silent> <leader>CD    :call Theme("dark")<cr>
+nnoremap <silent> <leader>CL    :call Theme("light")<cr>
 nnoremap <silent> <leader>CAL   :CalendarVR<cr>
 nnoremap <silent> <leader>d     :Gblame<cr>
 nnoremap <silent> <leader>D     :Gvdiff<cr>
@@ -291,8 +294,15 @@ set formatoptions-=t " do not wrap by default
 set nrformats=hex,alpha
 set nojoinspaces
 " UI Look {{{1
-set background=dark
-colorscheme badwolf
+function! Theme(background)
+  if a:background == "light"
+    colorscheme solarized
+  else
+    colorscheme badwolf
+  endif
+  let &background=a:background
+endfunction
+call Theme("dark")
 
 highlight Normal ctermfg=darkgreen
 highlight Special ctermfg=lightgreen
@@ -426,6 +436,8 @@ let g:rust_cargo_check_tests = 1
 
 let g:clang_format#code_style="Google"
 let g:clang_format#style_options={"ColumnLimit": 0, "AllowShortCaseLabelsOnASingleLine": "true"}
+
+let g:solarized_termcolors=256
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
