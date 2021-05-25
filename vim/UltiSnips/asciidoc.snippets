@@ -1,0 +1,165 @@
+clearsnippets
+priority 1
+
+snippet h0 "= [Document Ttitle] = "
+= ${1:Document title} =
+
+
+endsnippet
+snippet h1 "== [Section] =="
+== ${1:Section} ==
+
+endsnippet
+snippet h2 "=== [Subsection] ==="
+=== ${1:Subsection} ===
+
+endsnippet
+snippet h3 "==== [Sub²section] ===="
+==== ${1:Sub²section} ====
+
+endsnippet
+snippet h4 "===== [Sub³section] ====="
+===== ${1:Sub³section} =====
+
+endsnippet
+
+snippet h5 ".[Paragraph/Block Title]"
+.${1:Paragraph/Block Title until next empty line / end of block}
+
+endsnippet
+snippet NOTE "NOTE: [paragraph]"
+NOTE: ${1:Note paragraph until next empty line}
+endsnippet
+snippet TIP "TIP: [paragraph]"
+TIP: ${1:Tip paragraph until next empty line}
+endsnippet
+snippet IMPORTANT "IMPORTANT: [paragraph]"
+IMPORTANT: ${1:Important paragraph until next empty line}
+endsnippet
+snippet WARNING "WARNING: [paragraph]"
+WARNING: ${1:Warning paragraph until next empty line}
+endsnippet
+snippet CAUTION "CAUTION: [paragraph]"
+CAUTION: ${1:Caution paragraph until next empty line}
+endsnippet
+
+snippet listing "---- [Listing block]"
+----
+${1:Listing block}
+----
+endsnippet
+snippet code "[source, ...]---- [Code block]"
+[source, ${1:cpp}]
+----
+${1:Code block}
+----
+endsnippet
+snippet quote "[quote, ...]---- [block]"
+[quote, ${1:author}, ${2:source}]
+____
+${1:Quote block}
+____
+endsnippet
+snippet sidebar "**** [Sidebar block]"
+****
+${1:Sidebar block}
+****
+endsnippet
+snippet example "==== [Example block]"
+====
+${1:Example block}
+====
+endsnippet
+snippet note "[NOTE]==== [Note block]"
+[NOTE]
+====
+${1:Note block}
+====
+endsnippet
+snippet literal ".... [Literal block]"
+....
+${1:Literal block}
+....
+endsnippet
+snippet passthrough "++++ [Passthrough block]"
+++++
+${1:Passthrough block (i.e. backend markup)}
+++++
+endsnippet
+
+snippet normal "#[Normal text]"
+#${1:Normal text}#
+endsnippet
+snippet bold "*[Bold text]"
+*${1:Bold text}*
+endsnippet
+snippet italic "_[Italic text]"
+_${1:Italic text}_
+endsnippet
+snippet mono "+[Monospace text]"
++${1:Monospace text}+
+endsnippet
+snippet command "`[Command text]"
+\`${1:Command text}\`
+endsnippet
+snippet quoted "`[Single-quoted text]'"
+\`${1:Single-quoted text}'
+endsnippet
+snippet double "``[Double-quoted text]''"
+\`\`${1:Double-quoted text}''
+endsnippet
+snippet super "^[Superscripted text]"
+^${1:Superscripted text}^
+endsnippet
+snippet super "~[Subscripted text]"
+~${1:Subscripted text}~
+endsnippet
+snippet textProperty "[Text property]#[Normal text]"
+[${1|red,big,yellow-background|}]${2|#,*,_,+,^,~|}${3:Text}$2
+endsnippet
+
+snippet br " +\n [Line break]"
++
+${1:Forced line break}
+endsnippet
+snippet hr "'''' [Horizontal line]"
+''''
+
+endsnippet
+snippet comment "// [Comment]"
+// ${1:Comment line (i.e. not in rendered text)}
+endsnippet
+
+snippet bullet "* Bullet list"
+* ${1:Top bullet}
+	- ${2:Nested bullet}
+*** ${3:Nest²ed bullet}
+endsnippet
+snippet ordered "1. Ordered list"
+1. ${1:Top bullet}
+	a. ${2:Nested bullet}
+		A. ${3:Nest²ed bullet}
+.... "${4: Nest³ed bullet (1.->a.->i.->A.->I.)}
+endsnippet
+snippet labeled "[Term]::\n[Definition]"
+${1:Term}:: ${2:Definition}
+${3:Nested term}::: ${4: Nested definition}
+[horizontal]
+${5:Definition on the same line}:::: ${6:Modifier on for first bullet of a level, and applies to that level}
+endsnippet
+
+snippet table "|==== | [col] \n [row]"
+|====
+|${1:1A}|${2:1B}
+|${3:2A}|${4:2B}
+|====
+endsnippet
+snippet tableCsv "[format=csv]|==== [c,s,v]"
+// https://asciidoc.org/userguide.html#_tables
+[format="csv", float="right", width="80%", frame="topbot", grid="rows", options="header,footer", cols="<2s,2*^m,>e"]
+|====
+${1:Header,,,}
+${2:Bold left,mono,center,italic right}
+${3:Footer,,,}
+|====
+endsnippet
