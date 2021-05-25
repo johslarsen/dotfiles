@@ -7,40 +7,40 @@ snippet h0 "= [Document Ttitle] = "
 
 endsnippet
 snippet h1 "== [Section] =="
-== ${1:Section} ==
+== ${1:${VISUAL:Section}} ==
 
 endsnippet
 snippet h2 "=== [Subsection] ==="
-=== ${1:Subsection} ===
+=== ${1:${VISUAL:Subsection}} ===
 
 endsnippet
 snippet h3 "==== [Sub²section] ===="
-==== ${1:Sub²section} ====
+==== ${1:${VISUAL:Sub²section}} ====
 
 endsnippet
 snippet h4 "===== [Sub³section] ====="
-===== ${1:Sub³section} =====
+===== ${1:${VISUAL:Sub³section}} =====
 
 endsnippet
 
 snippet h5 ".[Paragraph/Block Title]"
-.${1:Paragraph/Block Title until next empty line / end of block}
+.${1:${VISUAL:Paragraph/Block Title until next empty line / end of block}}
 
 endsnippet
 snippet NOTE "NOTE: [paragraph]"
-NOTE: ${1:Note paragraph until next empty line}
+NOTE: ${1:${VISUAL:Note paragraph until next empty line}}
 endsnippet
 snippet TIP "TIP: [paragraph]"
-TIP: ${1:Tip paragraph until next empty line}
+TIP: ${1:${VISUAL:Tip paragraph until next empty line}}
 endsnippet
 snippet IMPORTANT "IMPORTANT: [paragraph]"
-IMPORTANT: ${1:Important paragraph until next empty line}
+IMPORTANT: ${1:${VISUAL:Important paragraph until next empty line}}
 endsnippet
 snippet WARNING "WARNING: [paragraph]"
-WARNING: ${1:Warning paragraph until next empty line}
+WARNING: ${1:${VISUAL:Warning paragraph until next empty line}}
 endsnippet
 snippet CAUTION "CAUTION: [paragraph]"
-CAUTION: ${1:Caution paragraph until next empty line}
+CAUTION: ${1:${VISUAL:Caution paragraph until next empty line}}
 endsnippet
 
 snippet listing "---- [Listing block]"
@@ -51,68 +51,68 @@ endsnippet
 snippet code "[source, ...]---- [Code block]"
 [source, ${1:cpp}]
 ----
-${1:Code block}
+${2:${VISUAL:Code block}}
 ----
 endsnippet
 snippet quote "[quote, ...]---- [block]"
 [quote, ${1:author}, ${2:source}]
 ____
-${1:Quote block}
+${3:${VISUAL:Quote block}}
 ____
 endsnippet
 snippet sidebar "**** [Sidebar block]"
 ****
-${1:Sidebar block}
+${1:${VISUAL:Sidebar block}}
 ****
 endsnippet
 snippet example "==== [Example block]"
 ====
-${1:Example block}
+${1:${VISUAL:Example block}}
 ====
 endsnippet
 snippet note "[NOTE]==== [Note block]"
 [NOTE]
 ====
-${1:Note block}
+${1:${VISUAL:Note block}}
 ====
 endsnippet
 snippet literal ".... [Literal block]"
 ....
-${1:Literal block}
+${1:${VISUAL:Literal block}}
 ....
 endsnippet
 snippet passthrough "++++ [Passthrough block]"
 ++++
-${1:Passthrough block (i.e. backend markup)}
+${1:${VISUAL:Passthrough block (i.e. backend markup)}}
 ++++
 endsnippet
 
 snippet normal "#[Normal text]"
-#${1:Normal text}#
+#${1:${VISUAL:Normal text}}#
 endsnippet
-snippet bold "*[Bold text]"
-*${1:Bold text}*
+snippet * "*[Bold text]"
+*${1:${VISUAL:Bold text}}*
 endsnippet
-snippet italic "_[Italic text]"
-_${1:Italic text}_
+snippet _ "_[Italic text]"
+_${1:${VISUAL:Italic text}}_
 endsnippet
-snippet mono "+[Monospace text]"
-+${1:Monospace text}+
+snippet + "+[Monospace text]"
++${1:${VISUAL:Monospace text}}+
 endsnippet
-snippet command "`[Command text]"
-\`${1:Command text}\`
+snippet ` "`[Command text]"
+\`${1:${VISUAL:Command text}}\`
 endsnippet
-snippet quoted "`[Single-quoted text]'"
-\`${1:Single-quoted text}'
+snippet ' "`[Single-quoted text]'"
+\`${1:${VISUAL:Single-quoted text}}'
 endsnippet
-snippet double "``[Double-quoted text]''"
-\`\`${1:Double-quoted text}''
+snippet " "``[Double-quoted text]''"
+\`\`${1:${VISUAL:Double-quoted text}}''
 endsnippet
-snippet super "^[Superscripted text]"
-^${1:Superscripted text}^
+snippet ^ "^[Superscripted text]"
+^${1:${VISUAL:Superscripted text}}^
 endsnippet
-snippet super "~[Subscripted text]"
-~${1:Subscripted text}~
+snippet ~ "~[Subscripted text]"
+~${1:${VISUAL:Subscripted text}}~
 endsnippet
 snippet textProperty "[Text property]#[Normal text]"
 [${1|red,big,yellow-background|}]${2|#,*,_,+,^,~|}${3:Text}$2
@@ -146,6 +146,10 @@ ${1:Term}:: ${2:Definition}
 ${3:Nested term}::: ${4: Nested definition}
 [horizontal]
 ${5:Definition on the same line}:::: ${6:Modifier on for first bullet of a level, and applies to that level}
+endsnippet
+snippet qanda "[qanda] 1. [Question]\n[Answer]"
+[qanda]
+${1:Numbered list with Q&A}:: ${2:Modifier only works properly on top level}
 endsnippet
 
 snippet table "|==== | [col] \n [row]"
