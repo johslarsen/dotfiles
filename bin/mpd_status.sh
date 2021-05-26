@@ -2,9 +2,8 @@
 me=`basename "$0"`
 mydir=`dirname "$0"`
 
-IFS=$'\n' result=( `mpc --format='%artist% - %title%'` )
+IFS=$'\n' result=( `mpc --format='%artist%@+@%title%'` )
 if [ $? -ne 0 ]; then
-	echo "NO MPD"
 	exit
 fi
 
@@ -39,13 +38,16 @@ if [ -z "$position_line" ]; then
 
 	status_char="#"
 	mode_line="$song_line"
-	song_line=""
+	artist=""
+	title=""
 else
 	if [[ "$position_line" =~ "[playing]" ]]; then
 		status_char='>'
 	else
 		status_char='|'
 	fi
+    artist=${song_line%@+@*}
+    title=${song_line#*@+@}
 fi
 
-echo " $song_line $status_char $(compact_mode "$mode_line")"
+printf " %s %c %10s - %-10s\n" "$(compact_mode "$mode_line")" "$status_char" "${artist:0:10}" "${title:0:10}"
