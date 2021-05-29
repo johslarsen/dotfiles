@@ -1,12 +1,13 @@
 #!/bin/bash -
-clipboard=${2:-clipboard}
-if [[ "$1" ]]; then
-	url="$(ssh "$1" DISPLAY=:0 xclip -o -session "$clipboard" | xargs echo)"
+CLIPBOARD=${CLIPBOARD:-clipboard}
+if [[ "$HOST" ]]; then
+	url="$(ssh "$HOST" DISPLAY=:0 xclip -o -session "$CLIPBOARD" | xargs echo)"
 else
-	url="$(xclip -o -session "$clipboard" | xargs echo)"
+	url="$(xclip -o -session "$CLIPBOARD" | xargs echo)"
 fi
 if [ -t 1 ]; then
-	mpv --no-ytdl "$url"
+    echo "$url"
+	mpv --no-ytdl "$url" "$@"
 else
-	mpv --no-ytdl "$url" &>/dev/null
+	mpv --no-ytdl "$url" "$@" &>/dev/null
 fi
