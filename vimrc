@@ -24,7 +24,6 @@ Plugin 'stevearc/vim-arduino'
 Plugin 'sunaku/vim-ruby-minitest'
 
 " IDE-like {{{2
-Plugin 'jackguo380/vim-lsp-cxx-highlight'
 Plugin 'johslarsen/vim-clang-format'
 Plugin 'johslarsen/vim-endwise' " #endif /*foo*/
 Plugin 'johslarsen/vim-racer'
@@ -126,6 +125,7 @@ xmap     <silent> <leader>iF    <plug>(coc-format-selected)
 nmap     <silent> <leader>il    <plug>(coc-references)
 nmap     <silent> <leader>iL    <plug>(coc-references-used)
 nmap     <silent> <leader>ir    <plug>(coc-rename)
+nmap     <silent> <leader>is    :call CocActionAsync('showSemanticHighlightInfo')<CR>
 nmap     <silent> <leader>i<C-r> <plug>(coc-refactor)
 nnoremap <silent> <leader>I     gg=G
 nnoremap <silent> <leader>k     :psearch <C-r><C-w><cr>
@@ -320,6 +320,13 @@ highlight SpecialKey cterm=NONE ctermfg=black ctermbg=brown
 highlight LocalIndentGuide ctermbg=234
 highlight CocHoverRange ctermbg=234
 
+highlight Function ctermfg=210
+highlight CocSem_method ctermfg=216
+highlight Structure ctermfg=205
+highlight CocSem_namespace ctermfg=133
+highlight CocSem_property ctermfg=202
+highlight CocSem_parameter ctermfg=208
+
 set laststatus=2
 set statusline=%< " truncate from left
 set statusline+=%#ErrorMsg#%{SyntasticStatuslineFlag()}%{SyntasticIsPassive()?'[PASSIVE]':''}%*
@@ -392,6 +399,8 @@ let g:arduino_dir = '/usr/share/arduino' " location on archlinux
 let g:calendar_mark = 'left-fit'
 let g:calendar_monday = 1
 let g:calendar_weeknm = 5
+
+let g:coc_default_semantic_highlight_groups = 1
 
 let g:csv_comment = '#'
 let g:csv_end = 10
