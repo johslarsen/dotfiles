@@ -115,6 +115,8 @@ vnoremap <silent> <leader><C-g> "vy:Ag <C-r>v<cr>
 nnoremap <silent> <leader>h     :FSHere<cr>
 nnoremap <silent> <leader>H     :FSSplitLeft<cr>
 nnoremap <silent> <leader><c-h> :FSSplitAbove<cr>
+nmap     <silent> <leader>ia    <plug>(coc-codeaction-line)
+xmap     <silent> <leader>ia    <plug>(coc-codeaction-selected)
 nmap     <silent> <leader>id    <plug>(coc-definition)
 nnoremap <silent> <leader>iD    :call CocAction('jumpDefinition', 'pedit')<CR>
 nmap     <silent> <leader>i<C-d> :call CocAction('jumpDeclaration', 'pedit')<CR>
@@ -124,6 +126,7 @@ nmap     <silent> <leader>iF    <plug>(coc-format-selected)
 xmap     <silent> <leader>iF    <plug>(coc-format-selected)
 nmap     <silent> <leader>il    <plug>(coc-references)
 nmap     <silent> <leader>iL    <plug>(coc-references-used)
+nmap     <silent> <leader>iq    <plug>(coc-fix-current)
 nmap     <silent> <leader>ir    <plug>(coc-rename)
 nmap     <silent> <leader>is    :call CocActionAsync('showSemanticHighlightInfo')<CR>
 nmap     <silent> <leader>i<C-r> <plug>(coc-refactor)
@@ -329,7 +332,8 @@ highlight CocSem_parameter ctermfg=208
 
 set laststatus=2
 set statusline=%< " truncate from left
-set statusline+=%#ErrorMsg#%{SyntasticStatuslineFlag()}%{SyntasticIsPassive()?'[PASSIVE]':''}%*
+set statusline+=[%#ErrorMsg#%{coc#status()}%*]
+set statusline+=%#ErrorMsg#%{SyntasticStatuslineFlag()}%*
 set statusline+=%{fugitive#statusline()}
 set statusline+=%y[%{&fo}][%{strlen(&fenc)?&fenc:&enc},%{&ff}][%{&spl}]
 set statusline+=\ %f\  " the file name
