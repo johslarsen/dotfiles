@@ -51,8 +51,13 @@ Dir.glob(File.join($opts[:root], "**", "*")).sort.reverse_each do |target|
     break nil if overridden.include? target
 
     l = link_for(target)
-    if File.symlink?(l) && target.start_with?(File.realpath(l))
-      break nil # an intermediate directory have already been linked
+    if File.symlink?(l)
+      unless File.exist?(File.readlink(l))
+        break nil # broken link, so just ignore it
+      end
+      if target.start_with?(File.realpath(l))
+        break nil # an intermediate directory have already been linked
+      end
     end
 
     shallowest_link_point ||=  Dir.exist?(File.dirname(l)) && [l, target]
