@@ -1,0 +1,3 @@
+#!/bin/bash -
+[ "$2" ] && options="sheet=$2"
+ssconvert -T Gnumeric_stf:stf_csv -O "$options" "$1" fd://1 2>/dev/null
