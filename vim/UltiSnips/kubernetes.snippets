@@ -1,0 +1,97 @@
+snippet m "metadata: name: ..."
+metadata:
+	name: ${1:`!v expand('%:t:r')`}
+	$0
+endsnippet
+snippet l "labels: k:v..."
+labels:
+	${1:key}: ${2:value}
+	$0
+endsnippet
+
+snippet kv "- name: ... value: ..."
+- name: $1
+	value: $2
+$0
+endsnippet
+snippet ef "envFrom: ..."
+envFrom:
+	- ${1|secret,configMap|}Ref:
+			name: $2
+	$0
+endsnippet
+
+snippet sh "command: [sh] tty: True, stdin: True"
+command: [${1:"sh"}]
+tty: True
+stdin: True
+$0
+endsnippet
+snippet cmd "command: [...], args: -..."
+command: ["$1"]
+args:
+	- $0
+endsnippet
+
+snippet mnt "volumeMounts: ..."
+volumeMounts:
+	- name: $1
+		mountPath: ${2:/}${3:${1/-/\//g}}
+	$0
+endsnippet
+snippet vol "volumes: ..."
+volumes:
+	- name: $1
+		$0
+endsnippet
+snippet ram "emptyDir: medium: Memory"
+emptyDir:
+	medium: Memory
+$0
+endsnippet
+snippet vcfg "configMap: ..."
+configMap:
+	name: $1
+$0
+endsnippet
+snippet vsec "secret: ..."
+secret:
+	secretName: $1
+$0
+endsnippet
+
+snippet kd "Kubernetes Deployment"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: &name ${1:`!v expand('%:t:r')`}
+	labels: &labels
+		${2:app: *name}
+spec:
+	selector:
+		matchLabels: *labels
+	template:
+		metadata:
+			labels: *labels
+		spec:
+			containers:
+				- name: ${3:*name}
+					image: ${4:$1}
+					$0
+endsnippet
+snippet kj "Kubernetes Job"
+apiVersion: batch/v1
+kind: Job
+metadata:
+	name: &name ${1:`!v expand('%:t:r')`}
+spec:
+	template:
+		spec:
+			containers:
+				- name: *name
+					image: ${2:$1}
+					$0
+			restartPolicy: ${3Never,OnFailure,Always|}
+	backoffLimit: ${4:3}
+	activeDeadlineSeconds: ${5:3600}
+endsnippet

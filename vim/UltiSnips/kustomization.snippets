@@ -1,0 +1,30 @@
+snippet kz "Kustomization"
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+	- ${1:../../base}
+	$0
+endsnippet
+snippet kzg "Kustomization configMap-/secretGenerator"
+${1|configMap,secret|}Generator:
+	- name: ${2}
+		${3|files,envs,literals|}:
+			- ${5:$2.${4|yaml,json,env,ini|}}
+			$0
+endsnippet
+snippet kzgs "Kustomization configMap-/secretGenerator with disableNameSuffixHash"
+${1|configMap,secret|}Generator:
+	- name: ${2}
+		${3|files,envs,literals|}:
+			- ${5:$2.${4|yaml,json,env,ini|}}
+			$0
+		options:
+			disableNameSuffixHash: True
+endsnippet
+snippet kzi "Kustomization images"
+images:
+	- name: $1
+		newName: $2
+		$0
+endsnippet
