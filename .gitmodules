@@ -7,3 +7,6 @@
 [submodule "toolboxes/jrb"]
 	path = toolboxes/jrb
 	url = ../jrb
+[submodule ".external/complete-alias"]
+	path = .external/complete-alias
+	url = https://github.com/cykerway/complete-alias
