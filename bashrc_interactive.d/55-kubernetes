@@ -1,0 +1,29 @@
+#!/bin/bash -
+alias k='kubectl'
+alias ka='k apply'
+alias kc='k create'
+alias kctx='k config use-context'
+alias kctxs='k config get-contexts'
+alias kd='k describe'
+alias kdf='k diff'
+alias kf='k logs --tail 10 -f'
+alias kg='k get --sort-by=.metadata.creationTimestamp'
+alias kh='k explain'
+alias kk='k kustomize'
+alias kit='k exec -i -t'
+alias kl='k get -o name'
+alias kp='k port-forward'
+alias krh='k rollout history'
+alias krm='k delete'
+alias krr='k rollout restart'
+alias krs='k rollout status'
+alias kru='k rollout undo'
+alias ky='k get -o yaml'
+alias kz='kustomize'
+complete -F _complete_alias k{,a,c,ctl,d,df,f,g,it,k,l,p,rh,rm,rr,rs,ru,y,z}
+
+kns() {
+    kubectl config set-context --current --namespace="$1"
+}
+
+export KUBECTL_EXTERNAL_DIFF='diff -U0 --color=auto'
