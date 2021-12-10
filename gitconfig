@@ -125,6 +125,7 @@
 	rba = rebase --abort
 	rbc = rebase --continue
 	rbf = rebase -i --autosquash
+	rbm = -c sequence.editor='vim -c :%s/^f/p/e -c %s/^s/p/e' rebase -i --autosquash
 	p = cherry-pick
 	pa = cherry-pick --abort
 	pc = cherry-pick --continue
@@ -152,8 +153,10 @@
 	cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
 	coc = !git checkout `gitf`
 
-	submaster = submodule foreach --recursive git checkout master
-	subpull = submodule foreach --recursive git rpull
-	subpush = submodule foreach --recursive git push
+	smaster = submodule foreach --recursive git checkout master
+	spull = submodule foreach --recursive git rpull
+	spush = submodule foreach --recursive git push
+	sfetch = submodule foreach --recursive git fetch
+	sco = submodule foreach --recursive git checkout
 
 	spop = stash pop --index
