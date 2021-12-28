@@ -545,6 +545,7 @@ augroup vimrc
 
   au CursorHold * silent call CocActionAsync('highlight')
   au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  au! FileType qf nnoremap <buffer> <CR> <CR>
 augroup END
 " Functions (alphabetized) {{{1
 function! AllFiles(directory)
