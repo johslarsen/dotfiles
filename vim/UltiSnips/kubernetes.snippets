@@ -79,6 +79,24 @@ spec:
 					image: ${4:$1}
 					$0
 endsnippet
+snippet ki "Kubernetes Ingress"
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+	name: &name ${1:`!v expand('%:t:r')`}
+spec:
+	rules:
+		- host: ${2:`!v expand('%:t:r')`}
+			http:
+				paths:
+					- path: ${3:/}
+						pathType: Prefix
+						backend:
+							service:
+								name: ${4:*name}
+								port:
+									number: ${5:80}
+endsnippet
 snippet kj "Kubernetes Job"
 apiVersion: batch/v1
 kind: Job
@@ -94,4 +112,16 @@ spec:
 			restartPolicy: ${3|Never,OnFailure,Always|}
 	backoffLimit: ${4:3}
 	activeDeadlineSeconds: ${5:3600}
+endsnippet
+snippet ks "Kubernetes Service"
+apiVersion: v1
+kind: Service
+metadata:
+	name: &name ${1:`!v expand('%:t:r')`}
+spec:
+	selector:
+		app: *name
+	ports:
+		- port: $2
+			$0
 endsnippet
