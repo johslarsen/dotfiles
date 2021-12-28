@@ -422,6 +422,7 @@ command! -bang -nargs=* GGrep
   \                           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                   <bang>0)
 
+let $VIM_GITGUTTER_TEST=1 " avoids CursorHold warning
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_map_keys = 0
