@@ -96,9 +96,9 @@ nnoremap <silent> <leader>C     :so $MYVIMRC<cr>
 nnoremap <silent> <leader>CD    :call Theme("dark")<cr>
 nnoremap <silent> <leader>CL    :call Theme("light")<cr>
 nnoremap <silent> <leader>CAL   :CalendarVR<cr>
-nnoremap <silent> <leader>d     :Gblame<cr>
-nnoremap <silent> <leader>D     :Gvdiff<cr>
-nnoremap <silent> <leader><C-d> :Gsdiff<cr>
+nnoremap <silent> <leader>d     :Git blame<cr>
+nnoremap <silent> <leader>D     :Gvdiffsplit<cr>
+nnoremap <silent> <leader><C-d> :Ghdiffsplit<cr>
 nnoremap <silent> <leader>e     :Explore<cr>
 nnoremap <silent> <leader>E     :Vexplore<cr>
 nnoremap <silent> <leader><c-e> :Sexplore<cr>
@@ -181,7 +181,9 @@ nnoremap          <leader>8     :call ToggleStaticColorcolumn(81)<cr>
 nnoremap          <leader>%     :%s//gc<Left><Left><Left>
 nnoremap          <leader>"     :call AutoPairsToggle()<CR>
 nnoremap <silent> <leader>+     :call GFileStatus(expand('%'))<cr>
-nnoremap          <leader>?     :Glog<cr>
+nnoremap <silent> <leader>?     :Gclog! ./<C-r>%<cr>
+nnoremap <silent> <leader><CR>  :Git! show <C-r><C-w><cr>
+
 nnoremap          <leader><Tab> :Snippets<cr>
 
 vnoremap <silent> <leader>r     :VSResize<cr>
@@ -582,7 +584,7 @@ function! GTestContext()
 endfunction
 
 function! GFileStatus(file)
-  :Gstatus
+  :Git
   call search(" ".a:file."$")
 endfunction
 
