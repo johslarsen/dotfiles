@@ -1,0 +1,4 @@
+#!/bin/bash -
+for addr in "$@"; do
+    openssl s_client -connect "$@" -showcerts < /dev/null
+done

@@ -1,0 +1,4 @@
+#!/bin/bash -
+for f in "${@:--}"; do
+    openssl x509 -text -noout -in "$f"
+done
