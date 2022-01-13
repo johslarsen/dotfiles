@@ -650,6 +650,11 @@ function! ToSnake(camel_case_str)
   return substitute(l:without_intra_camel, '\(\u\)', '\l\1', 'g')
 endfunction
 
+function! ToTitle(basename)
+  let l:with_spaces = substitute(a:basename, '[-_.]\+', ' ', 'g')
+  return substitute(l:with_spaces, '\<.', '\u\0', 'g')
+endfunction
+
 function! ToggleEmptyOr(needle, haystack)
   return a:haystack != a:needle ? a:needle : ''
 endfunction

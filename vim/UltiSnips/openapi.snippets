@@ -1,0 +1,40 @@
+snippet oa "openapi: 3.1.0"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json
+openapi: 3.1.0
+info:
+	title: ${1:`!v ToTitle(expand('%:t:r'))`}
+	version: ${2:0.1.0}
+
+tags:
+	- name: ${3:Public}
+
+paths:
+	${4:/}:
+		$0
+endsnippet
+snippet oam "GET/POST/..."
+${1|get,post,put,delete,options,head,patch,trace|}:
+	tags: [${2:Public}]
+	$0
+	responses:
+		200:
+			description: ${3:OK}
+endsnippet
+snippet oap "parameters ..."
+parameters:
+	- in: ${1|query,path,header,cookie|}
+		name: $2
+		schema: ${3:{$ref: '#/components/schemas/$4'}}
+	$0
+endsnippet
+snippet oab "requestBody ..."
+requestBody:
+	required: true
+	content:
+		${1|application/x-www-form-urlencoded,application/json,text/plain; charset=utf-8|}:
+			schema: ${2:{$ref: '#/components/schemas/$3'}}
+		$0
+endsnippet
+snippet oar "$ref: ..."
+$ref: '$1#/components/schema/$0'
+endsnippet

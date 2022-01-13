@@ -1,0 +1,22 @@
+snippet schema-js "# yaml-language-server: $schema=JSON Schema Draft 2020-12"
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$0
+endsnippet
+
+snippet t
+type: ${0|string,integer,number,boolean,null,array,object|}
+endsnippet
+snippet f
+format: ${0|password,uri,uuid,date-time,duration,email,ipv4|}
+endsnippet
+
+snippet o
+type: object
+properties:
+	$0
+endsnippet
+snippet a
+type: array
+items:
+	$0
+endsnippet

@@ -91,7 +91,7 @@ spec:
 				- name: *name
 					image: ${2:$1}
 					$0
-			restartPolicy: ${3Never,OnFailure,Always|}
+			restartPolicy: ${3|Never,OnFailure,Always|}
 	backoffLimit: ${4:3}
 	activeDeadlineSeconds: ${5:3600}
 endsnippet
