@@ -370,7 +370,7 @@ set smartcase
 
 set previewheight=5
 
-set completeopt=menu,longest
+set completeopt=menu
 set completefunc=syntaxcomplete#Complete
 set shortmess+=c " no "Match N of M" when i_<C-n/p>
 
