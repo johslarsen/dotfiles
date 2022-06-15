@@ -449,6 +449,7 @@ let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 
 let g:rust_cargo_check_tests = 1
+let g:rustfmt_autosave = 1
 
 let g:clang_format#code_style="Google"
 let g:clang_format#style_options={"ColumnLimit": 0, "AllowShortCaseLabelsOnASingleLine": "true"}

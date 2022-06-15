@@ -8,6 +8,8 @@
     },
     "diagnostic.separateRelatedInformationAsDiagnostics": true,
     "rust-client.disableRustup": true,
+    "rust-client.updateOnStartup": false,
+    "rust-analyzer.updates.checkOnStartup": false,
     "solargraph.promptDownload": false,
     "solargraph.checkGemVersion": false,
     "yaml.schemas": {
