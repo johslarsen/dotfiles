@@ -1,0 +1,5 @@
+#!/bin/bash -
+FN=${FN:-90}
+for f in "$@"; do
+	openscad -o "${f%.scad}.stl" -D"\$fn=$FN" "$f"
+done
