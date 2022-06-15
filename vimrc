@@ -283,7 +283,7 @@ cnoremap <M-f> <S-Right>
 " Syntax {{{1
 syntax on
 
-set noexpandtab
+set expandtab
 set softtabstop=0
 set tabstop=4
 set shiftwidth=4
