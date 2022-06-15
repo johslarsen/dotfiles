@@ -1,0 +1,3 @@
+#!/bin/bash -
+h=${HEIGHT:-720}
+"${0%/*}/mclip" --ytdl-format="bestvideo[height<=$h]+bestaudio/best[height<=$h]" "$@"

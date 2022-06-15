@@ -1,2 +1,2 @@
 #!/bin/bash -
-"${0%/*}/mclip" --ytdl-format=worstvideo+bestaudio
+"${0%/*}/mclip" --ytdl-format="bestaudio" "$@"
