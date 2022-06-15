@@ -116,7 +116,7 @@ altMask = mod1Mask
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 	[ ((modm                          .|.altMask, xK_s     ), spawn $ XMonad.terminal conf) -- launch a terminal
-	, ((modm              .|.shiftMask.|.altMask, xK_s     ), spawn "PATH=$PATH:~/bin:~/.bin dmenu_run") -- launch dmenu
+	, ((modm              .|.shiftMask.|.altMask, xK_s     ), spawn "PATH=$PATH:$HOME/bin:$HOME/.bin dmenu_run") -- launch dmenu
 
 	, ((modm                                    , xK_space ), sendMessage NextLayout) -- Rotate through the available layout algorithms
 	, ((modm              .|.shiftMask          , xK_space ), setLayout $ XMonad.layoutHook conf) --  Reset the layouts on the current workspace to default
@@ -164,7 +164,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm.|.controlMask                      , xK_p     ), spawn "mpc &>/dev/null toggle") -- mpd play/pause
 	, ((modm.|.controlMask                      , xK_space ), spawn "mpc &>/dev/null toggle") -- mpd play/pause
 	, ((0, xF86XK_AudioPlay                                ), spawn "mpc &>/dev/null toggle") -- mpd play/pause
-	, ((0, xF86XK_AudioPause                               ), spawn "mpc &>/dev/null toggle") -- mpd play/pause
+	, ((0, xF86XK_AudioPause                               ), spawn "mpc &>/dev/null pause") -- mpd play/pause
 	, ((modm.|.controlMask                      , xK_h     ), spawn "mpc &>/dev/null prev") -- mpd previous song
 	, ((0, xF86XK_AudioPrev                                ), spawn "mpc &>/dev/null prev") -- mpd previous song
 	, ((modm.|.controlMask                      , xK_j     ), spawn "mpc &>/dev/null seek -2%") -- mpd seek backward
@@ -208,6 +208,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((0, xF86XK_KbdBrightnessDown)                        , spawn "sudo /usr/local/lib/backlight/backlight_kbd.sh -"     )
 
 	, ((0, xF86XK_Display)                                  , spawn "xrandr --auto"                                            )
+	, ((modm, xK_p)                                         , spawn "xrandr --auto"                                            ) -- Stupid DELL BIOS sending this for fn+f8 (earlier xF86XK_Display)
 
 	, ((0, xF86XK_Eject)                                    , spawn "eject"                                                    )
 	]
