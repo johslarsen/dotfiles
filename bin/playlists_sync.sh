@@ -16,4 +16,4 @@ playlists=( "${@:3:$#}" )
 
 [[ $# -lt 3 ]] && die
 
-rsync -av --progress --delete --ignore-existing --include-from=<(cat "${playlists[@]}" | with_parent_directory_entries) --exclude="*" "$from" "$to"
+rsync -av --progress --delete --ignore-existing --include-from=<(awk '{print gensub(/[\[\]*?]/, "\\\\\\\\\\0", "g", $0)}' "${playlists[@]}" | with_parent_directory_entries) --exclude="*" "$from" "$to"
