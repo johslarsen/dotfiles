@@ -20,8 +20,8 @@ import Control.Monad (liftM2)
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
  
-main = xmonad =<< statusBar "/usr/bin/xmobar ~/.xmobarrc" myPP toggleBarKey (withUrgencyHook NoUrgencyHook $ defaultConfig)
-		{ manageHook = myManageHook <+> manageHook defaultConfig
+main = xmonad =<< statusBar "/usr/bin/xmobar ~/.xmobarrc" myPP toggleBarKey (withUrgencyHook NoUrgencyHook $ def)
+		{ manageHook = myManageHook <+> manageHook def
 		, layoutHook = myLayoutHook
 		, modMask = mod4Mask     -- Rebind Mod to the Super key
 		, workspaces = myWorkspaces
