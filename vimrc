@@ -165,12 +165,12 @@ nnoremap          <leader>V     :BCommits<cr>
 nnoremap <silent> <leader>w     :lopen 4<cr>
 nnoremap <silent> <leader>W     :lclose<cr>:llist<cr>
 nnoremap <silent> <leader>ye    :GTestCaseToggle<cr>
-nnoremap <silent> <leader>yy    :MakeCheckGTest *<cr>
-nnoremap          <leader>yY    :MakeCheckGTest *
-nnoremap          <leader>yf    :MakeCheckGTest <C-r>=GTestContext()[0]<cr>.*<cr>
-nnoremap          <leader>yF    :MakeCheckGTest <C-r>=GTestContext()[0]<cr>.*
-nnoremap          <leader>yt    :MakeCheckGTest <C-r>=join(GTestContext(),'.')<cr><cr>
-nnoremap          <leader>yT    :MakeCheckGTest <C-r>=join(GTestContext(),'.')<cr>
+nnoremap <silent> <leader>yy    :CTestGTest *<cr>
+nnoremap          <leader>yY    :CTestGTest *
+nnoremap          <leader>yf    :CTestGTest <C-r>=GTestContext()[0]<cr>.*<cr>
+nnoremap          <leader>yF    :CTestGTest <C-r>=GTestContext()[0]<cr>.*
+nnoremap          <leader>yt    :CTestGTest <C-r>=join(GTestContext(),'.')<cr><cr>
+nnoremap          <leader>yT    :CTestGTest <C-r>=join(GTestContext(),'.')<cr>
 nnoremap <silent> <leader>yc    :TestcovMark<cr>
 nnoremap <silent> <leader>yC    :TestcovRefresh<cr>
 nnoremap          <leader>x     :Dispatch<space>
@@ -598,12 +598,18 @@ function! IndentationString(indentation_level)
     endif
 endfunction
 
-command! -nargs=* MakeCheck call _MakeCheck(<f-args>)
-function! _MakeCheck(...)
-  exec 'Make test' join(a:000)
+command! -nargs=* CTest call _CTest(<f-args>)
+function! _CTest(...)
+  let l:makeprg=&makeprg
+  let &makeprg='ctest --test-dir '.shellescape(get(g:, 'cmake_build_dir', 'build'))
+  if !empty($CTEST_FILTER)
+    let &makeprg.=' -R '.shellescape($CTEST_FILTER)
+  endif
+  exec 'Make' join(a:000)
+  let &makeprg=l:makeprg
 endfunction
-command! -nargs=1 MakeCheckGTest call _MakeCheckGTest(<f-args>)
-function! _MakeCheckGTest(filter)
+command! -nargs=1 CTestGTest call _CTestGTest(<f-args>)
+function! _CTestGTest(filter)
   let l:errorformat=&errorformat
 
   let &errorformat  =  '%.%#: %f:%l: %m' " C/C++ assertions
@@ -620,7 +626,7 @@ function! _MakeCheckGTest(filter)
   let $GTEST_FILTER=a:filter
   let $ASAN_OPTIONS='coverage=1'
   let $CTEST_OUTPUT_ON_FAILURE='1'
-  call _MakeCheck()
+  call _CTest()
   let &errorformat=l:errorformat
 endfunction
 
