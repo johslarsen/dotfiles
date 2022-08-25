@@ -472,8 +472,8 @@ let s:W .= ' -Wswitch-default -Wduplicated-branches -Wduplicated-cond'
 let s:W .= ' -Wtrampolines -Wfloat-equal -Wlogical-op -Wshadow'
 let s:W .= ' -Wrestrict -Winline -fstack-protector'
 "let s:W .= ' -Weffc++ -Wpadded'
-let g:syntastic_c_compiler_options = s:W . ' -std=c11 -Wbad-function-cast -Wstrict-prototypes -Wold-style-definition -Wc++-compat'
-let g:syntastic_cpp_compiler_options = s:W . ' -std=c++17 -Wregister -Wstrict-null-sentinel -Wold-style-cast -Wzero-as-null-pointer-constant'
+let g:syntastic_c_compiler_options = s:W . ' -std=c17 -Wbad-function-cast -Wstrict-prototypes -Wold-style-definition -Wc++-compat'
+let g:syntastic_cpp_compiler_options = s:W . ' -std=c++20 -Wregister -Wstrict-null-sentinel -Wold-style-cast -Wzero-as-null-pointer-constant'
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_c_clang_check_post_args = ""
 let g:syntastic_cpp_clang_check_post_args = ""
