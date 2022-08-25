@@ -576,13 +576,14 @@ function! _GTestCaseToggle()
 endfunction
 
 function! GTestContext()
-  let l:pattern = 'TEST[^(]*(\([^ ,]\+\), \([^ ,)]\+\)'
+  let id='[[:alnum:]_[:space:]\n]'
+  let l:pattern = 'TEST'.id.'*(\('.id.'\+\),\('.id.'\+\))'
   let l:pos = search(l:pattern, 'bcnw')
   if (l:pos == 0)
     return [substitute(RPathSrc("%:r"), "/", "_", "g"), '']
   endif
-  let l:match = matchlist(getline(l:pos), l:pattern)
-  return [l:match[1], l:match[2]]
+  let l:match = matchlist(join(getline(l:pos,l:pos+2)), l:pattern)
+  return [trim(l:match[1]), trim(l:match[2])]
 endfunction
 
 function! GFileStatus(file)
