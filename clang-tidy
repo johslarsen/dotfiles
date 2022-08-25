@@ -1,0 +1,24 @@
+#Checks: '*,-fuchsia*,-google*,-zircon*,-abseil*,-llvm*,-*-magic-numbers,-*-non-private-member-variables-in-classes,-modernize-use-trailing-return-type'
+Checks: >
+  *
+  ,-altera*
+  ,-fuchsia*
+  ,-llvmlibc*
+  ,-*-length
+  ,-*-magic-numbers
+  ,-*-include-order
+  ,-*-non-private-member-variables-in-classes
+  ,-*-use-trailing-return-type
+  ,-*-braces-around-statements
+  ,-*-isolate-declaration
+  ,-*-macro-usage
+  ,-cert-err58-cpp
+  ,-cppcoreguidelines-owning-memory
+  ,-cppcoreguidelines-avoid-non-const-global-variables
+  ,-*-vararg
+  ,-*-avoid-goto
+HeaderFilterRegex: ''
+FormatStyle: none
+CheckOptions:
+  - key: readability-function-cognitive-complexity.IgnoreMacros
+    value: true

@@ -109,3 +109,6 @@ ncbmake() {
 btest() {
     CTEST_OUTPUT_ON_FAILURE=${CTEST_OUTPUT_ON_FAILURE:-1} ctest --test-dir build/ "$@"
 }
+btidy() {
+    clang-tidy -p build/ "$@"
+}
