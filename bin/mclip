@@ -9,5 +9,5 @@ options=( --demuxer-max-bytes=8M "$@" )
 if [ -t 1 ]; then
 	mpv "$url" "${options[@]}"
 else
-	mpv "$url" "${options[@]}" &>/dev/null
+	msg=$(mpv "$url" "${options[@]}" --quiet 2>&1) || echo "$msg" | head -5 | dzen2 -p 2 -l 5
 fi
