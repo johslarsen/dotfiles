@@ -1,10 +1,28 @@
 Lint/IneffectiveAccessModifier:
-    Enabled: false
+  Enabled: false
 Lint/Loop:
-    Enabled: false
+  Enabled: false
 Lint/ScriptPermission:
-    Enabled: false
-Lint/StringConversionInInterpolation:
-    Enabled: false
+  Enabled: false
+Lint/RedundantStringCoercion:
+  Enabled: false
 Lint/UselessAccessModifier:
-    Enabled: false
+  Enabled: false
+Layout:
+  Severity: info
+Style:
+  Severity: info
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+Metrics:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
