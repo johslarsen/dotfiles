@@ -117,6 +117,8 @@ nnoremap <silent> <leader>H     :FSSplitLeft<cr>
 nnoremap <silent> <leader><c-h> :FSSplitAbove<cr>
 nmap     <silent> <leader>ia    <plug>(coc-codeaction-line)
 xmap     <silent> <leader>ia    <plug>(coc-codeaction-selected)
+nmap     <silent> <leader>ic    :call CocAction('showIncomingCalls')<CR>
+nmap     <silent> <leader>iC    :call CocAction('showOutgoingCalls')<CR>
 nmap     <silent> <leader>id    <plug>(coc-definition)
 nnoremap <silent> <leader>iD    :call CocAction('jumpDefinition', 'pedit')<CR>
 nmap     <silent> <leader>i<C-d> :call CocAction('jumpDeclaration', 'pedit')<CR>
@@ -126,6 +128,7 @@ nmap     <silent> <leader>iF    <plug>(coc-format-selected)
 xmap     <silent> <leader>iF    <plug>(coc-format-selected)
 nmap     <silent> <leader>il    <plug>(coc-references)
 nmap     <silent> <leader>iL    <plug>(coc-references-used)
+nmap     <silent> <leader>io    :call CocAction('showOutline')<CR>
 nmap     <silent> <leader>iq    <plug>(coc-fix-current)
 nmap     <silent> <leader>ir    <plug>(coc-rename)
 nmap     <silent> <leader>is    :call CocActionAsync('showSemanticHighlightInfo')<CR>
@@ -260,6 +263,7 @@ inoremap <c-k> <c-x><c-o>
 
 nnoremap <silent>       <c-@> :call CocActionAsync('doHover')<CR>
 inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <c-\> CocActionAsync('showSignatureHelp')
 
 " mimic UltiSnips behavior for clang_complete snippets
 nmap <C-j> <Tab>

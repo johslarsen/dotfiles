@@ -7,11 +7,15 @@
         "semanticTokens": true
     },
     "diagnostic.separateRelatedInformationAsDiagnostics": true,
-    "rust-client.disableRustup": true,
-    "rust-client.updateOnStartup": false,
+    "python.autoUpdateLanguageServer": false,
     "rust-analyzer.updates.checkOnStartup": false,
-    "solargraph.promptDownload": false,
+    "sh.highlightParsingErrors": true,
     "solargraph.checkGemVersion": false,
+    "solargraph.diagnostics": true,
+    "solargraph.formatting": true,
+    "solargraph.promptDownload": false,
+    "suggest.virtualText": true,
+    "yaml.format.enable": true,
     "yaml.schemas": {
        "kubernetes": "*.yaml"
     }
