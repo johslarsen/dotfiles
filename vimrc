@@ -332,11 +332,12 @@ highlight LocalIndentGuide ctermbg=234
 highlight CocHoverRange ctermbg=234
 
 highlight Function ctermfg=210
-highlight CocSem_method ctermfg=216
+highlight CocSemMethod ctermfg=216
 highlight Structure ctermfg=205
-highlight CocSem_namespace ctermfg=133
-highlight CocSem_property ctermfg=202
-highlight CocSem_parameter ctermfg=208
+highlight CocSemNamespace ctermfg=133
+highlight CocSemProperty ctermfg=202
+highlight CocSemParameter ctermfg=208
+highlight link CocSemTypeParameter Type
 
 set laststatus=2
 set statusline=%< " truncate from left

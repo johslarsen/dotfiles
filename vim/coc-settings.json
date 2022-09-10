@@ -9,6 +9,7 @@
     "diagnostic.separateRelatedInformationAsDiagnostics": true,
     "python.autoUpdateLanguageServer": false,
     "rust-analyzer.updates.checkOnStartup": false,
+    "semanticTokens.filetypes": ["*"],
     "sh.highlightParsingErrors": true,
     "solargraph.checkGemVersion": false,
     "solargraph.diagnostics": true,
