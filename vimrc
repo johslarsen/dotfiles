@@ -203,7 +203,8 @@ nnoremap <space> za
 
 nnoremap <silent> zp :GitGutterFold<cr>
 
-nnoremap Y y$ " consistent behavior with D, C
+" consistent behavior with D, C
+nnoremap Y y$
 
 " Norwegian keyboard layout requires AltGr for lots of useful buttons, so remap the characters that are on the location that these are in the US keyboard layout
 noremap § ~
@@ -267,7 +268,8 @@ imap <C-j> <ESC><Tab>
 
 inoremap <silent> <S-Tab> <C-\><C-o>:Snippets<cr>
 
-imap <C-l> <C-y> " accept selected completion item
+" accept selected completion item
+imap <C-l> <C-y>
 
 " nbsp = space
 inoremap   <Space>
