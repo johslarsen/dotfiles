@@ -10,8 +10,7 @@ path_prepend PATH {/,/usr/,/usr/local/,/opt/local/}{bin,sbin} /usr/lib64/ccache 
 path_append LD_LIBRARY_PATH "$HOME/lib"
 path_prepend MANPATH "$HOME/share/man" "$HOME/man"
 
-if [ -d ~/.gem ]; then
-	for ruby_version in "$HOME/.gem/ruby/"*; do
-		[ -f "$ruby_version/NO_PATH" ] || path_append PATH "$ruby_version/bin"
-	done
-fi
+versions=( "$HOME/.gem/ruby/"*/bin )
+for ((i=${#versions[@]}-1; i>=0; i--)); do
+    path_append PATH "${versions[i]}"
+done
