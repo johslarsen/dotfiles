@@ -7,6 +7,10 @@
         "semanticTokens": true
     },
     "diagnostic.separateRelatedInformationAsDiagnostics": true,
+    "diagnostic.errorSign": "E>",
+    "diagnostic.warningSign": "W>",
+    "diagnostic.infoSign": "I>",
+    "diagnostic.hintSign": "H>",
     "python.autoUpdateLanguageServer": false,
     "rust-analyzer.updates.checkOnStartup": false,
     "semanticTokens.filetypes": ["*"],
