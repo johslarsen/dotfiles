@@ -69,6 +69,8 @@ Plugin 'altercation/vim-colors-solarized'
 " Miscellaneous {{{2
 Plugin 'sjl/gundo.vim' " undo history
 Plugin 'tpope/vim-sensible' " lots of defaults
+
+let g:loaded_matchit=1 " stop vim-unimpaired from loading it
 Plugin 'tpope/vim-unimpaired' " lots of shortcuts
 
 Plugin 'gnupg'
@@ -232,6 +234,8 @@ nnoremap <C-e> :buffer #<CR>
 " Movement {{{2
 noremap <C-Up> gk
 noremap <C-Down> gj
+
+nnoremap <silent> % %:call CocActionAsync('doHover')<CR>
 
 nmap <silent> [i <Plug>(coc-diagnostic-prev)
 nmap <silent> ]i <Plug>(coc-diagnostic-next)
