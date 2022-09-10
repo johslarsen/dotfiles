@@ -10,9 +10,13 @@ Lint/UselessAccessModifier:
   Enabled: false
 Layout:
   Severity: info
+Layout/LineLength:
+  Enabled: false
 Style:
   Severity: info
 Naming/HeredocDelimiterNaming:
+  Enabled: false
+Naming/MethodParameterName:
   Enabled: false
 Metrics:
   Enabled: false
@@ -20,9 +24,15 @@ Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/NestedTernaryOperator:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
 Style/StringLiterals:
   Enabled: false
 Style/TrailingCommaInArrayLiteral:
   Enabled: false
 Style/TrailingCommaInHashLiteral:
+  Enabled: false
+Style/WordArray:
   Enabled: false
