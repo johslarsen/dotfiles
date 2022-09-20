@@ -32,7 +32,7 @@ class PrefixTest < Minitest::Test
   end
 
   def test_binary_prefix
-    assert_equal "9.53674e-07B", Prefix.bin(1.0/2**20)
+    assert_equal "9.53674e-07B", Prefix.bin(1.0 / 2**20)
     assert_equal "1B", Prefix.bin(2**0)
     assert_equal "1", Prefix.bin(2**0, nil)
     assert_equal "1000B", Prefix.bin(10**3)

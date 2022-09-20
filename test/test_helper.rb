@@ -32,7 +32,7 @@ end
 #
 # Returns String with stdout and stderr from the command.
 def pipe(*cmd, stdin: nil)
-  IO.popen(cmd, "r+", err: [:child, :out]) do |io|
+  IO.popen(cmd, "r+", err: %i[child out]) do |io|
     io.write stdin if stdin
     io.close_write
     io.read

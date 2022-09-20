@@ -4,7 +4,6 @@ require 'minitest/autorun'
 require_relative '../test_helper'
 
 class FindLinksTest < Minitest::Test
-
   FIND_LINKS = File.join DOTFILES, "scripts", "find_links.sh"
 
   def test_links_from_tmpdir
@@ -14,12 +13,12 @@ class FindLinksTest < Minitest::Test
           link = File.join(hier, ".#{p}")
           FileUtils.ln_s File.join(dotfiles, p), link
         end
-        assert_equal <<EOF, pipe("#{DOTFILES}/scripts/find_links.sh", dotfiles, hier)
-#{hier}/.bashrc
-#{hier}/.bashrc.d
-#{hier}/.config/mc
-#{hier}/.vimrc
-EOF
+        assert_equal <<~EOF, pipe("#{DOTFILES}/scripts/find_links.sh", dotfiles, hier)
+          #{hier}/.bashrc
+          #{hier}/.bashrc.d
+          #{hier}/.config/mc
+          #{hier}/.vimrc
+        EOF
       end
     end
   end

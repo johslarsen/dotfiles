@@ -18,12 +18,12 @@ OptionParser.new do |o|
 
   $opts[:blacklist] = ["README.md", "LICENSE", "script/**/*", "test/**/*"]
   o.on "-b", "--blacklist PATERN,...", Array,
-      "Do not link to the following filename PATTERN,... relative to root.",
-      "Default: #{$opts[:blacklist].join ","}" do |patterns|
+       "Do not link to the following filename PATTERN,... relative to root.",
+       "Default: #{$opts[:blacklist].join ','}" do |patterns|
     $opts[:blacklist] = patterns
   end
 end.permute!
-BLACKLISTED = Set.new $opts[:blacklist].map{|p| Dir.glob File.join($opts[:root], p)}.flatten
+BLACKLISTED = Set.new $opts[:blacklist].map { |p| Dir.glob File.join($opts[:root], p) }.flatten
 
 def link_for(target)
   File.expand_path File.join($opts[:target], ".#{target[($opts[:root].size + 1)..-1]}")
@@ -36,7 +36,7 @@ Dir.glob(File.join($opts[:root], "**", "*@*")).each do |target|
   FileUtils.mkdir_p File.dirname(l), verbose: true unless Dir.exist?(File.dirname(l))
 end
 Dir.glob(File.join($opts[:root], "**", "*#{OVERRIDE_SUFFIX}")).each do |target|
-  overridden << (t = target[0..-OVERRIDE_SUFFIX.length-1])
+  overridden << (t = target[0..-OVERRIDE_SUFFIX.length - 1])
   l = link_for t
   FileUtils.ln_s target, l, verbose: true unless File.exist? l
 end
@@ -60,7 +60,7 @@ Dir.glob(File.join($opts[:root], "**", "*")).sort.reverse_each do |target|
       end
     end
 
-    shallowest_link_point ||=  Dir.exist?(File.dirname(l)) && [l, target]
+    shallowest_link_point ||= Dir.exist?(File.dirname(l)) && [l, target]
     target = File.dirname(target) # traverse up the hierarchy
     shallowest_link_point
   end

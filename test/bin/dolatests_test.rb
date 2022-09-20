@@ -3,7 +3,6 @@ require 'minitest/autorun'
 require_relative '../test_helper'
 
 class DolatestTest < Minitest::Test
-
   DOLATEST = File.join DOTFILES, "bin", "dolatest"
 
   def test_in_current_directory
@@ -30,9 +29,9 @@ class DolatestTest < Minitest::Test
       FileUtils.touch File.join(root, "2")
       sleep 0.01
       FileUtils.touch File.join(root, "1/2") # NOTE: this updates access on 1/
-      assert_equal <<EOF, pipe(DOLATEST, "echo", "foo", "---", root, File.join(root, "1"))
-foo #{root}/1 #{root}/1/2
-EOF
+      assert_equal <<~EOF, pipe(DOLATEST, "echo", "foo", "---", root, File.join(root, "1"))
+        foo #{root}/1 #{root}/1/2
+      EOF
     end
   end
 end
