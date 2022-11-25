@@ -7,8 +7,12 @@ case "$(cat "$battery/status")" in
 	*)             color="0000cc"; sign"+";;
 esac
 
-I=$(cat "$battery/current_now")
-U=$(cat "$battery/voltage_now")
-P=$(echo "(0${sign}1*$I*$U)/10^12" | bc -l)
+if [ -f "$battery/power_now" ]; then
+    P=$(echo "(0${sign}1*$(cat "$battery/power_now"))/10^6" | bc -l)
+else
+    I=$(cat "$battery/current_now")
+    U=$(cat "$battery/voltage_now")
+    P=$(echo "(0${sign}1*$I*$U)/10^12" | bc -l)
+fi
 printf "<fc=#$color>%+5.1f</fc>" $P
 echo
