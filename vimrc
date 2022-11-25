@@ -570,7 +570,7 @@ endfunction
 
 command! CocInstallJohs call _CocInstallJohs()
 function! _CocInstallJohs()
-  call coc#util#install_extension(['coc-clangd', 'coc-cmake', 'coc-go', 'coc-python', 'coc-rls', 'coc-sh', 'coc-solargraph', 'coc-vimlsp', 'coc-yaml'])
+  call coc#util#install_extension(['coc-clangd', 'coc-cmake', 'coc-go', 'coc-python', 'coc-rust-analyzer', 'coc-sh', 'coc-solargraph', 'coc-vimlsp', 'coc-yaml'])
 endfunction
 
 function! ColonsToSlash(namespace)
