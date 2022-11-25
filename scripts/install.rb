@@ -29,7 +29,7 @@ def link_for(target)
   File.expand_path File.join($opts[:target], ".#{target[($opts[:root].size + 1)..-1]}")
 end
 
-OVERRIDE_SUFFIX = "@#{Socket.gethostname}"
+OVERRIDE_SUFFIX = "@#{Socket.gethostname.split(".")[0]}"
 overridden = Set.new
 Dir.glob(File.join($opts[:root], "**", "*@*")).each do |target|
   l = link_for target
