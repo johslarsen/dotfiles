@@ -10,14 +10,19 @@ PV_HEIGHT="${3}"         # Height of the preview pane (number of fitting charact
 IMAGE_CACHE_PATH="${4}"  # Full path that should be used to cache image preview
 PV_IMAGE_ENABLED="${5}"  # 'True' if image previews are enabled, 'False' otherwise.
 
-FILE_EXTENSION="${FILE_PATH##*.}"
+openscad_png() {
+    [[ "$PV_IMAGE_ENABLED" ]] && openscad --colorscheme="Tomorrow Night" -o "$IMAGE_CACHE_PATH.png" "$@" && mv "$IMAGE_CACHE_PATH.png" "$IMAGE_CACHE_PATH"
+}
 
+FILE_EXTENSION="${FILE_PATH##*.}"
 case "${FILE_EXTENSION,,}" in
   doc|docx) doctotxt < "${FILE_PATH}" && exit 5;;
   gpg) gpg --batch --pinentry-mode loopback --list-packets "${FILE_PATH}" && exit 5;;
   ini) cat "${FILE_PATH}" && exit 5;;
   pyc) strings "${FILE_PATH}" && exit 5;;
   xlsx) xlsx2csv -i "${FILE_PATH}" && exit 5;;
+  csg|scad) openscad_png "$FILE_PATH" && exit 6;;
+  3mf|amf|dxf|off|stl) openscad_png <(echo "import(\"${FILE_PATH}\");") && exit 6;;
 esac
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
