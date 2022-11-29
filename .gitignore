@@ -13,11 +13,6 @@ gnupg/random_seed
 gnupg/pubring.*
 gnupg/secring.*
 gnupg/trustdb.*
-mc/*.bak
-mc/*~
-mc/Tree
-mc/bindings
-mc/history
 mpd/mpd.db
 mpd/mpd.log
 mpd/mpd.pid
