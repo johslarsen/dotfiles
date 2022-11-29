@@ -4,6 +4,8 @@ xterm*utf8Title: true
 
 xterm*selectToClipboard: true
 
+xterm*charClass: 33:48,35-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
 xterm*metaSendsEscape: true
 xterm*bellIsUrgent: true
 
@@ -28,6 +30,7 @@ xterm*vt100.Translations: #override\
   ~Ctrl ~Shift Meta <Btn1Down>:   popup-menu(vtMenu)\n\
    Ctrl ~Shift Meta <Btn1Down>:   popup-menu(fontMenu)\n\
    Ctrl  Shift Meta <Btn1Down>:   popup-menu(tekMenu)\n\
+         Shift Meta <KeyPress> w: exec-formatted("vivaldi-stable -- '%t'", CLIPBOARD)\n\
    Ctrl  Shift      <KeyPress> v: insert-selection(CLIPBOARD, CUT_BUFFER0)\n\
    Ctrl ~Shift Meta <KeyPress> v: insert-selection(PRIMARY, CUT_BUFFER0)\n\
    Ctrl  Shift      <KeyPress> -: set-vt-font(1)\n\
