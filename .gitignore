@@ -1,6 +1,8 @@
 .*.swp
 .~lock.*#
-doc/tags*
+abook/addressbook
+config/mpv/watch_later
+config/ncmpcpp/error.log
 gnupg/*.lock
 gnupg/*~
 gnupg/.gpg-v21-migrated
@@ -18,10 +20,11 @@ mpd/mpd.log
 mpd/mpd.pid
 mpd/mpdstate
 mpd/music
-ncmpcpp/error.log
+mpd/playlists
 vim/.netrwhist
 vim/bundle
 vim/spell/*.spl
+xmonad/build-*
 xmonad/xmonad
 xmonad/xmonad-*
 xmonad/xmonad.bak
@@ -29,3 +32,6 @@ xmonad/xmonad.errors
 xmonad/xmonad.hi
 xmonad/xmonad.o
 xmonad/xmonad.old
+w3m/bookmark.html
+w3m/cookie
+w3m/history
