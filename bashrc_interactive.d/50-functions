@@ -95,7 +95,7 @@ psv() {
 }
 
 bmake() {
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-Debug} -G${GENERATOR:-Ninja} -H. -Bbuild/ && cmake --build build/ -- -j$(nproc) "$@"
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RelWithDebInfo} -G${GENERATOR:-Ninja} -H. -Bbuild/ && cmake --build build/ -- -j$(nproc) "$@"
 }
 abmake() {
     CC=${CC:-clang} CXX=${CXX:-clang++} CXXFLAGS=${CXXFLAGS:--fsanitize=undefined,address -fsanitize-coverage=trace-pc-guard -g3} CFLAGS=${CFLAGS:-$CXXFLAGS} LDFALGS=${LDFLAGS:-$CXXFLAGS} bmake "$@"
