@@ -18,13 +18,14 @@ xterm*foreground: rgb:00/ff/00
 xterm*background: rgb:00/00/00
 
 xterm*faceName: mono
-xterm*faceSize:   8
-xterm*faceSize1:  2
-xterm*faceSize2:  5
-xterm*faceSize3:  7
-xterm*faceSize4: 12
-xterm*faceSize5: 16
+xterm*faceSize:  12
+xterm*faceSize1:  4
+xterm*faceSize2:  8
+xterm*faceSize3: 10
+xterm*faceSize4: 16
+xterm*faceSize5: 20
 xterm*faceSize6: 24
+xterm*faceSize7: 32
 
 xterm*vt100.Translations: #override\
   ~Ctrl ~Shift Meta <Btn1Down>:   popup-menu(vtMenu)\n\
