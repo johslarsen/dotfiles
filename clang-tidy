@@ -1,4 +1,3 @@
-#Checks: '*,-fuchsia*,-google*,-zircon*,-abseil*,-llvm*,-*-magic-numbers,-*-non-private-member-variables-in-classes,-modernize-use-trailing-return-type'
 Checks: >
   *
   ,-altera*
@@ -21,4 +20,8 @@ HeaderFilterRegex: ''
 FormatStyle: none
 CheckOptions:
   - key: readability-function-cognitive-complexity.IgnoreMacros
+    value: true
+  - key: hicpp-signed-bitwise.IgnorePositiveIntegerLiterals
+    value: true # otherwise or-ing bitflags tend to give false positives
+  - key: cppcoreguidelines-special-member-functions.AllowMissingMoveFunctionsWhenCopyIsDeleted
     value: true
