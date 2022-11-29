@@ -195,8 +195,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm              .|.shiftMask.|.altMask, xK_comma ), spawn "~/.bin/dual_screen_put_primary_in_relation_to_secondary.sh br")
 	, ((modm              .|.shiftMask.|.altMask, xK_period), spawn "~/.bin/dual_screen_put_primary_in_relation_to_secondary.sh rb")
 
-	, ((0, xF86XK_MonBrightnessUp)                          , spawn "xbacklight -time 0 +9")
-	, ((0, xF86XK_MonBrightnessDown)                        , spawn "xbacklight -time 0 -9")
+	, ((0, xF86XK_MonBrightnessUp)                          , spawn "brightnessctl -q s +9%")
+	, ((0, xF86XK_MonBrightnessDown)                        , spawn "brightnessctl -q s 9%-")
 
 	, ((0, xF86XK_AudioMute)                                , spawn "~/.bin/pa-vol.sh mute"                              )
 	, ((modm                          .|.altMask, xK_space) , spawn "~/.bin/pa-vol.sh mic"                               )
