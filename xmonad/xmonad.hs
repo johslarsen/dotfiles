@@ -199,6 +199,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((0, xF86XK_MonBrightnessDown)                        , spawn "brightnessctl -q s 9%-")
 
 	, ((0, xF86XK_AudioMute)                                , spawn "~/.bin/pa-vol.sh mute"                              )
+	, ((0, xF86XK_AudioMicMute)                              , spawn "~/.bin/pa-vol.sh mic"                              )
 	, ((modm                          .|.altMask, xK_space) , spawn "~/.bin/pa-vol.sh mic"                               )
 	, ((0, xF86XK_AudioLowerVolume)                         , spawn "~/.bin/pa-vol.sh minus"                             )
 	, ((0, xF86XK_AudioRaiseVolume)                         , spawn "~/.bin/pa-vol.sh plus"                              )
