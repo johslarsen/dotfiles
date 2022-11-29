@@ -18,7 +18,6 @@ case "${FILE_EXTENSION,,}" in
   ini) cat "${FILE_PATH}" && exit 5;;
   pyc) strings "${FILE_PATH}" && exit 5;;
   xlsx) xlsx2csv -i "${FILE_PATH}" && exit 5;;
-
 esac
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
@@ -28,7 +27,7 @@ case "$MIMETYPE" in
   *gzip) zcat "${FILE_PATH}" | head -${PV_HEIGHT} && exit 3;;
   *pcap) tcpdump -ttttnnr "${FILE_PATH}" | head -${PV_HEIGHT} && exit 3;;
   *sqlite3) sqlite3 -readonly "${FILE_PATH}" ".schema" && exit 0;;
-  application/json) json_pp < "${FILE_PATH}" && exit 5;;
+  application/json) jq --color-output . < "${FILE_PATH}" && exit 5;;
   application/octet-stream) xxd "${FILE_PATH}" | head -${PV_HEIGHT} && exit 3;;
 esac
 
