@@ -24,12 +24,6 @@ mpd/mpd.pid
 mpd/mpdstate
 mpd/music
 ncmpcpp/error.log
-ssh/config
-ssh/environment
-ssh/id_dsa
-ssh/id_ecdsa
-ssh/id_rsa
-ssh/known_hosts
 vim/.netrwhist
 vim/bundle
 vim/spell/*.spl
