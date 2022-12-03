@@ -1,8 +1,11 @@
 .*.swp
 .~lock.*#
+*.pyc
+__pycache__
 abook/addressbook
 config/mpv/watch_later
 config/ncmpcpp/error.log
+config/nvim/plugin
 gnupg/*.lock
 gnupg/*~
 gnupg/.gpg-v21-migrated

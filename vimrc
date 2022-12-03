@@ -366,13 +366,15 @@ set title
 set titlestring=''
 set titleold=''
 " UI Feel {{{1
-set visualbell t_vb=
-set mouse=a
-if has("mouse_sgr")
-  set ttymouse=sgr
-else
-  set ttymouse=xterm2
-end
+if !has('nvim')
+  set visualbell t_vb=
+  set mouse=a
+  if has("mouse_sgr")
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  end
+endif
 
 set showmatch " bracket,...
 set hlsearch
