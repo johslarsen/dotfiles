@@ -1,5 +1,5 @@
 #!/bin/bash -
-dev=$(iw dev | grep Interface | grep wl | head -1 | awk '{print $2}')
+dev=$(iw dev | grep Interface | grep wl | grep -v mon | head -1 | awk '{print $2}')
 link="$(iw dev "$dev" link)"
 
 RE_SSID="SSID: ([^[:space:]]*)"
