@@ -1,5 +1,5 @@
 Config {
-	  font = "xft:DejaVu Sans Mono:bold:size=10"
+	  font = "xft:DejaVu Sans Mono:bold:size=7"
 	, additionalFonts = ["xft:DejaVu Sans Mono:bold:size=16"]
 	, bgColor = "black"
 	, fgColor = "grey"
