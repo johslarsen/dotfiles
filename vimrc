@@ -55,7 +55,6 @@ Plugin 'tpope/vim-tbone' " tmux :Tyank, :Tput
 
 " Visual indicators {{{2
 Plugin 'csexton/trailertrash.vim'
-Plugin 'tweekmonster/local-indent.vim' " highlight column spanning current indent
 
 " Snippets {{{2
 Plugin 'SirVer/ultisnips'
@@ -332,7 +331,6 @@ set listchars=eol:$,tab:>-,nbsp:%,precedes:<,extends:>
 highlight NonText    cterm=bold ctermfg=magenta
 highlight SpecialKey cterm=NONE ctermfg=black ctermbg=brown
 
-highlight LocalIndentGuide ctermbg=234
 highlight CocHoverRange ctermbg=234
 
 highlight Function ctermfg=210
@@ -533,7 +531,6 @@ augroup vimrc
   au VimEnter * if filereadable('CMakeLists.txt') | let &makeprg='cmake --build '.shellescape(get(g:, 'cmake_build_dir', 'build')).' --' | endif
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " jump to last position
   au User plugin-template-loaded call s:template_init()
-  au FileType * LocalIndentGuide +hl
 
   " no folding whilst inserting text (mostly relevant for TeX)
   au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
