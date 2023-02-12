@@ -1,14 +1,17 @@
 #!/bin/bash -
 alias d='docker'
 alias db='docker build'
-alias dex='docker exec -it'
+alias dei='docker exec -it'
+alias deis='dei $(dps)'
+alias dex='docker exec'
 alias dexs='dex $(dps)'
-alias dit='docker run -it --rm'
+alias din='docker inspect'
 alias dl='docker logs'
 alias dls='docker logs $(dps)'
 alias dk='docker kill'
 alias dks='dk $(dps)'
 alias dr='docker run --rm'
+alias dri='docker run -it --rm'
 alias dpsa='dps --all'
 alias drm='docker rm'
 alias drms='drm $(dpsa)'
@@ -16,11 +19,11 @@ alias drmi='docker rmi'
 alias drmis='drmi $(di)'
 alias dt='docker logs -f'
 alias dts='dt $(dps)'
-complete -F _complete_alias d{,b,ex,exs,it,l,ls,k,ks,r,rm,rms,rmi,rmis,t,ts}
+complete -F _complete_alias d{,b,ei,eis,ex,exs,in,l,ls,k,ks,r,ri,rm,rms,rmi,rmis,t,ts}
 
 function dps() {
-    docker ps "$@"| tail +2 | fzf-tmux -0 --no-sort -m | awk '{print $1}'
+    docker ps "$@"| tail +2 | fzf-tmux -0 --no-sort -m --preview "docker inspect {1} | jq -C ." --preview-window up | awk '{print $1}'
 }
 function di() {
-    docker images "$@" | tail +2 | fzf-tmux -0 --no-sort -m | awk '{print $1":"$2}'
+    docker images "$@" | tail +2 | fzf-tmux -0 --no-sort -m --preview "docker inspect {1} | jq -C ." --preview-window up | awk '{print $1":"$2}'
 }
