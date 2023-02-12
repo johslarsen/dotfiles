@@ -501,7 +501,6 @@ if filereadable('CMakeLists.txt')
 endif
 
 let g:syntastic_python_checkers = ['python']
-let g:syntastic_python_python_exec = 'python2'
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_ruby_rubocop_args = '-l'
