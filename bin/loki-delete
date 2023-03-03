@@ -1,0 +1,5 @@
+#!/bin/bash -
+query=${1:?USAGE: [START=-1hour] $0 QUERY}
+start=$(date +%s -d ${START:--1hour})
+
+curl -v -G -XPOST --data-urlencode "start=$start" --data-urlencode "query=$query" http://localhost:3100/loki/api/v1/delete
