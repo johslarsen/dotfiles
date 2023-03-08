@@ -1,7 +1,7 @@
 #!/bin/bash -
 
 # Append (i.e. original PATH > 1st arg > nth arg) user-writeable paths so they cannot override sbins.
-path_append PATH /etc/smallsoft/sbin "$HOME/bin" "$HOME/.local/bin" "$HOME/.bin" "$HOME/.toolboxes"/*/bin "$HOME/.cargo/bin" "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
+path_append PATH /etc/smallsoft/sbin "$HOME/bin" "$HOME/.local/bin" "$HOME/.bin" "$HOME/.toolboxes"/*/bin "$HOME/.cargo/bin" "${GOROOT:-/usr/local/go}/bin" "$HOME/go/bin" /loot/bin /pub/doc/bin
 # Prepend (i.e. nth arg > 1st arg > original PATH) sbins because SUSE does not for non-root users.
 # Important to also prepend companion bins to not just prioritize ant sbin over bins.
 path_prepend PATH {/,/usr/,/usr/local/,/opt/local/}{bin,sbin}
