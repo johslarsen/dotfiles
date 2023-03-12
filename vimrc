@@ -16,6 +16,7 @@ Plugin 'confluencewiki.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jmirabel/vim-cmake'
 Plugin 'lervag/vimtex'
+Plugin 'guns/xterm-color-table.vim'
 "Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'rust-lang/rust.vim'
 Plugin 'saltstack/salt-vim'
@@ -344,6 +345,7 @@ highlight Structure ctermfg=205
 highlight CocSemNamespace ctermfg=133
 highlight CocSemProperty ctermfg=202
 highlight CocSemParameter ctermfg=208
+highlight CocInlayHint ctermfg=237
 highlight link CocSemTypeParameter Type
 
 set laststatus=2
