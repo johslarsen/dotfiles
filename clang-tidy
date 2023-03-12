@@ -1,5 +1,6 @@
 Checks: >
   *
+  ,-abseil*
   ,-altera*
   ,-fuchsia*
   ,-llvmlibc*
@@ -11,9 +12,12 @@ Checks: >
   ,-*-braces-around-statements
   ,-*-isolate-declaration
   ,-*-macro-usage
+  ,-*-move-const-arg
   ,-cert-err58-cpp
   ,-cppcoreguidelines-owning-memory
   ,-cppcoreguidelines-avoid-non-const-global-variables
+  ,-misc-use-anonymous-namespace
+  ,-hicpp-signed-bitwise
   ,-*-vararg
   ,-*-avoid-goto
 HeaderFilterRegex: ''
