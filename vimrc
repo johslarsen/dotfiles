@@ -127,6 +127,7 @@ nnoremap <silent> <leader>ie    :exec g:coc_enabled ? 'CocDisable' : 'CocEnable'
 nmap     <silent> <leader>if    <plug>(coc-format)
 nmap     <silent> <leader>iF    <plug>(coc-format-selected)
 xmap     <silent> <leader>iF    <plug>(coc-format-selected)
+nmap     <silent> <leader>ih    :CocCommand document.toggleInlayHint<CR>
 nmap     <silent> <leader>il    <plug>(coc-references)
 nmap     <silent> <leader>iL    <plug>(coc-references-used)
 nmap     <silent> <leader>io    :call CocAction('showOutline')<CR>
