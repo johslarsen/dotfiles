@@ -1,8 +1,8 @@
 Config {
-	  font = "xft:DejaVu Sans Mono:bold:size=7"
-	, additionalFonts = ["xft:DejaVu Sans Mono:bold:size=16"]
+	  font = "DejaVu Sans Mono Bold 9"
+	, additionalFonts = ["DejaVu Sans Mono Bold 16"]
 	, bgColor = "black"
-	, fgColor = "grey"
+	, fgColor = "light grey"
 	, position = TopW L 100
 	, persistent = True
 	, commands = [
