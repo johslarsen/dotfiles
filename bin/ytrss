@@ -1,0 +1,4 @@
+#!/bin/bash -
+for url in $@; do
+    echo https://www.youtube.com/feeds/videos.xml?channel_id=$(curl "$url" | awk 'match($0, /channelId":"([^"]+)"/, m){print m[1]}')
+done
