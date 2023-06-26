@@ -209,6 +209,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((0, xF86XK_KbdBrightnessDown)                        , spawn "sudo /usr/local/lib/backlight/backlight_kbd.sh -"     )
 
 	, ((0, xF86XK_Display)                                  , spawn "xrandr --auto"                                            )
+	, ((modm, xF86XK_Display)                               , spawn "~/.bin/only_laptop_screen.sh"                             )
 	, ((modm, xK_p)                                         , spawn "xrandr --auto"                                            ) -- Stupid DELL BIOS sending this for fn+f8 (earlier xF86XK_Display)
 
 	, ((0, xF86XK_Eject)                                    , spawn "eject"                                                    )
