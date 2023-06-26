@@ -9,7 +9,7 @@ ddgo() {
 	w3m "https://duckduckgo.com/?q=$*"
 }
 rfc() {
-	w3m "https://tools.ietf.org/html/$1"
+	w3m "https://www.rfc-editor.org/rfc/rfc$1.html"
 }
 
 moviemerge() { # Merge two or more moviefile using mencoder (mplayer coder)
