@@ -57,4 +57,6 @@ py=${coords[1]}
 sx=${coords[2]}
 sy=${coords[3]}
 
-xrandr --output "$primary" --auto --primary --pos ${px}x${py} --output "$secondary" --auto --pos ${sx}x${sy}
+disable_disconnected_screens=$(xrandr -q | awk '/disconnected/{print "--output", $1, "--off"}')
+
+xrandr $disable_disconnected_screens --output "$primary" --primary --mode ${pw}x${ph} --pos ${px}x${py} --rotate normal --output "$secondary" --mode ${sw}x${sh} --pos ${sx}x${sy} --rotate normal
