@@ -1,0 +1,8 @@
+#!/bin/bash -
+deadline=${1:-1hour}
+file=/run/user/$UID/xss-suspend-until
+if [ -e "$file" ]; then
+    rm "$file"
+else
+    date -d "$deadline" +%s > "$file"
+fi

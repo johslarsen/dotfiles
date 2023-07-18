@@ -15,8 +15,9 @@ Config {
 			, Run BatteryP ["BAT0"] ["-t","B<left>(<timeleft>)","-p","2","-L","20","-H","50","-l","#cc0000","-h","#00cc00","-n","#cccc00"] 100
 			, Run Com ".bin/wifi_status.sh" [] "wifi" 60
 			, Run Com ".bin/acstatus.sh" [] "acstatus" 10
+			, Run Com ".bin/xss-suspend-status" [] "xss" 600
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = "}%StdinReader%{<fc=#9999ff>%mpd%</fc> %status% <fc=#8888ff>%ip% %wifi%</fc> %vol% <fc=#ee9a00>%date%</fc> %battery%%acstatus%"
+	, template = "}%StdinReader%{<fc=#9999ff>%mpd%</fc> %status% <fc=#8888ff>%ip% %wifi%</fc> %vol% <fc=#ee9a00>%date%</fc> %battery%%acstatus%%xss%"
 }

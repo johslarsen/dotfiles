@@ -1,0 +1,10 @@
+#!/bin/bash -
+deadline_file=/run/user/$UID/xss-suspend-until
+deadline=$(cat "$deadline_file" 2>/dev/null)
+[[ "$deadline" ]] || exit 0
+if [ "$deadline" -gt $(date +%s) ]; then
+    echo "<fc=#ff0000><fn=1>☀</fn></fc>"
+    pgrep i3lock &>/dev/null || xset s reset
+else
+    rm "$deadline_file"
+fi
