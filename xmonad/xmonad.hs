@@ -155,7 +155,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm                          .|.altMask, xK_m     ), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") -- toggle touchpad
 
 	, ((modm                          .|.altMask, xK_z     ), spawn "sleep 1; xset dpms force off") -- lock screen, sleep to avoid race condition where screensaver turns display on again
-	, ((modm              .|.shiftMask.|.altMask, xK_z     ), spawn "~/.bin/xss-suspend-until 1hour")
+	, ((modm              .|.shiftMask.|.altMask, xK_z     ), spawn "~/.bin/xss-suspend-until 3hour")
 
 	, ((modm                                    , xK_Down  ), spawn "~/.bin/xclasskeys.sh Zathura Page_Down") -- presenter next
 	, ((modm                                    , xK_Right ), spawn "~/.bin/xclasskeys.sh Zathura Page_Down") -- presenter next
