@@ -27,6 +27,10 @@
 	indentHeuristic
 	colorMoved
 
+[diff "spreadsheet"]
+	textconv = spreadsheet2stdout
+    cachetextconv = true
+
 [init]
 	defaultBranch = master
 

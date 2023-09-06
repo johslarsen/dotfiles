@@ -1,0 +1,10 @@
+#!/bin/bash -
+output_dir=$(mktemp -d "/tmp/$(basename $0).XXXXXXX")
+
+ssconvert -ST Gnumeric_stf:stf_csv "$1" "$output_dir/%s" &>/dev/null
+
+while read f; do
+    xsv table "$output_dir/$f" | sed "s/^/$f: /" | sed 's/ *$//'
+done < <(ls -rt "$output_dir")
+
+rm -rf "$output_dir"
