@@ -1,0 +1,21 @@
+#!/bin/bash -
+shopt -s nullglob
+
+[[ "$UNIXTIME" ]] && now="-d@$UNIXTIME"
+date=$(date $now +%Y-%m-%d/%H%M%S.%N)
+for precision in ${date:0:15} ${date:0:17} ${date:0:21} $date; do
+    name=${NOTES:-~/notes}/${precision}
+    [[ "$(echo "$name"*)" ]] || break # retry with higher precision until we find a unique timestamp
+done
+
+if [[ "$TMUX" ]]; then
+    session=$(tmux display -p '#{session_name}')
+    [[ "$session" ]] && [[ "$session" != "work" ]] && name+=-${session// /_}
+    window=$(tmux display -p '#{window_name}')
+    [[ "$window" ]] && [[ "$window" != "bash" ]] && name+=-${window// /_}
+fi
+title="$*"
+[[ "$title" ]] && name+=-"${title// /_}"
+
+mkdir -p "$(dirname "$name")"
+echo "$name"

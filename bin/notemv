@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'time'
+require 'fileutils'
+require 'open3'
+
+PUNCTATION = /[-._:]/.freeze
+
+if (separator = ARGV.find_index("--"))
+  files = ARGV[0..separator - 1]
+  comment = ARGV[separator + 1..-1]
+else
+  files = ARGV
+  comment = []
+end
+
+files.each do |path|
+  env = {}
+  suffix = File.extname(path)
+  suffix = nil if suffix =~ /^\.\d\d:\d\d:\d\d$/ # <= end of time stamp in e.g. xterm dumps
+  env["SUFFIX"] = suffix unless suffix =~ /^\.\d*$/ # random suffix from xterm log files
+
+  title = File.basename(path, suffix || "")
+  if title.match(/(.*)(\d{4}).?(\d{2}).?(\d{2}).(\d{2}).?(\d{2}).?(\d{2}).?(.*)/)
+    m = Regexp.last_match
+    env["UNIXTIME"] = Time.parse("#{m[2..4].join('-')}T#{m[5..7].join(':')}").to_f.to_s
+    title = "#{m[1]}#{m[8]}"
+  end
+  title.gsub!(/\s+/, '_')
+  title.gsub!(/^#{PUNCTATION}|#{PUNCTATION}$/, '')
+
+  name, = Open3.capture2(env, "#{File.dirname(__FILE__)}/notename", title, *comment)
+  FileUtils.mv(path, name.chomp + suffix || ".log", verbose: true)
+end
