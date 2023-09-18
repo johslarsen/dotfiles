@@ -1,0 +1,21 @@
+#!/usr/bin/gawk -f
+BEGIN{
+    n=ENVIRON["N"]
+    if (n=="") n=5
+}
+
+FNR == 1 {
+    if (ARGC > 2) prefix=FILENAME":"
+}
+
+FNR <= n { print prefix $0 }
+{l[FNR % n] = $0}
+
+ENDFILE {
+    if (FNR > 2*n) {
+        print prefix "[... "FNR-2*n"]"
+    }
+    for (i = FNR-n+1; i <= FNR; i++) {
+        if (i > n) print prefix l[i % n]
+    }
+}
