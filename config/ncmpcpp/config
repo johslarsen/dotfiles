@@ -18,3 +18,5 @@ default_find_mode =            "wrapped"
 
 external_editor =              "vim"
 use_console_editor =           "yes"
+
+lyrics_fetchers =              "azlyrics, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet"
