@@ -1,0 +1,6 @@
+#!/bin/bash -
+NOTES=${NOTES:-~/notes}
+
+IFS=$'\n' files=( $(fd --base-directory "$NOTES" -t f --color always| sort -r | fzf-tmux --height=10 -m --ansi --color=16 --preview="head -n \$FZF_PREVIEW_LINES '$NOTES/{}'" | awk -v dir="$NOTES" '{print dir "/" $0}') )
+
+[[ "$files" ]] && "${@:-rifle}" "${files[@]}"

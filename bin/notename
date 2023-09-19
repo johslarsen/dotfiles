@@ -10,6 +10,7 @@ done
 
 if [[ "$TMUX" ]]; then
     session=$(tmux display -p '#{session_name}')
+    [[ "$session" =~ ^[0-9]+$ ]] && session=""
     [[ "$session" ]] && [[ "$session" != "work" ]] && name+=-${session// /_}
     window=$(tmux display -p '#{window_name}')
     [[ "$window" ]] && [[ "$window" != "bash" ]] && name+=-${window// /_}
