@@ -1,9 +1,9 @@
 #!/bin/bash -
 CLIPBOARD=${CLIPBOARD:-clipboard}
 if [[ "$HOST" ]]; then
-    url="$(ssh "$HOST" DISPLAY=:0 xclip -o -session "$CLIPBOARD")"
+    url="$(ssh "$HOST" DISPLAY=:0 xclip -o -selection "$CLIPBOARD")"
 else
-    url="$(xclip -o -session "$CLIPBOARD")"
+    url="$(xclip -o -selection "$CLIPBOARD")"
 fi
 options=( --demuxer-max-bytes=8M "$@" )
 if [ -t 1 ]; then

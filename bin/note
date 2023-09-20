@@ -1,11 +1,11 @@
 #!/bin/bash -
 name=$("$(dirname "$0")/notename" "$@")
 if [ -t 0 ] && [ -t 1 ]; then
-    name+=".md"
+    name+="${SUFFIX:-.md}"
     touch "$name" # to reserve the name
     vim -c 'startinsert' "$name"
 else
-    name+=".log"
+    name+="${SUFFIX:-.log}"
     cat > "$name"
 fi
 [ -s "$name" ] || rm "$name" # clean up empty files
