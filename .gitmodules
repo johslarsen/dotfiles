@@ -1,12 +1,12 @@
 [submodule "vim/bundle/Vundle.vim"]
-	path = vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
+    path = vim/bundle/Vundle.vim
+    url = https://github.com/VundleVim/Vundle.vim.git
 [submodule "toolboxes/binops"]
-	path = toolboxes/binops
-	url = ../binops
+    path = toolboxes/binops
+    url = ../binops
 [submodule "toolboxes/jrb"]
-	path = toolboxes/jrb
-	url = ../jrb
+    path = toolboxes/jrb
+    url = ../jrb
 [submodule ".external/complete-alias"]
-	path = .external/complete-alias
-	url = https://github.com/cykerway/complete-alias
+    path = .external/complete-alias
+    url = https://github.com/cykerway/complete-alias

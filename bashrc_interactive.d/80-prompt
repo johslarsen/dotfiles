@@ -1,13 +1,13 @@
 #!/bin/bash -
-if [ "$UID" == "0" ]; then	# If admin
-	userColor="\e[31m"
+if [ "$UID" == "0" ]; then    # If admin
+    userColor="\e[31m"
 else
-	groupsThatProbablyGiveSudo='admin|sudo'
-	if [[ $(groups) =~ $groupsThatProbablyGiveSudo ]]; then
-		userColor="\e[33m"
-	else
-		userColor="\e[35m"
-	fi
+    groupsThatProbablyGiveSudo='admin|sudo'
+    if [[ $(groups) =~ $groupsThatProbablyGiveSudo ]]; then
+        userColor="\e[33m"
+    else
+        userColor="\e[35m"
+    fi
 fi
 
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -25,5 +25,5 @@ export PS1+='\[\e[0;36m\]\w$(__git_ps1 " (%s)")' # path
 export PS1+='\['"${userColor}"'\]\$\[\e[0m\] ' # command separator
 
 case "$TERM" in
-	screen|xterm*|rxvt*) PS1+="\[\e]0;\u@\h:\w\a\]";; # window title
+    screen|xterm*|rxvt*) PS1+="\[\e]0;\u@\h:\w\a\]";; # window title
 esac

@@ -1,8 +1,8 @@
 #!/bin/bash -
 if type tmux &>/dev/null; then
-	if tmux list-sessions &>/dev/null; then
-		echo 'Tmux sessions:'
-		tmux list-sessions | sed "s/^/\t/"
-		echo
-	fi
+    if tmux list-sessions &>/dev/null; then
+        echo 'Tmux sessions:'
+        tmux list-sessions | sed "s/^/\t/"
+        echo
+    fi
 fi

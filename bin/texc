@@ -4,8 +4,8 @@ me=`basename "$0"`
 tempfilesuffixes=(aux bbl blg log out toc texcalc)
 
 die() {
-	[ "$1" ] && echo "$*"$'\n' >&2
-	cat <<EOF >&2
+    [ "$1" ] && echo "$*"$'\n' >&2
+    cat <<EOF >&2
 Usage: $me FILE COMMANDSTRING
 
 Commandstring (no space):
@@ -17,16 +17,16 @@ d: remove all genereted files except pdf,dvi (${tempfilesuffixes[@]})
 r: run remote through blo
 P: preview
 EOF
-	exit 1
+    exit 1
 }
 [ $# -gt 0 ] || die 'Missing argument!'
 
 me=`basename "$0"`
 template=~/common/doc/template.tex
 
-case $OSTYPE in 
-	'linux-gnu' ) command -v zathura &> /dev/null && pdfViewer="zathura" || pdfViewer="evince";;
-	*'darwin'* ) pdfViewer="open";;
+case $OSTYPE in
+    'linux-gnu' ) command -v zathura &> /dev/null && pdfViewer="zathura" || pdfViewer="evince";;
+    *'darwin'* ) pdfViewer="open";;
 esac
 
 name=$1
@@ -35,46 +35,46 @@ doPrewiew=""
 
 i=0
 until [ $i = ${#optstr} ]; do
-	[ "$next" ] && file="$next" || file="$name"
-	unset next
-	fileWithoutFilesuffix=${file%.*}
+    [ "$next" ] && file="$next" || file="$name"
+    unset next
+    fileWithoutFilesuffix=${file%.*}
 
-	case ${optstr:$i:1} in
-		'p' )
-			pdflatex -output-directory `dirname "$file"` -interaction=nonstopmode "$file"
-			preview="$fileWithoutFilesuffix.pdf"
-			;;
-		'l' )	
-			latex -output-directory `dirname "$file"` -interaction=nonstopmode "$file"
-			preview="$fileWithoutFilesuffix.dvi"
-			;;
-		'b' )	
-			cd `dirname "$1"`
-			bibtex "$fileWithoutFilesuffix"
-			cd ~-
-			;;
-		'c' )	
-			calcFile="$fileWithoutFilesuffix.texcalc"
-			latexcalc -o ".texcalc" "$name"
-			next=$calcFile
-			;;
-		'd' )
-			for suffix in ${tempfilesuffixes[@]}; do
-				[ -f "$fileWithoutFilesuffix.$suffix" ] && rm -v "$fileWithoutFilesuffix.$suffix"
-			done
-			;;
-		'r' )
-			host=blo
-			cat "$file" | ssh "$host" "cat > '/tmp/$file'; pdflatex -output-directory /tmp/ -interaction=nonstopmode '/tmp/$file'; cat '/tmp/$fileWithoutFilesuffix.pdf'" > $fileWithoutFilesuffix.pdf
+    case ${optstr:$i:1} in
+        'p' )
+            pdflatex -output-directory `dirname "$file"` -interaction=nonstopmode "$file"
+            preview="$fileWithoutFilesuffix.pdf"
+            ;;
+        'l' )
+            latex -output-directory `dirname "$file"` -interaction=nonstopmode "$file"
+            preview="$fileWithoutFilesuffix.dvi"
+            ;;
+        'b' )
+            cd `dirname "$1"`
+            bibtex "$fileWithoutFilesuffix"
+            cd ~-
+            ;;
+        'c' )
+            calcFile="$fileWithoutFilesuffix.texcalc"
+            latexcalc -o ".texcalc" "$name"
+            next=$calcFile
+            ;;
+        'd' )
+            for suffix in ${tempfilesuffixes[@]}; do
+                [ -f "$fileWithoutFilesuffix.$suffix" ] && rm -v "$fileWithoutFilesuffix.$suffix"
+            done
+            ;;
+        'r' )
+            host=blo
+            cat "$file" | ssh "$host" "cat > '/tmp/$file'; pdflatex -output-directory /tmp/ -interaction=nonstopmode '/tmp/$file'; cat '/tmp/$fileWithoutFilesuffix.pdf'" > $fileWithoutFilesuffix.pdf
 
-			preview="$fileWithoutFilesuffix.pdf"
-			;;
-		'P' )
-			doPreview=1;
-			;;
-		* ) die "Wrong option (${optstr:$i:1})!"
-	esac
+            preview="$fileWithoutFilesuffix.pdf"
+            ;;
+        'P' )
+            doPreview=1;
+            ;;
+        * ) die "Wrong option (${optstr:$i:1})!"
+    esac
 
-	((i++))
+    ((i++))
 done
 [ "$doPreview" ] && [ "$preview" ] && $pdfViewer "$preview" &> /dev/null &

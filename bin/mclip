@@ -1,13 +1,13 @@
 #!/bin/bash -
 CLIPBOARD=${CLIPBOARD:-clipboard}
 if [[ "$HOST" ]]; then
-	url="$(ssh "$HOST" DISPLAY=:0 xclip -o -session "$CLIPBOARD")"
+    url="$(ssh "$HOST" DISPLAY=:0 xclip -o -session "$CLIPBOARD")"
 else
-	url="$(xclip -o -session "$CLIPBOARD")"
+    url="$(xclip -o -session "$CLIPBOARD")"
 fi
 options=( --demuxer-max-bytes=8M "$@" )
 if [ -t 1 ]; then
-	mpv "$url" "${options[@]}"
+    mpv "$url" "${options[@]}"
 else
-	msg=$(mpv "$url" "${options[@]}" --quiet 2>&1) || echo "$msg" | head -5 | dzen2 -p 2 -l 5
+    msg=$(mpv "$url" "${options[@]}" --quiet 2>&1) || echo "$msg" | head -5 | dzen2 -p 2 -l 5
 fi

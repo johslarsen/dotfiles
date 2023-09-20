@@ -1,10 +1,10 @@
 #!/bin/bash -
 battery=${1:-/sys/class/power_supply/BAT0}
 case "$(cat "$battery/status")" in
-	"Full")        color="cccccc"; sign="+";;
-	"Charging")    color="00cc00"; sign="+";;
-	"Discharging") color="cc0000"; sign="-";;
-	*)             color="0000cc"; sign"+";;
+    "Full")        color="cccccc"; sign="+";;
+    "Charging")    color="00cc00"; sign="+";;
+    "Discharging") color="cc0000"; sign="-";;
+    *)             color="0000cc"; sign"+";;
 esac
 
 if [ -f "$battery/power_now" ]; then

@@ -1,23 +1,23 @@
 Config {
-	  font = "DejaVu Sans Mono Bold 9"
-	, additionalFonts = ["DejaVu Sans Mono Bold 16"]
-	, bgColor = "black"
-	, fgColor = "light grey"
-	, position = TopW L 100
-	, persistent = True
-	, commands = [
+      font = "DejaVu Sans Mono Bold 9"
+    , additionalFonts = ["DejaVu Sans Mono Bold 16"]
+    , bgColor = "black"
+    , fgColor = "light grey"
+    , position = TopW L 100
+    , persistent = True
+    , commands = [
               Run StdinReader
-			, Run Com ".bin/mpd_status.sh" [] "mpd" 10
+            , Run Com ".bin/mpd_status.sh" [] "mpd" 10
             , Run CommandReader ".bin/xmobarStatus.rb" "status"
-			, Run Com ".bin/current_ip.sh" [] "ip" 60
-			, Run ComX ".bin/pa-vol.sh" ["xmobar"] "V<fc=#cc0000>--</fc>" "vol" 10
-			, Run Com "/usr/bin/date" ["+W#%V:%u %Y-%m-%d %H:%M:%S%:::z"] "date" 10
-			, Run BatteryP ["BAT0"] ["-t","B<left>(<timeleft>)","-p","2","-L","20","-H","50","-l","#cc0000","-h","#00cc00","-n","#cccc00"] 100
-			, Run Com ".bin/wifi_status.sh" [] "wifi" 60
-			, Run Com ".bin/acstatus.sh" [] "acstatus" 10
-			, Run Com ".bin/xss-suspend-status" [] "xss" 600
-	]
-	, sepChar = "%"
-	, alignSep = "}{"
-	, template = "}%StdinReader%{<fc=#9999ff>%mpd%</fc> %status% <fc=#8888ff>%ip% %wifi%</fc> %vol% <fc=#ee9a00>%date%</fc> %battery%%acstatus%%xss%"
+            , Run Com ".bin/current_ip.sh" [] "ip" 60
+            , Run ComX ".bin/pa-vol.sh" ["xmobar"] "V<fc=#cc0000>--</fc>" "vol" 10
+            , Run Com "/usr/bin/date" ["+W#%V:%u %Y-%m-%d %H:%M:%S%:::z"] "date" 10
+            , Run BatteryP ["BAT0"] ["-t","B<left>(<timeleft>)","-p","2","-L","20","-H","50","-l","#cc0000","-h","#00cc00","-n","#cccc00"] 100
+            , Run Com ".bin/wifi_status.sh" [] "wifi" 60
+            , Run Com ".bin/acstatus.sh" [] "acstatus" 10
+            , Run Com ".bin/xss-suspend-status" [] "xss" 600
+    ]
+    , sepChar = "%"
+    , alignSep = "}{"
+    , template = "}%StdinReader%{<fc=#9999ff>%mpd%</fc> %status% <fc=#8888ff>%ip% %wifi%</fc> %vol% <fc=#ee9a00>%date%</fc> %battery%%acstatus%%xss%"
 }

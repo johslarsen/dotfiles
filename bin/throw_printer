@@ -1,7 +1,7 @@
 #!/bin/bash -
 dir="/dev/shm/$(basename "$0")_$$"
 cleanup() {
-	rm -rf "$dir"
+    rm -rf "$dir"
 }
 trap cleanup INT TERM EXIT
 mkdir -p "$dir"

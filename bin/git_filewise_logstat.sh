@@ -1,7 +1,7 @@
 #!/bin/bash -
 
 skip_binaries() {
-	cat | grep -v '^-'
+    cat | grep -v '^-'
 }
 
 echo -e "#ncommit_touched	nline+	nline-	filename"

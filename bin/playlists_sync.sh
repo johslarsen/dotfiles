@@ -5,8 +5,8 @@ mydir=`dirname "$0"`
 . "$mydir/with_parent_directory_entries.sh"
 
 die() {
-	echo >&2 "USAGE: $0 FROM TO PLAYLIST..."
-	exit 1
+    echo >&2 "USAGE: $0 FROM TO PLAYLIST..."
+    exit 1
 }
 
 from=$1

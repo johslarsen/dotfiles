@@ -7,10 +7,10 @@ output_suffix=${1%:*}
 
 mkdir "$output_dir"
 if [[ $# -gt 1 ]]; then
-	input="$2"
+    input="$2"
 else
-	input="$output_dir/foo.hopefully_doc"
-	cat > "$input"
+    input="$output_dir/foo.hopefully_doc"
+    cat > "$input"
 fi
 output="$output_dir/$(basename "${input%.*}").$output_suffix"
 

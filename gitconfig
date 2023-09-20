@@ -1,166 +1,166 @@
 [user]
-	name = Johannes Larsen
-	email = mail@johslarsen.net
-	signingkey = B26FAB26
+    name = Johannes Larsen
+    email = mail@johslarsen.net
+    signingkey = B26FAB26
 
 [gitget]
-	root = .
-	skip-host = true
+    root = .
+    skip-host = true
 
 [blame]
-	showEmail
+    showEmail
 
 [branch]
-	autoSetupMerge = false
+    autoSetupMerge = false
 
 [color]
-	ui = auto
+    ui = auto
 
 [core]
-	pager = less -FiMRSWX
-	editor = vim
+    pager = less -FiMRSWX
+    editor = vim
 
 [diff]
-	context = 2
-	mnemonicPrefix
-	renames = copy
-	indentHeuristic
-	colorMoved
+    context = 2
+    mnemonicPrefix
+    renames = copy
+    indentHeuristic
+    colorMoved
 
 [diff "spreadsheet"]
-	textconv = spreadsheet2stdout
+    textconv = spreadsheet2stdout
     cachetextconv = true
 
 [init]
-	defaultBranch = master
+    defaultBranch = master
 
 [interactive]
-	singleKey
+    singleKey
 
 [log]
-	date = iso
-	decorate = auto
+    date = iso
+    decorate = auto
 
 [merge]
-	tool = vim
+    tool = vim
 
 [mergetool]
-	keepBackup = false
-	keepTemporaries = false
+    keepBackup = false
+    keepTemporaries = false
 
 [mergetool.vim]
-	cmd = vim '+Gvdiffsplit!' $MERGED
+    cmd = vim '+Gvdiffsplit!' $MERGED
 
 
 [pretty]
-	r = %C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s
-	rd = %C(yellow)%h%C(auto)%d %C(cyan)%ai %C(magenta)%aE %C(green)%s
-	rc = %C(cyan)%ad %C(green)%s
+    r = %C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s
+    rd = %C(yellow)%h%C(auto)%d %C(cyan)%ai %C(magenta)%aE %C(green)%s
+    rc = %C(cyan)%ad %C(green)%s
 
 [pull]
-	ff = only
+    ff = only
 
 [push]
-	default = current
+    default = current
 
 [rebase]
-	abbreviateCommands
-	missingCommitsCheck = warn
-	stat = true
+    abbreviateCommands
+    missingCommitsCheck = warn
+    stat = true
 
 [status]
     showStash = true
 
 
 [alias]
-	st = status
-	nst = status -s
-	ust = status -uno
-	unst = status -s -uno
+    st = status
+    nst = status -s
+    ust = status -uno
+    unst = status -s -uno
 
-	df = diff --compact-summary -p
-	sdf = diff --compact-summary
-	rdf = diff --dirstat
-	cdf = diff --compact-summary -p --cached
+    df = diff --compact-summary -p
+    sdf = diff --compact-summary
+    rdf = diff --dirstat
+    cdf = diff --compact-summary -p --cached
 
-	ci = commit
-	cim = commit -m
-	cia = commit -a
-	fix = commit --fixup
-	fixs = !git commit --fixup `gitf`
-	squash = commit --squash
-	squashs = !git commit --squash `gitf`
-	amend = commit --amend
+    ci = commit
+    cim = commit -m
+    cia = commit -a
+    fix = commit --fixup
+    fixs = !git commit --fixup `gitf`
+    squash = commit --squash
+    squashs = !git commit --squash `gitf`
+    amend = commit --amend
 
-	l = log
-	pl = log --compact-summary -p
-	wl = log --compact-summary -pw
-	sl = log --compact-summary
-	sgl = log --graph --all --compact-summary
-	gl = log --graph --all
-	hl = log --format=format:'%H %s'
-	fl = log --format=fuller
-	ol = log --oneline
-	rl = log --format=r
-	r10 = log --format=r -n10
-	r40 = log --format=r -n40
-	rl0 = log --format=r --compact-summary -U0
-	rcl = log --date=short --format=format:'%C(cyan)%ad %C(green)%s'
-	rdl = log --format=rd
-	rgl = log --graph --all --format=rd
-	rsgl = log --compact-summary --graph --all --format=rd
-	rsl = log --format=rd --compact-summary
+    l = log
+    pl = log --compact-summary -p
+    wl = log --compact-summary -pw
+    sl = log --compact-summary
+    sgl = log --graph --all --compact-summary
+    gl = log --graph --all
+    hl = log --format=format:'%H %s'
+    fl = log --format=fuller
+    ol = log --oneline
+    rl = log --format=r
+    r10 = log --format=r -n10
+    r40 = log --format=r -n40
+    rl0 = log --format=r --compact-summary -U0
+    rcl = log --date=short --format=format:'%C(cyan)%ad %C(green)%s'
+    rdl = log --format=rd
+    rgl = log --graph --all --format=rd
+    rsgl = log --compact-summary --graph --all --format=rd
+    rsl = log --format=rd --compact-summary
 
-	wc = whatchanged
-	rwc = whatchanged --pretty=format:'%C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s'
+    wc = whatchanged
+    rwc = whatchanged --pretty=format:'%C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s'
 
-	ns = show --name-status
-	ps = show -p --compact-summary
-	ss = show --compact-summary
-	ws = show -pw --compact-summary
+    ns = show --name-status
+    ps = show -p --compact-summary
+    ss = show --compact-summary
+    ws = show -pw --compact-summary
 
-	ff = merge --ff-only
-	rpull = pull --rebase
-	ipull = pull --rebase=interactive
-	mpull = pull --no-rebase
-	mt = mergetool
+    ff = merge --ff-only
+    rpull = pull --rebase
+    ipull = pull --rebase=interactive
+    mpull = pull --no-rebase
+    mt = mergetool
 
-	rbi = rebase -i
-	rba = rebase --abort
-	rbc = rebase --continue
-	rbf = rebase -i --autosquash
-	rbm = -c sequence.editor='vim -c :%s/^f/p/e -c %s/^s/p/e' rebase -i --autosquash
-	p = cherry-pick
-	pa = cherry-pick --abort
-	pc = cherry-pick --continue
+    rbi = rebase -i
+    rba = rebase --abort
+    rbc = rebase --continue
+    rbf = rebase -i --autosquash
+    rbm = -c sequence.editor='vim -c :%s/^f/p/e -c %s/^s/p/e' rebase -i --autosquash
+    p = cherry-pick
+    pa = cherry-pick --abort
+    pc = cherry-pick --continue
 
-	refs = !set -o pipefail && git reflog --color | fzf-tmux +s -m --layout reverse --ansi --preview-window=down --preview 'git ps --color {1}' | cut -d' ' -f1
+    refs = !set -o pipefail && git reflog --color | fzf-tmux +s -m --layout reverse --ansi --preview-window=down --preview 'git ps --color {1}' | cut -d' ' -f1
 
-	ffs = !r=`gitf` && git merge --ff-only $r
-	rbs = !r=`gitf` && git rebase -i $r
-	rbfs = !r=`gitf` && git rebase -i --autosquash $r
-	resets = !r=`gitf` && git reset $r
-	reseth = !r=`gitf` && git reset --hard $r
-	resetr = !r=`git refs` && git reset --hard $r
-	picks = !rs=`gitf` && git cherry-pick $rs
+    ffs = !r=`gitf` && git merge --ff-only $r
+    rbs = !r=`gitf` && git rebase -i $r
+    rbfs = !r=`gitf` && git rebase -i --autosquash $r
+    resets = !r=`gitf` && git reset $r
+    reseth = !r=`gitf` && git reset --hard $r
+    resetr = !r=`git refs` && git reset --hard $r
+    picks = !rs=`gitf` && git cherry-pick $rs
 
-	big = bisect good
-	bib = bisect bad
-	bis = bisect stop
-	bir = bisect reset
+    big = bisect good
+    bib = bisect bad
+    bis = bisect stop
+    bir = bisect reset
 
-	padd = add -p
+    padd = add -p
 
-	rclone = clone --recurse-submodules
-	co = checkout
-	cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
-	cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
-	coc = !git checkout `gitf`
+    rclone = clone --recurse-submodules
+    co = checkout
+    cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
+    cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
+    coc = !git checkout `gitf`
 
-	smaster = submodule foreach --recursive git checkout master
-	spull = submodule foreach --recursive git rpull
-	spush = submodule foreach --recursive git push
-	sfetch = submodule foreach --recursive git fetch
-	sco = submodule foreach --recursive git checkout
+    smaster = submodule foreach --recursive git checkout master
+    spull = submodule foreach --recursive git rpull
+    spush = submodule foreach --recursive git push
+    sfetch = submodule foreach --recursive git fetch
+    sco = submodule foreach --recursive git checkout
 
-	spop = stash pop --index
+    spop = stash pop --index

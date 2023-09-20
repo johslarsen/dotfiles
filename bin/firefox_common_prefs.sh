@@ -1,25 +1,25 @@
 #!/bin/bash -
 
 if pidof firefox &> /dev/null; then
-	echo "ABORTING: firefox is running, so any changes would be overwritten when it quites" >&2
-	exit 1
+    echo "ABORTING: firefox is running, so any changes would be overwritten when it quites" >&2
+    exit 1
 fi
 
 files=( ~/.mozilla/firefox/*/prefs.js )
 case ${#files[@]} in
-	0)
-		echo "ABORTING: missing, or corrupt, profile" >&2
-		exit 1
-		;;
-	1)
-		file=${files[0]}
-		;;
-	*)
-		PS3="file?"
-		select file in "${files[@]}"; do
-			[ "$file" ] && break;
-		done
-		;;
+    0)
+        echo "ABORTING: missing, or corrupt, profile" >&2
+        exit 1
+        ;;
+    1)
+        file=${files[0]}
+        ;;
+    *)
+        PS3="file?"
+        select file in "${files[@]}"; do
+            [ "$file" ] && break;
+        done
+        ;;
 esac
 
 searchEngine="DuckDuckGo"

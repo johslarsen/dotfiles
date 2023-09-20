@@ -1,4 +1,4 @@
 #!/bin/bash -
 for f in ~/.bashrc.d/*; do
-	[ -f "$f" ] && . "$f"
+    [ -f "$f" ] && . "$f"
 done

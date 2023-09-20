@@ -1,11 +1,11 @@
 #!/bin/bash -
 cmd=()
 for arg in "$@"; do
-	this=$1
-	shift
+    this=$1
+    shift
 
-	[ "$this" == "---" ] && break
-	cmd[${#cmd}]="$this"
+    [ "$this" == "---" ] && break
+    cmd[${#cmd}]="$this"
 done
 
 
@@ -15,11 +15,11 @@ directories=( "$@" )
 
 files=()
 for dir in "${directories[@]}"; do
-	if [ -d "$dir" ]; then
-		files[${#files}]="$dir/$(ls -rt "$dir" | tail -1)"
-	else
-		files[${#files}]="$dir"
-	fi
+    if [ -d "$dir" ]; then
+        files[${#files}]="$dir/$(ls -rt "$dir" | tail -1)"
+    else
+        files[${#files}]="$dir"
+    fi
 done
 
 "${cmd[@]:?Usage: $0 CMDLINE [--- DIR/FILE...]}" "${files[@]}"

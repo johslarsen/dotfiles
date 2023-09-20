@@ -1,4 +1,4 @@
 #!/bin/bash -
 for f in /etc/{profile,bash_profile,bash.bash_profile}; do
-	[ -f "$f" ] && . "$f"
+    [ -f "$f" ] && . "$f"
 done

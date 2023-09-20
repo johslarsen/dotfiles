@@ -1,7 +1,7 @@
 #!/bin/bash -
 if [ -f "${HOME}/.gpg-agent-info" ]; then
-	. "${HOME}/.gpg-agent-info"
-	export GPG_AGENT_INFO
+    . "${HOME}/.gpg-agent-info"
+    export GPG_AGENT_INFO
 fi
 gpg-agent --daemon --write-env-file "${HOME}/.gpg-agent-info" --quiet &> /dev/null
 export GPG_TTY=$(tty)

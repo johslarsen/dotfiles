@@ -2,40 +2,40 @@
 me=$(basename $0)
 
 die() {
-	echo "Usage: $0 [directory|file]" >&2
-	[ "$1" ] && echo $1
-	exit 1
+    echo "Usage: $0 [directory|file]" >&2
+    [ "$1" ] && echo $1
+    exit 1
 }
 
 if [ $# -eq 0 ];then
-	read -ep "No argument provided, use current dir (.) [Y|y/*] " -n 1 reply
-	echo
-	if [ ${reply,,} == "y" ]; then
-		arg='.'
-	else
-		die "Missing argument"
-	fi
+    read -ep "No argument provided, use current dir (.) [Y|y/*] " -n 1 reply
+    echo
+    if [ ${reply,,} == "y" ]; then
+        arg='.'
+    else
+        die "Missing argument"
+    fi
 fi
 
 [ "$arg" ] || arg=$1
 if [ -d "$arg" ]; then
-	[ -e "${arg%%/}/avi" ] || mkdir ${arg%%/}/avi
-	for i in ${arg%%/}/*.{MTS,mts}; do
-		if [ -f "$i" ];then
-			dir=${arg%%/}
-			old=`basename "$i"`
-			new=$dir/avi/${old%.*}.avi
-			if [ -e "$new" ];then
-				error=${error}$'\n'"'$new' does not exists"
-			else
-				mencoder "$i" -o "$new" -oac copy -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=10000 -noskip -ofps 25 -vf scale=1280:720 -mc 0
-			fi 
-		fi
-	done
+    [ -e "${arg%%/}/avi" ] || mkdir ${arg%%/}/avi
+    for i in ${arg%%/}/*.{MTS,mts}; do
+        if [ -f "$i" ];then
+            dir=${arg%%/}
+            old=`basename "$i"`
+            new=$dir/avi/${old%.*}.avi
+            if [ -e "$new" ];then
+                error=${error}$'\n'"'$new' does not exists"
+            else
+                mencoder "$i" -o "$new" -oac copy -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=10000 -noskip -ofps 25 -vf scale=1280:720 -mc 0
+            fi
+        fi
+    done
 elif [ -f "$arg" ]; then
-	[ -e "${arg%.*}.avi" ] || mencoder "$arg" -o "${arg%.*}.avi" -oac copy -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=10000 -noskip -ofps 25 -vf scale=1280:720 -mc 0
+    [ -e "${arg%.*}.avi" ] || mencoder "$arg" -o "${arg%.*}.avi" -oac copy -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=10000 -noskip -ofps 25 -vf scale=1280:720 -mc 0
 else
-	die "'$arg' does not exists"
+    die "'$arg' does not exists"
 fi
 
 [ "$error" ] && echo "$error" >&2
