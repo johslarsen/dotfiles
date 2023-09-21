@@ -1,0 +1,2 @@
+#!/bin/bash -
+TIMEFMT="%F_" "$(dirname "$0")/ntotmp" "$@"

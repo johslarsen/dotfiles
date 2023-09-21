@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'time'
+
+exec("#{File.dirname(__FILE__)}/nfzf", $PROGRAM_NAME) if ARGV.empty?
+
+TMP = ENV.fetch('TMPDIR', "/tmp")
+TIMEFMT = ENV.fetch('TIMEFMT', "")
+PREFIX = ENV.fetch('PREFIX', "")
+
+ARGV.map do |path|
+  target = File.realpath(path).match(%r{/(\d{4}-\d{2}-\d{2})/(\d{2})(\d{2})(\d{2}(\.\d+)?)?[-_]?([^/]*)$}) do |m|
+    time = Time.parse("#{m[1]}T#{(m[2..3] << (m[4] || '00')).join(':')}")
+    "#{TMP}/#{time.strftime(TIMEFMT)}#{PREFIX}#{m[6]}"
+  end
+  FileUtils.cp(path, target, verbose: true)
+end
