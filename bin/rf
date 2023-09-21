@@ -1,0 +1,5 @@
+#!/bin/bash -
+[[ "$DISPLAY" ]] && ! [ -t 0 ] && exec xterm -e "$0" "$@"
+
+IFS=$'\n' files=( $(fd -t f --color always . "$@" | fzf-tmux -m --ansi --color=16) )
+[[ "$files" ]] && rifle "${files[@]}"
