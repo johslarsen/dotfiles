@@ -1,2 +1,2 @@
 #!/bin/bash -
-xclip -o -selection "${CLIPBOARD:-clipboard}" | SUFFIX="${SUFFIX:-.gist}" "$(dirname "$0")/note" "$@"
+xclip -o -selection "${CLIPBOARD:-clipboard}" | SUFFIX="${SUFFIX:-.txt}" "$(dirname "$0")/note" "$@"
