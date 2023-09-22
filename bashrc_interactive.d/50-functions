@@ -96,7 +96,7 @@ psv() {
 
 bmake() {
     local build=${BUILD:-build}
-    [ -d "$build" ] || cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RelWithDebInfo} -G${GENERATOR:-Ninja} -H. -B"$build" && cmake --build "$build" -- -j$(nproc) "$@"
+    [ -d "$build" ] || cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-Debug} -G${GENERATOR:-Ninja} -H. -B"$build" && cmake --build "$build" -- -j$(nproc) "$@"
 }
 ncbmake() {
     PATH=$(path_without PATH /usr/lib{,64}/ccache/bin) bmake "$@"
