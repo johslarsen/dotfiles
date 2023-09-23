@@ -264,7 +264,10 @@ inoremap <c-c> <Esc>
 " custom completion, neatly located between ^n (next, completion) and ^p (previous)
 inoremap <c-k> <c-x><c-o>
 
+" <c-space> is a new keycode in neovim. in traditional vim/xterm/... it produce <c-@> (null byte)
+nnoremap <silent>       <c-space> :call CocActionAsync('doHover')<CR>
 nnoremap <silent>       <c-@> :call CocActionAsync('doHover')<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <c-@> coc#refresh()
 inoremap <silent><expr> <c-\> CocActionAsync('showSignatureHelp')
 
