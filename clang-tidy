@@ -1,7 +1,16 @@
 Checks: >
-  *
+  clang-analyzer-*
+  ,bugprone-*
+  ,concurrency-*
+  ,hicpp-*
+  ,modernize-*
+  ,misc-*
+  ,openmp-*
+  ,performance-*
+  ,performance-*
   ,-abseil*
   ,-altera*
+  ,-bugprone-unchecked-optional-access
   ,-fuchsia*
   ,-llvmlibc*
   ,-*-length
