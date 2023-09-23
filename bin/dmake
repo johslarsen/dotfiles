@@ -1,0 +1,6 @@
+#!/bin/bash -
+image=${1:?USAGE: $0 BUILD_IMAGE [...]}
+args=( "${@:2}" )
+
+mnt=/tmp/$(basename "$PWD") # compatible with CLion
+docker run --rm --user=$UID -v "$PWD:$mnt" "$image" cmake --build "$mnt/build" -- -j$(nproc) "${args[@]}"

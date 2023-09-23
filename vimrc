@@ -528,7 +528,7 @@ let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*
 " Autocommands {{{1
 let g:number_of_processors = system('nproc')+0
 augroup vimrc
-  au VimEnter * if filereadable('CMakeLists.txt') | let &makeprg='cmake --build '.shellescape(get(g:, 'cmake_build_dir', 'build')).' --' | endif
+  au VimEnter * if !empty($BUILD_IMAGE) | let &makeprg='dmake '.$BUILD_IMAGE | elseif filereadable('CMakeLists.txt') | let &makeprg='cmake --build '.shellescape(get(g:, 'cmake_build_dir', 'build')).' --' | endif
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " jump to last position
   au User plugin-template-loaded call s:template_init()
 
@@ -613,7 +613,11 @@ endfunction
 command! -nargs=* CTest call _CTest(<f-args>)
 function! _CTest(...)
   let l:makeprg=&makeprg
-  let &makeprg='ctest --test-dir '.shellescape(get(g:, 'cmake_build_dir', 'build'))
+  if empty($BUILD_IMAGE)
+    let &makeprg='ctest --test-dir '.shellescape(get(g:, 'cmake_build_dir', 'build'))
+  else
+    let &makeprg='dtest '.$BUILD_IMAGE
+  endif
   if !empty($CTEST_FILTER)
     let &makeprg.=' -R '.shellescape($CTEST_FILTER)
   endif
