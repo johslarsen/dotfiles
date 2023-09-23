@@ -31,6 +31,9 @@
     textconv = spreadsheet2stdout
     cachetextconv = true
 
+[diff "cpp"]
+    xfuncname = "^((::[[:space:]]*)?[[A-Za-z_].*)$"
+
 [init]
     defaultBranch = master
 

@@ -1,2 +1,9 @@
 *.xls* diff=spreadsheet
 *.ods diff=spreadsheet
+
+*.c diff=cpp
+*.cc diff=cpp
+*.cpp diff=cpp
+*.cxx diff=cpp
+*.h diff=cpp
+*.hpp diff=cpp
