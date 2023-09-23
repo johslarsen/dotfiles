@@ -13,6 +13,7 @@ export PROMPT_DIRTRIM=3
 export NMON=lmd
 export LS_COLORS+=":di=01;37;40"
 export FZF_DEFAULT_COMMAND="fd -Ebuild/"
+export FZF_DEFAULT_OPTS="--bind alt-a:select-all,alt-d:deselect-all"
 export GTEST_COLOR=1
 
 [ -z "$MANPATH" ] && export MANPATH=$(manpath)
