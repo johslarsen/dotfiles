@@ -98,7 +98,7 @@ remake() {
     local build=${BUILD:-build} build_type=${BUILD_TYPE:-Debug}
     local typed="$build-$build_type"
     ! [ -e "$build" ] || [ -L "$build" ] && ln -sfT "$(basename "$typed")" "$build"
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=$build_type -G${GENERATOR:-Ninja} -H. -B"$typed"
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=$build_type -G${GENERATOR:-Ninja} -S. -B"$typed" "$@"
 }
 bmake() {
     local build=${BUILD:-build}
@@ -117,7 +117,7 @@ xmake() {
     BUILD="$gcc" CC=gcc CXX=g++ bmake "$@" && BUILD="$build-clang" CC=clang CXX=clang++ bmake "$@"
 }
 btest() {
-    CTEST_OUTPUT_ON_FAILURE=${CTEST_OUTPUT_ON_FAILURE:-1} ctest --test-dir build/ "$@"
+    CTEST_OUTPUT_ON_FAILURE=${CTEST_OUTPUT_ON_FAILURE:-1} ctest --test-dir "${BUILD:-build}" "$@"
 }
 atest() {
     local build=${BUILD:-build-asan}
