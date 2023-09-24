@@ -2,5 +2,18 @@
 image=${1:?USAGE: $0 BUILD_IMAGE [...]}
 args=( "${@:2}" )
 
-mnt=/tmp/$(basename "$PWD") # compatible with CLion
-docker run --rm --user=$UID -v "$PWD:$mnt" "$image" cmake --build "$mnt/build" -- -j$(nproc) "${args[@]}"
+build=${BUILD:-build}
+mnt="$PWD"
+run() {
+    docker run --rm --user=$UID:$GID -v "$PWD:$mnt" "$image" "$@"
+}
+
+if [ -d "$build" ]; then
+    mnt=$(dirname "$(awk 'match($0, /For build in directory: (.*)/, m){print m[1]}' "$build/CMakeCache.txt")")
+else
+    build_type=${BUILD_TYPE:-Debug}
+    typed="${build}-${build_type}"
+    ! [ -e "$build" ] || [ -L "$build" ] && ln -sfT "$(basename "$typed")" "$build"
+    run cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=$build_type -G${GENERATOR:-Ninja} -S"$mnt" -B"$mnt/$typed"
+fi
+run cmake --build "$mnt/$build" -- -j$(nproc) "${args[@]}"
