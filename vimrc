@@ -125,8 +125,7 @@ nnoremap <silent> <leader>iD    :call CocAction('jumpDefinition', 'pedit')<CR>
 nmap     <silent> <leader>i<C-d> :call CocAction('jumpDeclaration', 'pedit')<CR>
 nnoremap <silent> <leader>ie    :exec g:coc_enabled ? 'CocDisable' : 'CocEnable'<CR>
 nmap     <silent> <leader>if    <plug>(coc-format)
-nmap     <silent> <leader>iF    <plug>(coc-format-selected)
-xmap     <silent> <leader>iF    <plug>(coc-format-selected)
+xmap     <silent> <leader>if    <plug>(coc-format-selected)
 nmap     <silent> <leader>ih    :CocCommand document.toggleInlayHint<CR>
 nmap     <silent> <leader>il    <plug>(coc-references)
 nmap     <silent> <leader>iL    <plug>(coc-references-used)
