@@ -31,4 +31,5 @@ case "$MIMETYPE" in
   application/octet-stream) xxd "${FILE_PATH}" | head -${PV_HEIGHT} && exit 3;;
 esac
 
-. /usr/share/doc/ranger/config/scope.sh
+. /usr/share/doc/ranger/config/scope.sh # arch
+. /usr/lib/python3.6/site-packages/ranger/data/scope.sh # OpenSUSE 15.5
