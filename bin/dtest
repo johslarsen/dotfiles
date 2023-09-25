@@ -7,4 +7,4 @@ IFS=$'\n' envargs=( $(env | awk '/^GTEST/{print "--env="$0}') )
 build=${BUILD:-build}
 mnt=$(dirname "$(awk 'match($0, /For build in directory: (.*)/, m){print m[1]}' "$build/CMakeCache.txt")")
 
-docker run --rm --user=$UID -v "$PWD:$mnt" --workdir="$mnt/$build" "${envargs[@]}" "$image" ctest --output-on-failure "${args[@]}"
+docker run --rm --user=$UID:$(id -g $UID) -v "$PWD:$mnt" --workdir="$mnt/$build" "${envargs[@]}" "$image" ctest --output-on-failure "${args[@]}"
