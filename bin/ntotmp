@@ -2,7 +2,7 @@
 require 'fileutils'
 require 'time'
 
-exec("#{File.dirname(__FILE__)}/nfzf", $PROGRAM_NAME) if ARGV.empty?
+exec("#{File.dirname(__FILE__)}/nf", $PROGRAM_NAME) if ARGV.empty?
 
 TMP = ENV.fetch('TMPDIR', "/tmp")
 TIMEFMT = ENV.fetch('TIMEFMT', "")
