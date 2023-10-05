@@ -28,6 +28,9 @@ files.each do |path|
   title.gsub!(/\s+/, '_')
   title.gsub!(/^#{PUNCTATION}|#{PUNCTATION}$/, '')
 
-  name, = Open3.capture2(env, "#{File.dirname(__FILE__)}/notename", *comment, title)
+  basename = [*comment]
+  basename << title unless title.empty?
+
+  name, = Open3.capture2(env, "#{File.dirname(__FILE__)}/notename", *basename)
   FileUtils.mv(path, name.chomp + suffix || ".log", verbose: true)
 end
