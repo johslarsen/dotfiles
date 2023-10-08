@@ -588,12 +588,34 @@ function! _GTestCaseToggle()
   call setpos('.', l:cursor)
 endfunction
 
+function! DoctestSuite()
+  let l:pattern = 'TEST_SUITE[^(]*("\([^"]*\)"'
+  let l:pos = search(l:pattern, 'bcnw')
+  if (l:pos == 0)
+    return substitute(RPathSrc("%:r"), "/", "_", "g")
+  endif
+  let l:match = matchlist(join(getline(l:pos,l:pos+2)), l:pattern)
+  return trim(l:match[1])
+endfunction
+function! DoctestCase()
+  let l:pattern = 'TEST_CASE[^(]*("\([^"]*\)"'
+  let l:pos = search(l:pattern, 'bcnw')
+  if (l:pos == 0)
+    return ''
+  endif
+  let l:match = matchlist(join(getline(l:pos,l:pos+2)), l:pattern)
+  return trim(l:match[1])
+endfunction
+function! DoctestContext()
+  return [DoctestSuite(), DoctestCase()]
+endfunction
+
 function! GTestContext()
   let id='[[:alnum:]_[:space:]\n]'
   let l:pattern = 'TEST'.id.'*(\('.id.'\+\),\('.id.'\+\))'
   let l:pos = search(l:pattern, 'bcnw')
   if (l:pos == 0)
-    return [substitute(RPathSrc("%:r"), "/", "_", "g"), '']
+    return DoctestContext()
   endif
   let l:match = matchlist(join(getline(l:pos,l:pos+2)), l:pattern)
   return [trim(l:match[1]), trim(l:match[2])]
@@ -636,9 +658,19 @@ function! _CTestGTest(filter)
   let &errorformat .= ',%C%m'
 
   " NOTE: ctest specific
-  let &errorformat .= ',%E%c/%l Test #%\d%#: %f .%#***%m' " hacky way to catch segfault errors++
+  let &errorformat .= ',%.%#Subprocess %m' " hacky way to catch gtest segfault errors++
+  let &errorformat .= ',%A%f:%l: %t%m' " doctest segfaults..
   " NOTE: gtester specific
   let &errorformat .= ',%EFAIL: %f' " segfuault, exceptions, ...
+
+  let l:context = split(a:filter, '\.')
+  if (len(l:context) == 1)
+    let $TEST_SUITE = ''
+    let $TEST_CASE = l:context[0]
+  elseif (len(l:context) == 2)
+    let $TEST_SUITE = l:context[0]
+    let $TEST_CASE = l:context[1]
+  endif
 
   let $GTEST_COLOR='no' " causes problems in output
   let $GTEST_FILTER=a:filter
@@ -654,7 +686,7 @@ endfunction
 
 function! RPathSrc(path)
   let l:no_prefix = substitute(RPath(a:path), '.*test/', '', 'g')
-  return substitute(l:no_prefix, 'test\(\.[^.]*\)\?$', '\1', 'g')
+  return substitute(l:no_prefix, '_\?[Tt]est\(\.[^.]*\)\?$', '\1', 'g')
 endfunction
 
 function! RetabIndents()
