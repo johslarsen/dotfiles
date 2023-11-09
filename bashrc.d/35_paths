@@ -4,8 +4,7 @@
 path_append PATH /etc/smallsoft/sbin "$HOME/bin" "$HOME/.local/bin" "$HOME/.bin" "$HOME/.toolboxes"/*/bin "$HOME/.cargo/bin" "${GOROOT:-/usr/local/go}/bin" /loot/bin /pub/doc/bin
 # Prepend (i.e. nth arg > 1st arg > original PATH) sbins because SUSE does not for non-root users.
 # Important to also prepend companion bins to not just prioritize ant sbin over bins.
-# Also prioritize ccache compilers over regular ones.
-path_prepend PATH {/,/usr/,/usr/local/,/opt/local/}{bin,sbin} /usr/lib64/ccache /usr/lib/ccache/bin
+path_prepend PATH {/,/usr/,/usr/local/,/opt/local/}{bin,sbin}
 
 path_append LD_LIBRARY_PATH "$HOME/lib"
 path_prepend MANPATH "$HOME/share/man" "$HOME/man"

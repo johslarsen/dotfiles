@@ -1,0 +1,8 @@
+#!/bin/bash -
+if [[ "$CMAKE_CXX_COMPILER_LAUNCHER" ]]; then
+    true # keep it unchanged
+elif command -v ccache &>/dev/null; then
+    export CMAKE_CXX_COMPILER_LAUNCHER=ccache
+elif command -v sccache &>/dev/null; then
+    export CMAKE_CXX_COMPILER_LAUNCHER=sccache
+fi
