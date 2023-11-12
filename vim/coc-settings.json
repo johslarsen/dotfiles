@@ -22,6 +22,6 @@
     "suggest.virtualText": true,
     "yaml.format.enable": true,
     "yaml.schemas": {
-       "kubernetes": "*.yaml"
+       "kubernetes": "k8s/**/*.yaml"
     }
 }
