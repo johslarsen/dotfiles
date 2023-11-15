@@ -15,6 +15,9 @@ export LS_COLORS+=":di=01;37;40"
 export FZF_DEFAULT_COMMAND="fd -E'build*'"
 export FZF_DEFAULT_OPTS="--bind alt-a:select-all,alt-d:deselect-all"
 export GTEST_COLOR=1
+export CTEST_OUTPUT_ON_FAILURE=1
+export CTEST_PROGRESS_OUTPUT=1
+export CTEST_PARALLEL_LEVEL=$(($(nproc)/2))
 
 [ -z "$MANPATH" ] && export MANPATH=$(manpath)
 [ -z "$GOMAXPROCS" ] && export GOMAXPROCS=$(grep "^processor" /proc/cpuinfo | wc -l)
