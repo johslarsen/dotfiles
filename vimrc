@@ -644,6 +644,8 @@ function! _CTest(...)
   endif
   if !empty($CTEST_FILTER)
     let &makeprg.=' -R '.shellescape($CTEST_FILTER)
+  elseif !empty($GTEST_FILTER)
+    let &makeprg.=' -R '.shellescape(substitute($GTEST_FILTER, '\*', '.*', 'g'))
   endif
   exec 'Make' join(a:000)
   let &makeprg=l:makeprg
