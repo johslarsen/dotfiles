@@ -654,16 +654,20 @@ command! -nargs=1 CTestGTest call _CTestGTest(<f-args>)
 function! _CTestGTest(filter)
   let l:errorformat=&errorformat
 
+  let &errorformat  =  '%.%#: ../%f:%l: %m' " C/C++ assertions
   let &errorformat  =  '%.%#: %f:%l: %m' " C/C++ assertions
+  let &errorformat .= ',%A../%f:%l: %t%[ar]%[ir]%[lo]%[ur]%.%#'
   let &errorformat .= ',%A%f:%l: %t%[ar]%[ir]%[lo]%[ur]%.%#'
   let &errorformat .= ',%Z[%.%#] %m'
   let &errorformat .= ',%C%m'
 
   " NOTE: ctest specific
   let &errorformat .= ',%.%#Subprocess %m' " hacky way to catch gtest segfault errors++
+  let &errorformat .= ',%A../%f:%l: %t%m' " doctest segfaults..
   let &errorformat .= ',%A%f:%l: %t%m' " doctest segfaults..
   " NOTE: gtester specific
-  let &errorformat .= ',%EFAIL: %f' " segfuault, exceptions, ...
+  let &errorformat .= ',%EFAIL: ../%f' " segfault, exceptions, ...
+  let &errorformat .= ',%EFAIL: %f' " segfault, exceptions, ...
 
   let l:context = split(a:filter, '\.')
   if (len(l:context) == 1)
