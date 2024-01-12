@@ -103,12 +103,13 @@ nnoremap <silent> <leader><C-d> :Ghdiffsplit<cr>
 nnoremap <silent> <leader>e     :Explore<cr>
 nnoremap <silent> <leader>E     :Vexplore<cr>
 nnoremap <silent> <leader><c-e> :Sexplore<cr>
-nnoremap <silent> <leader>f     :set invcursorline invcursorcolumn<cr>
+nnoremap <silent> <leader>f     :Lines <C-r><C-w><cr>
+vnoremap <silent> <leader>f     "vy:Lines <C-r>v<cr>
 nnoremap <silent> <leader>F     :Tags <C-r><C-w><cr>
 vnoremap <silent> <leader>F     "vy:Tags <C-r>v<cr>
-nnoremap <silent> <leader><C-f> :Lines <C-r><C-w><cr>
-nnoremap <silent> <leader>g     :vimgrep /\<<C-r><C-w>\>/gj %<cr>
-vnoremap <silent> <leader>g     "vy:vimgrep /<C-r>v/gj %<cr>
+nnoremap <silent> <leader><C-f> :set invcursorline invcursorcolumn<cr>
+nnoremap <silent> <leader>g     :GGrep \<<C-r><C-w>\> <C-r>=expand("%:h")<CR><CR>
+vnoremap <silent> <leader>g     "vy:GGrep <C-r>v <C-r>=expand("%:h")<CR><CR>
 nnoremap <silent> <leader>G     :GGrep \<<C-r><C-w>\><cr>
 vnoremap <silent> <leader>G     "vy:GGrep <C-r>v<cr>
 nnoremap <silent> <leader><C-g> :Ag <C-r><C-w><cr>
