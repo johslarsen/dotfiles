@@ -433,7 +433,7 @@ command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0,
+  \ call fzf#vim#grep('git grep --line-number '.join(map([<f-args>], {_,v->shellescape(v)})), 0,
   \                   <bang>0 ? fzf#vim#with_preview('up:60%')
   \                           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                   <bang>0)
