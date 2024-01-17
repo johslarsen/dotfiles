@@ -1,0 +1,1 @@
+../gitcommit/fix_wrapping.vim
