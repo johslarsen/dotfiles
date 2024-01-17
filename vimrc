@@ -159,6 +159,7 @@ nnoremap <silent> <leader>Q     :cclose<cr>:clist<cr>
 nnoremap          <leader>r     :%s/\<<C-r><C-w>\>//g<Left><Left>
 vnoremap          <leader>r     "vy:%s/<C-r>v//g<Left><Left>
 nnoremap          <leader>R     :%s/\<<C-r><C-a>\>//g<Left><Left>
+nnoremap          <leader><C-r> :Dispatch rifle <C-r><C-p><CR>
 nnoremap          <leader>s     :split<Space>
 nnoremap          <leader>S     :vsplit<Space>
 nnoremap <silent> <leader>t     :edit =ToggleSourceTestFilename()<cr><cr>
