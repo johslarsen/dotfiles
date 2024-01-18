@@ -580,6 +580,11 @@ function! ColonsToSlash(namespace)
   return substitute(a:namespace, '::', '\/', 'g')
 endfunction
 
+function! EnvOr(key, fallback)
+  let l:value = getenv(a:key)
+  return empty(l:value) ? a:fallback : l:value
+endfunction
+
 command! GTestCaseToggle call _GTestCaseToggle()
 function! _GTestCaseToggle()
   let l:cursor = getcurpos()
