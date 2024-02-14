@@ -1,0 +1,21 @@
+#!/bin/bash -
+CPU_MASK=${CPU_MASK:-1}
+export BENCHMARK_REPETITIONS=${BENCHMARK_REPETITIONS:-3}
+export BENCHMARK_MIN_WARMUP_TIME=${BENCHMARK_MIN_WARMUP_TIME:-1}
+
+old_policy=()
+# setting all because the OS might do useful things on non-taskset cores, and Google benchmark checks all
+for f in /sys/devices/system/cpu/cpufreq/policy*; do
+    n=${f#*policy}
+    old_policy[$n]=$(cat $f/scaling_governor)
+    [[ $EUID == 0 ]] && echo "performance" > $f/scaling_governor
+done
+revert_governer() {
+    for f in /sys/devices/system/cpu/cpufreq/policy*; do
+        n=${f#*policy}
+        [[ $EUID == 0 ]] && echo "${old_policy[$n]}" > $f/scaling_governor
+    done
+}
+trap revert_governer INT TERM EXIT
+
+taskset $CPU_MASK "$@"
