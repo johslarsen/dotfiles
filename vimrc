@@ -324,28 +324,28 @@ function! Theme(background)
 endfunction
 call Theme("dark")
 
-highlight Normal ctermfg=darkgreen
-highlight Special ctermfg=lightgreen
+highlight Normal ctermfg=darkgreen guifg=#00cd00 guibg=#121212
+highlight Special ctermfg=lightgreen guifg=#87ffaf
 
-highlight DiffText ctermfg=darkgreen cterm=bold ctermbg=darkblue
+highlight DiffText ctermfg=NONE guifg=NONE cterm=bold,underline gui=bold,undercurl guisp=blue
 
-highlight SpellBad term=reverse cterm=bold,underline ctermbg=NONE
-highlight SpellLocal term=reverse cterm=underline ctermfg=brown ctermbg=NONE
-highlight SpellRare term=reverse cterm=underline ctermfg=yellow ctermbg=NONE
+highlight SpellBad term=reverse cterm=bold,underline gui=bold,undercurl ctermbg=NONE guisp=NONE
+highlight SpellLocal term=reverse cterm=underline ctermfg=brown guifg=#ffaf00 ctermbg=NONE guisp=NONE
+highlight SpellRare term=reverse cterm=underline ctermfg=yellow guifg=yellow ctermbg=NONE guisp=NONE
 
 set listchars=eol:$,tab:>-,nbsp:%,precedes:<,extends:>
-highlight NonText    cterm=bold ctermfg=magenta
-highlight SpecialKey cterm=NONE ctermfg=black ctermbg=brown
+highlight NonText    cterm=bold ctermfg=magenta guifg=magenta
+highlight SpecialKey cterm=NONE ctermfg=black guifg=black ctermbg=brown guibg=#ffaf00
 
-highlight CocHoverRange ctermbg=234
+highlight CocHoverRange ctermbg=234 guibg=#1c1c1c
 
-highlight Function ctermfg=210
-highlight CocSemMethod ctermfg=216
-highlight Structure ctermfg=205
-highlight CocSemNamespace ctermfg=133
-highlight CocSemProperty ctermfg=202
-highlight CocSemParameter ctermfg=208
-highlight CocInlayHint ctermfg=237
+highlight Function ctermfg=210 guifg=#ff8787
+highlight CocSemMethod ctermfg=216 guifg=#ffaf87
+highlight Structure ctermfg=205 guifg=#df5eaf
+highlight CocSemNamespace ctermfg=133 guifg=#ae5a88
+highlight CocSemProperty ctermfg=202 guifg=#ff5f00
+highlight CocSemParameter ctermfg=208 guifg=#ff7500
+highlight CocInlayHint ctermfg=237 guifg=#3a3a3a
 highlight link CocSemTypeParameter Type
 
 set laststatus=2
@@ -358,14 +358,14 @@ set statusline+=\ %f\  " the file name
 set statusline+=%#ModeMsg#%h%m%*
 set statusline+=%#WarningMsg#%{&paste?'[PASTE]':''}%q%w%r%a%*
 set statusline+=%=0x%B\ (%4l/%-4L,%2c%-2V)\ %P " on right side
-highlight StatusLine term=bold cterm=bold ctermfg=darkgreen  ctermbg=darkred
+highlight StatusLine term=bold cterm=bold gui=bold ctermfg=darkgreen guifg=yellow ctermbg=darkred guibg=darkred
 set noshowmode " keep info when cmdline is not in use
 
 set number
 set relativenumber
 set nocursorline
 set colorcolumn=+1
-highlight ColorColumn ctermbg=magenta
+highlight ColorColumn ctermbg=magenta guibg=magenta
 
 set title
 set titlestring=''
