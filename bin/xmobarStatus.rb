@@ -118,14 +118,14 @@ end
 
 def load_avg
   l1 = File.read("/proc/loadavg").split[0].to_f
-  "L#{colored(l1 < 1 ? LOW : l1 < NPROC ? MEDIUM : HIGH, '%1.1f' % l1)}"
+  "#{colored(l1 < 1 ? LOW : l1 < NPROC ? MEDIUM : HIGH, '%1.1f' % l1)}L"
 end
 
 cpu = CPU.new
 network = Network.new
 disk = Disk.new
 loop do
-  puts [cpu.sample, mem, load_avg, network.sample, disk.sample].compact.join(" ")
+  puts ["#{load_avg}#{cpu.sample}", mem, network.sample, disk.sample].compact.join(" ")
   $stdout.flush
   sleep 1
 end
