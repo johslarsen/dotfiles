@@ -664,7 +664,6 @@ function! _CTestGTest(filter)
   let l:errorformat=&errorformat
 
   let &errorformat  =  '%.%#: %f:%l: %m' " C/C++ assertions
-  let &errorformat .= ',%A%f:%l: %t%[ar]%[ir]%[lo]%[ur]%.%#'
   let &errorformat .= ',%Z[%.%#] %m'
   let &errorformat .= ',%C%m'
 
