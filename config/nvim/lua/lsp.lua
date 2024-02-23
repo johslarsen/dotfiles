@@ -11,6 +11,8 @@ end
 
 local function on_attach(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.del("n", "K", bufopts) -- revert to regular man page on this
+
   vim.keymap.set("n", "<Leader>id", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "<Leader>iD", pedit_definition, bufopts)
   vim.keymap.set("n", "<Leader>i<C-d>", vim.lsp.buf.declaration, bufopts)

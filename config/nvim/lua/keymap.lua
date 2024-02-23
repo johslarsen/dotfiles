@@ -3,6 +3,13 @@ vim.keymap.set('', '<C-,>', ',', { remap = true }) -- easier for <Leader><C-... 
 vim.keymap.set({ 'n', 'v' }, ';', ',', { remap = true }) -- easier for <Leader>A... hotkeys
 
 local fzf = require 'fzf-lua'
+local delete_man_buffers = function()
+  for _, bufid in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_get_name(bufid):find("^man://") then
+      vim.api.nvim_buf_delete(bufid, {})
+    end
+  end
+end
 
 vim.g.nproc = tonumber(vim.fn.system('nproc'))
 
@@ -24,7 +31,7 @@ vim.keymap.set('n', '<Leader><C-g>', fzf.grep_cword)
 vim.keymap.set('v', '<Leader><C-g>', fzf.grep_visual)
 vim.keymap.set('n', '<Leader>io', "<cmd>Outline<CR>")
 vim.keymap.set('n', '<Leader>iQ', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<Leader>I', "<cmd>Outline<CR>")
+vim.keymap.set('n', '<Leader>K', delete_man_buffers)
 vim.keymap.set('n', '<Leader>L', "<cmd>set list!<CR>")
 vim.keymap.set('n', '<Leader><C-l>', function() vim.opt.spelllang = vim.o.spelllang == "en_us" and "nb" or "en_us" end)
 vim.keymap.set('n', '<Leader>m', function() vim.cmd("Make -j" .. vim.g.nproc) end)
@@ -73,7 +80,7 @@ vim.keymap.set('n', 'ØØ', '{{', { remap = true })
 vim.keymap.set('n', 'ÆÆ', '}}', { remap = true })
 vim.keymap.set('n', 'ææ', ']]', { remap = true })
 
-vim.keymap.set('n', '<CR>', '<C-]>')          -- enter as goto
+vim.keymap.set('n', '<CR>', '<C-]>', { remap = true })          -- enter as goto
 vim.api.nvim_create_autocmd({ "FileType" }, { -- except in quickfix windows
   pattern = "qf",
   callback = function() vim.keymap.set('n', '<CR>', '<CR>') end,
