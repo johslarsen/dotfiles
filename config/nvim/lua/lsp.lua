@@ -38,6 +38,16 @@ local function on_attach(client, bufnr)
     vim.lsp.buf.signature_help()
   end, bufopts)
 
+  vim.keymap.set('n', '<Leader>h', vim.cmd.ClangdSwitchSourceHeader, bufopts)
+  vim.keymap.set('n', '<Leader>H', function()
+    vim.cmd.vsplit()
+    vim.cmd.ClangdSwitchSourceHeader()
+  end, bufopts)
+  vim.keymap.set('n', '<Leader><C-h>', function()
+    vim.cmd.split()
+    vim.cmd.ClangdSwitchSourceHeader()
+  end, bufopts)
+
   if client.server_capabilities.inlayHintProvider then
     vim.lsp.inlay_hint.enable(bufnr, true)
   end
