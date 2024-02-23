@@ -1,5 +1,5 @@
 vim.g.mapleader = ","
-vim.keymap.set('', '<C-,>', ',', { remap = true }) -- easier for <Leader><C-... hotkeys
+vim.keymap.set('', '<C-,>', ',', { remap = true })       -- easier for <Leader><C-... hotkeys
 vim.keymap.set({ 'n', 'v' }, ';', ',', { remap = true }) -- easier for <Leader>A... hotkeys
 
 local fzf = require 'fzf-lua'
@@ -80,8 +80,9 @@ vim.keymap.set('n', 'ØØ', '{{', { remap = true })
 vim.keymap.set('n', 'ÆÆ', '}}', { remap = true })
 vim.keymap.set('n', 'ææ', ']]', { remap = true })
 
-vim.keymap.set('n', '<CR>', '<C-]>', { remap = true })          -- enter as goto
-vim.api.nvim_create_autocmd({ "FileType" }, { -- except in quickfix windows
+vim.keymap.set('n', '<CR>', '<C-]>', { remap = true }) -- enter as goto
+vim.keymap.set('n', '<Space>', '<C-f>')                -- space as page down, like less
+vim.api.nvim_create_autocmd({ "FileType" }, {          -- except in quickfix windows
   pattern = "qf",
   callback = function() vim.keymap.set('n', '<CR>', '<CR>') end,
 })
@@ -108,7 +109,7 @@ vim.keymap.set('o', 'ah', '<Plug>(GitGutterTextObjectOuterPending)')
 vim.keymap.set('x', 'ih', '<Plug>(GitGutterTextObjectInnerVisual)')
 vim.keymap.set('x', 'ah', '<Plug>(GitGutterTextObjectOuterVisual)')
 
-vim.keymap.set('i', '<C-k>', '<C-x><C-o>') -- omnifunc completion
+vim.keymap.set('i', '<C-k>', '<C-x><C-n>') -- because nvim-cmp reuse <C-n> for "omnicomplete"
 vim.keymap.set('i', '<C-l>', '<C-y>')      -- accepted selected completion item
 
 -- BASH-like command line movement

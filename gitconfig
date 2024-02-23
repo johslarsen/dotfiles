@@ -18,7 +18,6 @@
 
 [core]
     pager = less -FiMRSWX
-    editor = vim
 
 [diff]
     context = 2

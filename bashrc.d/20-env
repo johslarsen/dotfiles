@@ -5,10 +5,10 @@ export HISTFILESIZE=999999
 export HISTSIZE=999999
 export HISTFILE=~/.bash_history
 export HISTCONTROL='ignorespace'
-export EDITOR=vim
+type nvim &> /dev/null && export EDITOR=nvim || export EDITOR=vim
 #export BROWSER=w3m # delegating to a console browser in an applications spawned without console does not work very well
 export PAGER='less -FiMRSWX'
-export MANPAGER=$PAGER
+type nvim &> /dev/null && export MANPAGER='nvim +Man!' || export MANPAGER=$PAGER
 export PROMPT_DIRTRIM=3
 export NMON=lmd
 export LS_COLORS+=":di=01;37;40"
@@ -20,6 +20,6 @@ export CTEST_PROGRESS_OUTPUT=1
 export CTEST_PARALLEL_LEVEL=$(($(nproc)/2))
 
 [ -z "$MANPATH" ] && export MANPATH=$(manpath)
-[ -z "$GOMAXPROCS" ] && export GOMAXPROCS=$(grep "^processor" /proc/cpuinfo | wc -l)
+[ -z "$GOMAXPROCS" ] && export GOMAXPROCS=$(nproc)
 
 umask 0022

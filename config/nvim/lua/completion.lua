@@ -9,9 +9,8 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert({
     ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
     ['<C-d>'] = cmp.mapping.scroll_docs(4),  -- Down
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-l>'] = confirm,
-    ['<CR>'] = confirm,
+    ['<C-l>'] = cmp.mapping(confirm, { 'i', 's' }),
+    ['<CR>'] = cmp.mapping(confirm, { 'i', 's' }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         confirm()
