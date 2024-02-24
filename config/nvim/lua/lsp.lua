@@ -88,9 +88,5 @@ lspconfig.pylsp.setup(with_defaults {})
 lspconfig.rust_analyzer.setup(with_defaults {})
 lspconfig.salt_ls.setup(with_defaults {})
 lspconfig.solargraph.setup(with_defaults {})
-lspconfig.yamlls.setup(with_defaults {
-  schemas = {
-    ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.yml",
-  }
-})
+lspconfig.yamlls.setup(with_defaults {})
 lspconfig.vimls.setup(with_defaults {})
