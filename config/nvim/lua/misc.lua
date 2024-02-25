@@ -20,6 +20,10 @@ vim.opt.listchars = "trail:#"
 
 vim.opt.completeopt = "menu,noinsert,popup"
 
+vim.api.nvim_create_autocmd({ "FileType" }, { -- use K for man-pages regardless of language defaults
+  callback = function() vim.bo.keywordprg = ":Man" end,
+})
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "c", "cpp" },
   callback = function()
