@@ -18,7 +18,7 @@ vim.opt.updatetime = 300 -- speed up CursorHold feedback
 vim.api.nvim_create_autocmd({ "BufReadPost" }, { callback = function() vim.cmd.normal('`"') end })
 
 vim.opt.previewheight = 5
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   callback = function ()
     if vim.o.previewwindow then
       vim.opt.cursorline = true

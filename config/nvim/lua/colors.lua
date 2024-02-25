@@ -32,6 +32,8 @@ vim.cmd [[
 
   highlight StatusLine term=bold cterm=bold gui=bold ctermfg=darkgreen guifg=yellow ctermbg=darkred guibg=darkred
   highlight ColorColumn ctermbg=magenta guibg=magenta
+  highlight CursorColumn guibg=#333333
+  highlight CursorLine guibg=#333333
 ]]
 
 vim.opt.colorcolumn = "+1"

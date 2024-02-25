@@ -82,9 +82,32 @@ vim.keymap.set('n', 'ææ', ']]', { remap = true })
 
 vim.keymap.set('n', '<CR>', '<C-]>', { remap = true }) -- enter as goto
 vim.keymap.set('n', '<Space>', '<C-f>')                -- space as page down, like less
-vim.api.nvim_create_autocmd({ "FileType" }, {          -- except in quickfix windows
+
+local function preview_window()
+  for _, winid in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_get_option_value('previewwindow', { win = winid }) then
+      return winid
+    end
+  end
+  return nil
+end
+local function pedit_qf_entry()
+  local getqflist = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].loclist == 1 and vim.fn.getloclist or
+  vim.fn.getqflist
+  local items = getqflist({ idx = vim.fn.line('.'), items = 1 }).items[1]
+  local preview = preview_window()
+  if preview ~= nil and vim.api.nvim_win_get_buf(preview) == items.bufnr then -- do not reload it unnecessarily
+    vim.api.nvim_win_set_cursor(preview, { items.lnum, items.col })
+  else
+    vim.cmd("pedit +:call\\ cursor(" .. items.lnum .. "," .. items.col .. ") " .. vim.api.nvim_buf_get_name(items.bufnr))
+  end
+end
+vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "qf",
-  callback = function() vim.keymap.set('n', '<CR>', '<CR>') end,
+  callback = function()
+    vim.keymap.set('n', '<CR>', '<CR>') -- use as regular in quickfix
+    vim.keymap.set('n', '<Space>', pedit_qf_entry)
+  end,
 })
 
 vim.keymap.set('n', 'Y', 'y$') -- to be consistent with D/C
@@ -92,7 +115,6 @@ vim.keymap.set('n', 'Y', 'y$') -- to be consistent with D/C
 --vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --  callback = function() vim.keymap.set('n', '%', '<Plug>(MatchitOperationForward)') end,
 --})
-
 
 vim.keymap.set('n', '<C-e>', '<cmd>:buffer #<CR>')
 vim.keymap.set('n', '<C-Up>', 'gk')
