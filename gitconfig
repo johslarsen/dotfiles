@@ -44,7 +44,7 @@
     decorate = auto
 
 [merge]
-    tool = vim
+    tool = nvimdiff
 
 [mergetool]
     keepBackup = false
