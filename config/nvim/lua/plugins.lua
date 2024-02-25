@@ -35,6 +35,9 @@ return require('packer').startup(function(use)
   use 'sjl/badwolf'
   use 'altercation/vim-colors-solarized'
 
+  use 'chrisbra/csv.vim'
+
+  use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'     -- :SudoWrite
   use 'tpope/vim-unimpaired' -- e.g. [q
   use 'ibhagwan/fzf-lua'

@@ -19,3 +19,10 @@ vim.opt.list = true
 vim.opt.listchars = "trail:#"
 
 vim.opt.completeopt = "menu,noinsert,popup"
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "c", "cpp" },
+  callback = function()
+    vim.bo.commentstring = "// %s"
+  end,
+})
