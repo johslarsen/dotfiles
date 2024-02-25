@@ -166,5 +166,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
       end)
     end
     vim.keymap.set('n', '<Leader>yf', minitest)
+    vim.keymap.set('n', '<Leader>yt', minitest)
   end
 })
