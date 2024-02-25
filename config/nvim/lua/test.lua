@@ -59,13 +59,13 @@ local function doctest_suite()
   local pattern = 'TEST_SUITE[^(]*("\\([^"]*\\)"'
   local pos = vim.fn.search(pattern, 'bcnw')
   if (pos == 0) then return '*' end -- TODO: guess filename
-  return vim.fn.trim(vim.fn.matchlist(vim.fn.join(vim.fn.getline(pos, pos+2)), pattern)[2])
+  return vim.fn.trim(vim.fn.matchlist(vim.fn.join(vim.fn.getline(pos, pos + 2)), pattern)[2])
 end
 local function doctest_case()
   local pattern = 'TEST_CASE[^(]*("\\([^"]*\\)"'
   local pos = vim.fn.search(pattern, 'bcnw')
   if (pos == 0) then return '*' end
-  return vim.fn.trim(vim.fn.matchlist(vim.fn.join(vim.fn.getline(pos, pos+2)), pattern)[2])
+  return vim.fn.trim(vim.fn.matchlist(vim.fn.join(vim.fn.getline(pos, pos + 2)), pattern)[2])
 end
 local function doctest_context()
   return doctest_suite(), doctest_case()
@@ -84,21 +84,23 @@ local function gtest_context()
   end)
 end
 
-local function ctest()
-  local makeprg = vim.o.makeprg
-  if (vim.env.BUILD_IMAGE ~= nil) then
-    vim.o.makeprg = 'dtest ' .. vim.env.BUILD_IMAGE
-  else
-    vim.o.makeprg = 'ctest --test-dir build'
-  end
-
-  if (vim.env.CTEST_FILTER ~= nil) then
-    vim.o.makeprg = vim.o.makeprg .. ' -R ' .. vim.fn.shellescape(vim.env.CTEST_FILTER)
-  elseif (vim.env.GTEST_FILTER ~= nil) then
-    vim.o.makeprg = vim.o.makeprg .. ' -R ' .. vim.fn.shellescape(vim.env.GTEST_FILTER:gsub("[*]", ".*"))
-  end
+local function make_with(makeprg, errorformat)
+  local old_errorformat = vim.bo.errorformat
+  vim.bo.errorformat = errorformat
+  local old_makeprg = vim.bo.makeprg
+  vim.bo.makeprg = makeprg
   vim.cmd.Make()
-  vim.o.makeprg = makeprg
+  vim.bo.makeprg = old_makeprg
+  vim.bo.errorformat = old_errorformat
+end
+local function ctest(errorformat)
+  local makeprg = vim.env.BUILD_IMAGE ~= nil and 'dtest ' .. vim.env.BUILD_IMAGE or 'ctest --test-dir build'
+  if (vim.env.CTEST_FILTER ~= nil) then
+    makeprg = makeprg .. ' -R ' .. vim.fn.shellescape(vim.env.CTEST_FILTER)
+  elseif (vim.env.GTEST_FILTER ~= nil) then
+    makeprg = makeprg .. ' -R ' .. vim.fn.shellescape(vim.env.GTEST_FILTER:gsub("[*]", ".*"))
+  end
+  make_with(makeprg, errorformat)
 end
 
 local function ctest_gtest(suite, case)
@@ -106,12 +108,11 @@ local function ctest_gtest(suite, case)
   vim.env.TEST_CASE = case or '*'   -- doctest
   vim.env.GTEST_FILTER = vim.env.TEST_SUITE .. '.' .. vim.env.TEST_CASE
 
-  vim.env.GTEST_COLOR = '0'         -- causes problems in output
+  vim.env.GTEST_COLOR = '0' -- causes problems in output
   vim.env.ASAN_OPTIONS = 'coverage=1'
   vim.env.CTEST_OUTPUT_ON_FAILURE = '1'
 
-  local old_errorformat = vim.o.errorformat
-  vim.o.errorformat = ''
+  local errorformat = ''
       .. '%.%#: %f:%l: %m' -- C/C++ assertions
       .. ',%Z[%.%#] %m'
       .. ',%C%m'
@@ -119,9 +120,51 @@ local function ctest_gtest(suite, case)
       .. ',%A%f:%l: %t%*[^:]:\\ %m' -- doctest: assertions, ...
       .. ',%A%f:%l: %t%.%#'         -- gtest: assertions, ...
       .. ',%EFAIL: %f'              -- gtest segault, exceptions, ...
-  ctest()
-  vim.o.errorformat = old_errorformat
+  ctest(errorformat)
 end
 vim.keymap.set('n', '<Leader>yy', ctest_gtest)
 vim.keymap.set('n', '<Leader>yf', function() ctest_gtest(select(1, gtest_context()), '*') end)
 vim.keymap.set('n', '<Leader>yt', function() ctest_gtest(gtest_context()) end)
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "ruby" },
+  callback = function()
+    local function minitest()
+      run_in_testbuf(function()
+        local errorformat = ''
+          ..  '%.%#: %f:%l: %tarning %m'
+          .. ',%[%^/]%#%f:%l: %tarning: %m'
+          .. ',%.%#: %f:%l: %m%trror)'
+          .. ',%[%^/]%#%f:%l: %m%trror)'
+          .. ',%A%[ ]%#%n) %tailure:'
+          .. ',%C%.%##%m [%f:%l]:'
+          .. ',%C%m but nothing was raised.'
+          .. ',%CExpected %m'
+          .. ',%C[%m'
+          .. ',%CClass: <%m>'
+          .. ',%CMessage: %m'
+          .. ',%A%[ ]%#%l) %trror:'
+          .. ',%C%f#%m:'
+          .. ''
+          .. ',%-Z---Backtrace---' --backtrace lines as new general info
+          .. ',%-G------%.%#'
+          .. ',%[[:space:]]%#from %f:%l:%m'
+          .. ',%[[:space:]]%#%f:%l:%m'
+          .. ',%Z'
+          .. ''
+          .. ',%-G'
+          .. ',%-G# Running:'
+          .. ',%-Grake aborted!'
+          .. ',%-GCommand failed with status (%.%#'
+          .. ',%-G/usr%.%#lib:test" -I%.%#'
+          .. ',%-GTasks: %.%#'
+          .. ',%-G(See full trace by running task with --trace)'
+          .. ''
+          .. ',%C%m'
+          .. ',%C%p'
+        make_with('ruby ' .. vim.api.nvim_buf_get_name(0) .. ' -v', errorformat)
+      end)
+    end
+    vim.keymap.set('n', '<Leader>yf', minitest)
+  end
+})
