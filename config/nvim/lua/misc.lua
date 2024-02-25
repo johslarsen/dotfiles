@@ -15,6 +15,7 @@ vim.opt.spelllang = "en_us"
 
 vim.opt.nrformats = "hex,alpha"
 vim.opt.joinspaces = false
-vim.opt.listchars= "eol:$,tab:>-,nbsp:%,precedes:<,extends:>"
+vim.opt.list = true
+vim.opt.listchars = "trail:#"
 
 vim.opt.completeopt = "menu,noinsert,popup"
