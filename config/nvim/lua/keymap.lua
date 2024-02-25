@@ -120,7 +120,7 @@ vim.keymap.set('n', '<C-e>', '<cmd>:buffer #<CR>')
 vim.keymap.set('n', '<C-Up>', 'gk')
 vim.keymap.set('n', '<C-Down>', 'gj')
 
-vim.keymap.set('n', '<S-Space>', vim.diagnostic.open_float)
+vim.keymap.set({ 'n', 'i' }, '<A-Space>', vim.diagnostic.open_float)
 vim.keymap.set('n', '[i', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']i', vim.diagnostic.goto_next)
 
