@@ -68,7 +68,7 @@ extbrowser2
 extbrowser /usr/bin/mozilla
 mailer
 mailto_options 1
-editor vim
+editor nvim
 urimethodmap ~/.w3m//urimethodmap, /etc/w3m/urimethodmap
 mailcap ~/.w3m/mailcap, /etc/w3m/mailcap, /etc/mailcap
 mime_types ~/.w3m/mime.types, /etc/mime.types

@@ -50,9 +50,6 @@
     keepBackup = false
     keepTemporaries = false
 
-[mergetool.vim]
-    cmd = vim '+Gvdiffsplit!' $MERGED
-
 
 [pretty]
     r = %C(yellow)%h %C(cyan)%ai %C(magenta)%aE %C(green)%s
@@ -131,7 +128,7 @@
     rba = rebase --abort
     rbc = rebase --continue
     rbf = rebase -i --autosquash
-    rbm = -c sequence.editor='vim -c :%s/^f/p/e -c %s/^s/p/e' rebase -i --autosquash
+    rbm = -c sequence.editor='nvim -c :%s/^f/p/e -c %s/^s/p/e' rebase -i --autosquash
     p = cherry-pick
     pa = cherry-pick --abort
     pc = cherry-pick --continue

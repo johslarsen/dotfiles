@@ -80,7 +80,7 @@ user_pref("security.dialog_enable_delay", 0);
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 user_pref("security.tls.version.min", 1);
 user_pref("signon.rememberSignons", false);
-user_pref("view_source.editor.args", "-e vim");
+user_pref("view_source.editor.args", "-e nvim");
 user_pref("view_source.editor.external", true);
 user_pref("view_source.editor.path", "/usr/bin/xterm");
 EOF

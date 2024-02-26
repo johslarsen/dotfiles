@@ -1,4 +1,4 @@
 #!/bin/bash -
 openscad "$1" &>/dev/null &
-vim "$1"
+nvim "$1"
 kill %1

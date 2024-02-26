@@ -4,11 +4,11 @@ grandparent=$(cut -d' ' -f 4 /proc/$PPID/stat)
 if [ $grandparent -eq 1 ] && [[ "$DISPLAY" ]]; then # spawned directly by the window manager (at least for dmenu
     name+="${SUFFIX:-.md}"
     touch "$name" # to reserve the name
-    xterm -e vim -c 'startinsert' "$name"
+    xterm -e nvim -c 'startinsert' "$name"
 elif [ -t 0 ] && [ -t 1 ]; then
     name+="${SUFFIX:-.md}"
     touch "$name" # to reserve the name
-    vim -c 'startinsert' "$name"
+    nvim -c 'startinsert' "$name"
 else
     name+="${SUFFIX:-.log}"
     cat > "$name"

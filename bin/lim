@@ -1,2 +1,2 @@
 #!/bin/bash -
-vim -c 'call Theme("light")' "$@"
+nvim -c 'call Theme("light")' "$@"

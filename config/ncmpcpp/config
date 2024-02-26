@@ -16,7 +16,7 @@ display_bitrate =              "yes"
 
 default_find_mode =            "wrapped"
 
-external_editor =              "vim"
+external_editor =              "nvim"
 use_console_editor =           "yes"
 
 lyrics_fetchers =              "azlyrics, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet"
