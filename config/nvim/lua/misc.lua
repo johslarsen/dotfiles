@@ -16,14 +16,18 @@ vim.opt.spelllang = "en_us"
 vim.opt.nrformats = "hex,alpha"
 vim.opt.joinspaces = false
 
+local trail = "trail:#,tab:  " -- needs spaces for tab to avoid it written as ^I
 vim.opt.list = true
-vim.opt.listchars = "trail:#"
+vim.opt.listchars = trail
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
   callback = function() vim.wo.listchars = vim.o.listchars:gsub('trail:#', 'trail: ') end
 })
 vim.api.nvim_create_autocmd({ "InsertLeavePre" }, {
   callback = function() vim.wo.listchars = nil end
 })
+vim.keymap.set('n', '<Leader>L', function()
+  vim.opt.listchars = vim.o.listchars == trail and 'eol:$,tab:>-,nbsp:%,precedes:<,extends:>,trail:#' or trail
+end)
 
 vim.opt.completeopt = "menu,noinsert,popup"
 

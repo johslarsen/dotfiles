@@ -34,9 +34,6 @@ vim.keymap.set('x', '<Leader>if', "gqgv")      -- fallback, ISP overrides this i
 vim.keymap.set('n', '<Leader>io', "<cmd>Outline<CR>")
 vim.keymap.set('n', '<Leader>iQ', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>K', delete_man_buffers)
-vim.keymap.set('n', '<Leader>L', function()
-  vim.opt.listchars = vim.o.listchars == 'trail:#' and 'eol:$,tab:>-,nbsp:%,precedes:<,extends:>,trail:#' or 'trail:#'
-end)
 vim.keymap.set('n', '<Leader><C-l>', function() vim.opt.spelllang = vim.o.spelllang == "en_us" and "nb" or "en_us" end)
 vim.keymap.set('n', '<Leader>m', function() vim.cmd("Make -j" .. vim.g.nproc) end)
 vim.keymap.set('n', '<Leader>M', ":Make -j<C-r>=g:nproc<CR><Space>")
