@@ -96,16 +96,18 @@ end
 local function ctest(errorformat)
   local makeprg = vim.env.BUILD_IMAGE ~= nil and 'dtest ' .. vim.env.BUILD_IMAGE or 'ctest --test-dir build'
   if (vim.env.CTEST_FILTER ~= nil) then
-    makeprg = makeprg .. ' -R ' .. vim.fn.shellescape(vim.env.CTEST_FILTER)
-  elseif (vim.env.GTEST_FILTER ~= nil) then
-    makeprg = makeprg .. ' -R ' .. vim.fn.shellescape(vim.env.GTEST_FILTER:gsub("[*]", ".*"))
+    local suite = vim.env.TEST_SUITE:gsub('[*]', '.*')
+    local case = vim.env.TEST_CASE:gsub('[*]', '.*')
+    local filter = vim.env.CTEST_FILTER:gsub('#s', suite):gsub('#c', case)
+    makeprg = makeprg .. ' -R ' .. vim.fn.shellescape(filter)
   end
   make_with(makeprg, errorformat)
 end
 
+local original_test_suite = vim.env.TEST_SUITE
 local function ctest_gtest(suite, case)
-  vim.env.TEST_SUITE = suite or '*' -- doctest
-  vim.env.TEST_CASE = case or '*'   -- doctest
+  vim.env.TEST_SUITE = suite or original_test_suite or '*' -- doctest
+  vim.env.TEST_CASE = case or '*'                         -- doctest
 
   -- '*' in the middle to support '/<N>' part of TYPED_TESTs names
   vim.env.GTEST_FILTER = vim.env.TEST_SUITE .. '*.' .. vim.env.TEST_CASE
