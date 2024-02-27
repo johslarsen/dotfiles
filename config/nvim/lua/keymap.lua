@@ -85,6 +85,7 @@ vim.keymap.set('n', 'ææ', ']]', { remap = true })
 
 vim.keymap.set('n', '<CR>', '<C-]>', { remap = true }) -- enter as goto
 vim.keymap.set('n', '<Space>', '<C-f>')                -- space as page down, like less
+vim.keymap.set({ '', 'i', 'c' }, ' ', ' ')             -- nbsp = space
 
 local function preview_window()
   for _, winid in ipairs(vim.api.nvim_list_wins()) do
