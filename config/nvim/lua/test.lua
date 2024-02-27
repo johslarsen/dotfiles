@@ -106,7 +106,9 @@ end
 local function ctest_gtest(suite, case)
   vim.env.TEST_SUITE = suite or '*' -- doctest
   vim.env.TEST_CASE = case or '*'   -- doctest
-  vim.env.GTEST_FILTER = vim.env.TEST_SUITE .. '.' .. vim.env.TEST_CASE
+
+  -- '*' in the middle to support '/<N>' part of TYPED_TESTs names
+  vim.env.GTEST_FILTER = vim.env.TEST_SUITE .. '*.' .. vim.env.TEST_CASE
 
   vim.env.GTEST_COLOR = '0' -- causes problems in output
   vim.env.ASAN_OPTIONS = 'coverage=1'
