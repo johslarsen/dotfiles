@@ -135,13 +135,14 @@
 
     refs = !set -o pipefail && git reflog --color | fzf-tmux +s -m --layout reverse --ansi --preview-window=down --preview 'git ps --color {1}' | cut -d' ' -f1
 
-    ffs = !r=`gitf` && git merge --ff-only $r
-    rbs = !r=`gitf` && git rebase -i $r
-    rbfs = !r=`gitf` && git rebase -i --autosquash $r
-    resets = !r=`gitf` && git reset $r
-    reseth = !r=`gitf` && git reset --hard $r
-    resetr = !r=`git refs` && git reset --hard $r
-    picks = !rs=`gitf` && git cherry-pick $rs
+    # `&& printf ""` to make silently ignore further arguments given from CLI, instead of having them apply in addition to the selected ones
+    ffs = !r=( `gitf` ) && git merge --ff-only "${r[@]}" && printf ""
+    rbs = !r=( `gitf` ) && git rebase -i "${r[@]}" && printf ""
+    rbfs = !r=( `gitf` ) && git rebase -i --autosquash "${r[@]}" && printf ""
+    resets = !r=( `gitf` ) && git reset "${r[@]}" && printf ""
+    reseth = !r=( `gitf` ) && git reset --hard "${r[@]}" && printf ""
+    resetr = !r=( `git refs` ) && git reset --hard "${r[@]}" && printf ""
+    picks = !rs=( `gitf` ) && git cherry-pick "${rs[@]}" && printf ""
 
     big = bisect good
     bib = bisect bad
@@ -152,9 +153,9 @@
 
     rclone = clone --recurse-submodules
     co = checkout
-    cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
-    cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'`
-    coc = !git checkout `gitf`
+    cos = !git checkout `git branch | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'` && printf ""
+    cosa = !git checkout `git branch -a | grep -v '^*'| awk '{print $1}' | fzf --preview 'git rcl -n$LINES {}'` && printf ""
+    coc = !git checkout `gitf`  && printf ""
 
     smaster = submodule foreach --recursive git checkout master
     spull = submodule foreach --recursive git rpull
