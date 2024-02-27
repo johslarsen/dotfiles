@@ -107,7 +107,7 @@ end
 local original_test_suite = vim.env.TEST_SUITE
 local function ctest_gtest(suite, case)
   vim.env.TEST_SUITE = suite or original_test_suite or '*' -- doctest
-  vim.env.TEST_CASE = case or '*'                         -- doctest
+  vim.env.TEST_CASE = case or '*'                          -- doctest
 
   -- '*' in the middle to support '/<N>' part of TYPED_TESTs names
   vim.env.GTEST_FILTER = vim.env.TEST_SUITE .. '*.' .. vim.env.TEST_CASE
@@ -136,36 +136,36 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     local function minitest()
       run_in_testbuf(function()
         local errorformat = ''
-          ..  '%.%#: %f:%l: %tarning %m'
-          .. ',%[%^/]%#%f:%l: %tarning: %m'
-          .. ',%.%#: %f:%l: %m%trror)'
-          .. ',%[%^/]%#%f:%l: %m%trror)'
-          .. ',%A%[ ]%#%n) %tailure:'
-          .. ',%C%.%##%m [%f:%l]:'
-          .. ',%C%m but nothing was raised.'
-          .. ',%CExpected %m'
-          .. ',%C[%m'
-          .. ',%CClass: <%m>'
-          .. ',%CMessage: %m'
-          .. ',%A%[ ]%#%l) %trror:'
-          .. ',%C%f#%m:'
-          .. ''
-          .. ',%-Z---Backtrace---' --backtrace lines as new general info
-          .. ',%-G------%.%#'
-          .. ',%[[:space:]]%#from %f:%l:%m'
-          .. ',%[[:space:]]%#%f:%l:%m'
-          .. ',%Z'
-          .. ''
-          .. ',%-G'
-          .. ',%-G# Running:'
-          .. ',%-Grake aborted!'
-          .. ',%-GCommand failed with status (%.%#'
-          .. ',%-G/usr%.%#lib:test" -I%.%#'
-          .. ',%-GTasks: %.%#'
-          .. ',%-G(See full trace by running task with --trace)'
-          .. ''
-          .. ',%C%m'
-          .. ',%C%p'
+            .. '%.%#: %f:%l: %tarning %m'
+            .. ',%[%^/]%#%f:%l: %tarning: %m'
+            .. ',%.%#: %f:%l: %m%trror)'
+            .. ',%[%^/]%#%f:%l: %m%trror)'
+            .. ',%A%[ ]%#%n) %tailure:'
+            .. ',%C%.%##%m [%f:%l]:'
+            .. ',%C%m but nothing was raised.'
+            .. ',%CExpected %m'
+            .. ',%C[%m'
+            .. ',%CClass: <%m>'
+            .. ',%CMessage: %m'
+            .. ',%A%[ ]%#%l) %trror:'
+            .. ',%C%f#%m:'
+            .. ''
+            .. ',%-Z---Backtrace---' --backtrace lines as new general info
+            .. ',%-G------%.%#'
+            .. ',%[[:space:]]%#from %f:%l:%m'
+            .. ',%[[:space:]]%#%f:%l:%m'
+            .. ',%Z'
+            .. ''
+            .. ',%-G'
+            .. ',%-G# Running:'
+            .. ',%-Grake aborted!'
+            .. ',%-GCommand failed with status (%.%#'
+            .. ',%-G/usr%.%#lib:test" -I%.%#'
+            .. ',%-GTasks: %.%#'
+            .. ',%-G(See full trace by running task with --trace)'
+            .. ''
+            .. ',%C%m'
+            .. ',%C%p'
         make_with('ruby ' .. vim.api.nvim_buf_get_name(0) .. ' -v', errorformat)
       end)
     end

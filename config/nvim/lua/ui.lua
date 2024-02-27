@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, { callback = function() vim.cmd.n
 
 vim.opt.previewheight = 5
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function ()
+  callback = function()
     if vim.o.previewwindow then
       vim.opt.cursorline = true
       vim.opt.cursorcolumn = true
