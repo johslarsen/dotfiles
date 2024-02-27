@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
 
   use 'sjl/badwolf'
   use 'altercation/vim-colors-solarized'
+  use 'guns/xterm-color-table.vim'
 
   use 'chrisbra/csv.vim'
 
