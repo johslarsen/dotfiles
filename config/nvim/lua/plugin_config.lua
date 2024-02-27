@@ -46,6 +46,8 @@ require 'outline'.setup {
   },
 }
 
+vim.g.dispatch_no_maps = true
+vim.g.dispatch_no_tmux_make = true
 
 vim.g.gitgutter_diff_args = '-w'
 vim.g.gitgutter_escape_grep = 1

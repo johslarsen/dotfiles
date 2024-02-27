@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     if vim.env.BUILD_IMAGE then
       vim.opt.makeprg = "dmake " .. vim.env.BUILD_IMAGE
     elseif vim.fn.filereadable('build') then
-      vim.opt.makeprg = "cmake --build build --"
+      vim.opt.makeprg = "bash -c 'cmake --build build -- \"$@\"' -- "
     end
   end
 })
