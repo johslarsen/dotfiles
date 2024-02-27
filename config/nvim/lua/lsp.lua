@@ -14,13 +14,15 @@ local function on_attach(client, bufnr)
   vim.keymap.set("n", "<Leader>id", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "<Leader>iD", pedit_definition, bufopts)
   vim.keymap.set("n", "<Leader>i<C-d>", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "<Leader>if", function() vim.lsp.buf.format { async = true } end, bufopts)
-  vim.keymap.set("x", "<Leader>if", function()
-    vim.lsp.buf.format({
-      async = true,
-      range = { ["start"] = vim.api.nvim_buf_get_mark(0, "<"), ["end"] = vim.api.nvim_buf_get_mark(0, ">") }
-    })
-  end, bufopts)
+  if client.server_capabilities.documentFormattingProvider then
+    vim.keymap.set("n", "<Leader>if", function() vim.lsp.buf.format { async = true } end, bufopts)
+    vim.keymap.set("x", "<Leader>if", function()
+      vim.lsp.buf.format({
+        async = true,
+        range = { ["start"] = vim.api.nvim_buf_get_mark(0, "<"), ["end"] = vim.api.nvim_buf_get_mark(0, ">") }
+      })
+    end, bufopts)
+  end
   vim.keymap.set("n", "<Leader>ii", "<cmd>LspInfo<CR>", bufopts)
   vim.keymap.set("n", "<Leader>ih", function()
     vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))

@@ -29,6 +29,8 @@ vim.keymap.set('n', '<Leader>G', function() fzf.grep_cword({ cmd = "git grep" })
 vim.keymap.set('v', '<Leader>G', function() fzf.grep_visual({ cmd = "git grep" }) end)
 vim.keymap.set('n', '<Leader><C-g>', fzf.grep_cword)
 vim.keymap.set('v', '<Leader><C-g>', fzf.grep_visual)
+vim.keymap.set('n', '<Leader>if', "mfgggqG`f") -- fallback, ISP overrides this if it is capable
+vim.keymap.set('x', '<Leader>if', "gqgv")      -- fallback, ISP overrides this if it is capable
 vim.keymap.set('n', '<Leader>io', "<cmd>Outline<CR>")
 vim.keymap.set('n', '<Leader>iQ', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>K', delete_man_buffers)
