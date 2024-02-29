@@ -31,5 +31,8 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip', option = { show_autosnippets = true } },
+    { name = 'buffer' },
+    { name = 'calc' },
+    { name = 'path' },
   },
 }
