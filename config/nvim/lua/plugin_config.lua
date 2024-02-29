@@ -2,6 +2,12 @@ require 'fzf-lua'.setup {
   'max-perf',
   winopts = { split = "belowright new" },
   fzf_opts = { ["--layout"] = "default" },
+  keymap = {
+    fzf = {
+      ["alt-w"] = "toggle-preview-wrap",
+      ["alt-z"] = "toggle-preview",
+    }
+  }
 }
 require 'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown" },
