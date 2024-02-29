@@ -14,8 +14,12 @@ vim.opt.showmode = false -- keep info when cmdline is not in use
 
 vim.opt.updatetime = 300 -- speed up CursorHold feedback
 
--- jump to previous position
-vim.api.nvim_create_autocmd({ "BufReadPost" }, { callback = function() vim.cmd.normal('`"') end })
+vim.api.nvim_create_autocmd({ "BufReadPost" }, { -- jump to previous position
+  callback = function()
+    local previous = vim.api.nvim_buf_get_mark(0, '"')
+    pcall(vim.api.nvim_win_set_cursor, 0, previous)
+  end
+})
 
 vim.opt.previewheight = 5
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
