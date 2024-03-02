@@ -6,7 +6,14 @@ require 'fzf-lua'.setup {
     ["--color"] = "dark",
     ["--layout"] = "default",
   },
-  --winopts = { split = "belowright new" }, -- currently not compatible with fzf-tmux
+  winopts = {
+    -- split = "belowright new" , -- currently not compatible with fzf-tmux
+    preview = {
+      horizontal = "right:50%",
+      layout = "flex",
+      flip_columns = 160,
+    },
+  },
   keymap = {
     fzf = {
       ["alt-a"]      = "toggle-all",
