@@ -149,7 +149,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm.|.controlMask            .|.altMask, xK_q     ), io (exitWith ExitSuccess)) -- Quit xmonad
 
     , ((modm                                    , xK_Print ), spawn "scrot ~/img/%Y-%m-%dT%H:%M:%S.png") -- screenshot
-    , ((modm              .|.shiftMask          , xK_Print ), spawn "sleep 0.2; scrot -s ~/img/%Y-%m-%dT%H:%M:%S.png") -- screenshot for window clicked on
+    , ((modm.|.controlMask                      , xK_Print ), spawn "sleep 0.2; scrot -s ~/img/%Y-%m-%dT%H:%M:%S.png") -- screenshot for window clicked on
 
     , ((modm                          .|.altMask, xK_m     ), spawn "synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") -- toggle touchpad
 
