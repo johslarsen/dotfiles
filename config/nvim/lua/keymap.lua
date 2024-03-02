@@ -39,8 +39,12 @@ vim.keymap.set('n', '<Leader><C-g>', fzf.grep_cword)
 vim.keymap.set('v', '<Leader><C-g>', fzf.grep_visual)
 vim.keymap.set('n', '<Leader>if', "mfgggqG`f") -- fallback, ISP overrides this if it is capable
 vim.keymap.set('x', '<Leader>if', "gqgv")      -- fallback, ISP overrides this if it is capable
+vim.keymap.set("n", "<Leader>iG", '<cmd>GitGutterQuickFix<CR><cmd>lopen<CR>')
+vim.keymap.set("n", "<Leader>i<C-g>", '<cmd>GitGutterQuickFixCurrentFile<CR><cmd>lopen<CR>')
 vim.keymap.set('n', '<Leader>io', "<cmd>Outline<CR>")
-vim.keymap.set('n', '<Leader>iQ', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<Leader>iQ', fzf.diagnostics_document)
+vim.keymap.set('n', '<Leader>i<C-q>', fzf.diagnostics_workspace)
+vim.keymap.set('n', '<Leader>iW', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>K', delete_man_buffers)
 vim.keymap.set('n', '<Leader><C-k>', fzf.man_pages)
 vim.keymap.set('n', '<Leader><C-l>', function() vim.opt.spelllang = vim.o.spelllang == "en_us" and "nb" or "en_us" end)
@@ -187,6 +191,8 @@ vim.keymap.set('n', ']i', vim.diagnostic.goto_next)
 
 vim.keymap.set('n', '[g', '<Plug>(GitGutterPrevHunk)')
 vim.keymap.set('n', ']g', '<Plug>(GitGutterNextHunk)')
+vim.keymap.set('n', '{G', '[n', { remap = true }) -- goto next conflict marker vim-unimpaired have
+vim.keymap.set('n', '}G', ']n', { remap = true }) -- mappings for this, but I never remember where
 vim.keymap.set('o', 'ih', '<Plug>(GitGutterTextObjectInnerPending)')
 vim.keymap.set('o', 'ah', '<Plug>(GitGutterTextObjectOuterPending)')
 vim.keymap.set('x', 'ih', '<Plug>(GitGutterTextObjectInnerVisual)')

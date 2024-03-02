@@ -82,5 +82,6 @@ vim.g.gitgutter_diff_args = '-w'
 vim.g.gitgutter_escape_grep = 1
 vim.g.gitgutter_map_keys = 0
 vim.g.gitgutter_sign_priority = 5
+vim.g.gitgutter_use_location_list = true
 
 vim.g.gundo_prefer_python3 = true
