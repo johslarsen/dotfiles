@@ -10,9 +10,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.title = true
-vim.opt.showmode = false -- keep info when cmdline is not in use
+vim.opt.showmode = false                         -- keep info when cmdline is not in use
 
-vim.opt.updatetime = 300 -- speed up CursorHold feedback
+vim.opt.updatetime = 300                         -- speed up CursorHold feedback
 
 vim.api.nvim_create_autocmd({ "BufReadPost" }, { -- jump to previous position
   callback = function()

@@ -7,22 +7,20 @@ require 'fzf-lua'.setup {
   fzf_opts = { ["--layout"] = "default" },
   keymap = {
     fzf = {
-      ["alt-a"] = "toggle-all",
-      ["alt-w"] = "toggle-preview-wrap",
-      ["alt-z"] = "toggle-preview",
-      ["ctrl-f"]      = "half-page-down",
-      ["ctrl-b"]      = "half-page-up",
-      ["shift-down"]  = "preview-page-down",
-      ["shift-up"]    = "preview-page-up",
+      ["alt-a"]      = "toggle-all",
+      ["alt-w"]      = "toggle-preview-wrap",
+      ["alt-z"]      = "toggle-preview",
+      ["ctrl-f"]     = "half-page-down",
+      ["ctrl-b"]     = "half-page-up",
+      ["shift-down"] = "preview-page-down",
+      ["shift-up"]   = "preview-page-up",
     }
   },
   previewers = {
     man_native = { cmd = "man %s | bat -l man -p --color=always" },
   },
   helptags = {
-    fzf_opts = {
-      ["--tiebreak"] = "begin,length,index",
-    }
+    fzf_opts = { ["--tiebreak"] = "begin,length,index" }
   }
 }
 require 'nvim-treesitter.configs'.setup {
