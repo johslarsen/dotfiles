@@ -13,7 +13,7 @@ if [[ "$TMUX" ]]; then
     [[ "$session" =~ ^[0-9]+$ ]] && session=""
     [[ "$session" ]] && [[ "$session" != "work" ]] && name+=-${session// /_}
     window=$(tmux display -p '#{window_name}')
-    [[ "$window" ]] && [[ "$window" != "bash" ]] && name+=-${window// /_}
+    [[ "$window" ]] && [[ "$window" != "bash" ]] && [[ "$window" != "ruby" ]] && name+=-${window// /_}
 fi
 title="$*"
 [[ "$title" ]] && name+=-"${title// /_}"
