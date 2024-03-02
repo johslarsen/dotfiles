@@ -1,10 +1,12 @@
 require 'fzf-lua'.setup {
-  'native',
-  winopts = {
-    preview = { default = "bat" },
-    split = "belowright new"
+  'fzf-tmux',
+  fzf_tmux_opts = { ["-d"] = "30%" },
+  fzf_opts = {
+    ["--border"] = "none",
+    ["--color"] = "dark",
+    ["--layout"] = "default",
   },
-  fzf_opts = { ["--layout"] = "default" },
+  --winopts = { split = "belowright new" }, -- currently not compatible with fzf-tmux
   keymap = {
     fzf = {
       ["alt-a"]      = "toggle-all",
