@@ -15,8 +15,12 @@ vim.g.nproc = tonumber(vim.fn.system('nproc'))
 
 vim.keymap.set('n', '<Leader>b', fzf.buffers)
 vim.keymap.set('n', '<Leader>d', "<cmd>Git blame<CR>")
-vim.keymap.set('n', '<Leader>D', "<cmd>Gvdiffsplit<CR>")
-vim.keymap.set('n', '<Leader><C-d>', "<cmd>Ghdiffsplit<CR>")
+vim.keymap.set('n', '<Leader>D', function()
+  return "<cmd>Gvdiffsplit HEAD~" .. vim.v.count .. "<CR>"
+end, { expr = true })
+vim.keymap.set('n', '<Leader><C-d>', function()
+  return "<cmd>Ghdiffsplit HEAD~" .. vim.v.count .. "<CR>"
+end, { expr = true })
 vim.keymap.set('n', '<Leader>e', "<cmd>Explore<CR>")
 vim.keymap.set('n', '<Leader>E', "<cmd>Vexplore<CR>")
 vim.keymap.set('n', '<Leader><C-e>', "<cmd>Sexplore<CR>")
