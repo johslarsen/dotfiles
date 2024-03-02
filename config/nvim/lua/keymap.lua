@@ -110,18 +110,34 @@ local function preview_window()
   end
   return nil
 end
+local function flagged_window(flag)
+  if vim.fn.getwininfo(vim.api.nvim_get_current_win())[1][flag] == 1 then
+    return vim.api.nvim_get_current_win() -- prioritize the focused window if it matches
+  end
+  for _, winid in ipairs(vim.api.nvim_list_wins()) do
+    if vim.fn.getwininfo(winid)[1][flag] == 1 then
+      return winid
+    end
+  end
+  return nil
+end
+
 local function pedit_qf_entry(getqflist, idx)
   local items = getqflist({ idx = idx, items = 1 }).items[1]
   local preview = preview_window()
-  if preview ~= nil and vim.api.nvim_win_get_buf(preview) == items.bufnr then -- do not reload it unnecessarily
+  if false and preview ~= nil and vim.api.nvim_win_get_buf(preview) == items.bufnr then -- do not reload it unnecessarily
     vim.api.nvim_win_set_cursor(preview, { items.lnum, items.col })
   else
     vim.cmd("pedit +:call\\ cursor(" .. items.lnum .. "," .. items.col .. ") " .. vim.api.nvim_buf_get_name(items.bufnr))
   end
 end
+local function current_loclist(what)
+  print(flagged_window("loclist"))
+  return vim.fn.getloclist(flagged_window("loclist") or 0, what)
+end
 local function pedit_focused_qf_entry()
   local loclist = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].loclist == 1
-  pedit_qf_entry(loclist and vim.fn.getloclist or vim.fn.getqflist, vim.fn.line('.'))
+  pedit_qf_entry(loclist and current_loclist or vim.fn.getqflist, vim.fn.line('.'))
 end
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "qf",
@@ -130,22 +146,30 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.keymap.set('n', '<Space>', pedit_focused_qf_entry)
   end,
 })
-local function preview_diagnostic(getqflist, step, reset)
+local function preview_diagnostic(winid, getqflist, step, reset)
   local preview = preview_window()
   if preview == nil then
     pedit_qf_entry(getqflist, getqflist({ idx = 0 }).idx)
     preview = preview_window()
     if preview == nil then return end -- just to satisfy lsp-linter
   end
-  if not select(1, pcall(vim.api.nvim_win_call, preview, step)) then
-    vim.api.nvim_win_call(preview, reset)
+  if not select(1, pcall(vim.api.nvim_win_call, winid, step)) then
+    vim.api.nvim_win_call(winid, reset)
   end
   pedit_qf_entry(getqflist, getqflist({ idx = 0 }).idx)
 end
-vim.keymap.set('n', '{Q', function() preview_diagnostic(vim.fn.getqflist, vim.cmd.cprev, vim.cmd.clast) end)
-vim.keymap.set('n', '}Q', function() preview_diagnostic(vim.fn.getqflist, vim.cmd.cnext, vim.cmd.cfirst) end)
-vim.keymap.set('n', '{L', function() preview_diagnostic(vim.fn.getloclist, vim.cmd.lprev, vim.cmd.llast) end)
-vim.keymap.set('n', '}L', function() preview_diagnostic(vim.fn.getloclist, vim.cmd.lnext, vim.cmd.lfirst) end)
+vim.keymap.set('n', '{Q', function()
+  preview_diagnostic(flagged_window("quickfix") or 0, vim.fn.getqflist, vim.cmd.cprev, vim.cmd.clast)
+end)
+vim.keymap.set('n', '}Q', function()
+  preview_diagnostic(flagged_window("quickfix") or 0, vim.fn.getqflist, vim.cmd.cnext, vim.cmd.cfirst)
+end)
+vim.keymap.set('n', '{L', function()
+  preview_diagnostic(flagged_window("loclist") or 0, current_loclist, vim.cmd.lprev, vim.cmd.llast)
+end)
+vim.keymap.set('n', '}L', function()
+  preview_diagnostic(flagged_window("loclist") or 0, current_loclist, vim.cmd.lnext, vim.cmd.lfirst)
+end)
 
 vim.keymap.set('n', 'Y', 'y$') -- to be consistent with D/C
 
