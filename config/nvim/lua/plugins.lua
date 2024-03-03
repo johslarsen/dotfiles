@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-calc'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
+  use 'Leathong/openscad-LSP'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   --  use 'ray-x/lsp_signature.nvim'

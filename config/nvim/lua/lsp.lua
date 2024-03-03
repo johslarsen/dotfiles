@@ -81,6 +81,7 @@ lspconfig.lua_ls.setup(with_defaults {
   }
 })
 --lspconfig.neocmake.setup(with_defaults {})
+lspconfig.openscad_lsp.setup(with_defaults {})
 lspconfig.pylsp.setup(with_defaults {})
 lspconfig.rust_analyzer.setup(with_defaults {})
 lspconfig.salt_ls.setup(with_defaults {})
