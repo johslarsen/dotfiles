@@ -7,7 +7,7 @@ require 'fzf-lua'.setup {
     ["--layout"] = "default",
   },
   winopts = {
-    -- split = "belowright new" , -- currently not compatible with fzf-tmux
+    split = "belowright new",
     preview = {
       horizontal = "right:50%",
       layout = "flex",
