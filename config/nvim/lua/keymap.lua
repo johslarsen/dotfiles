@@ -11,6 +11,26 @@ local delete_man_buffers = function()
   end
 end
 
+local function preview_window()
+  for _, winid in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_get_option_value('previewwindow', { win = winid }) then
+      return winid
+    end
+  end
+  return nil
+end
+local function flagged_window(flag)
+  if vim.fn.getwininfo(vim.api.nvim_get_current_win())[1][flag] == 1 then
+    return vim.api.nvim_get_current_win() -- prioritize the focused window if it matches
+  end
+  for _, winid in ipairs(vim.api.nvim_list_wins()) do
+    if vim.fn.getwininfo(winid)[1][flag] == 1 then
+      return winid
+    end
+  end
+  return nil
+end
+
 vim.g.nproc = tonumber(vim.fn.system('nproc'))
 
 vim.keymap.set('n', '<Leader>b', fzf.buffers)
@@ -65,14 +85,16 @@ vim.keymap.set('n', '<Leader>Q', function()
   vim.cmd.cclose()
   fzf.quickfix({ only_valid = true })
 end)
-vim.keymap.set('n', '<Leader><C-q>', "<cmd>cclose<CR>")
+vim.keymap.set('n', '<Leader><C-q>', function()
+  if flagged_window("quickfix") then vim.cmd.cclose() else fzf.quickfix() end
+end)
 vim.keymap.set('n', '<Leader>r', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>')
 vim.keymap.set('v', '<Leader>r', '"vy:%s/<C-r>v//g<Left><Left>')
 vim.keymap.set('n', '<Leader>R', ':%s/\\<<C-r><C-a>\\>//g<Left><Left>')
+vim.keymap.set('n', '<Leader><C-r>', ':Dispatch rifle <C-r><C-p><CR>')
 vim.keymap.set('n', '<Leader>s', ':split ')
 vim.keymap.set('n', '<Leader>S', ':vs ')
 vim.keymap.set('n', '<Leader><C-s>', ':%s//gc<Left><Left><Left>')
-vim.keymap.set('n', '<Leader><C-r>', ':Dispatch rifle <C-r><C-p><CR>')
 vim.keymap.set('n', '<Leader>U', "<cmd>GundoToggle<CR>")
 vim.keymap.set('n', '<Leader>v', fzf.git_commits)
 vim.keymap.set('n', '<Leader>V', fzf.git_bcommits)
@@ -81,7 +103,9 @@ vim.keymap.set('n', '<Leader>W', function()
   vim.cmd.lclose()
   fzf.loclist({ only_valid = true })
 end)
-vim.keymap.set('n', '<Leader><C-w>', "<cmd>lclose<CR>")
+vim.keymap.set('n', '<Leader><C-w>', function()
+  if flagged_window("loclist") then vim.cmd.lclose() else fzf.loclist() end
+end)
 vim.keymap.set('n', '<Leader>7', function() vim.opt.colorcolumn = vim.o.colorcolumn == "73" and "-1" or "73" end)
 vim.keymap.set('n', '<Leader>8', function() vim.opt.colorcolumn = vim.o.colorcolumn == "81" and "-1" or "81" end)
 vim.keymap.set('n', '<Leader>%', '%<C-space>', { remap = true })
@@ -106,26 +130,6 @@ vim.keymap.set('n', '<CR>', '<C-]>', { remap = true }) -- enter as goto
 vim.keymap.set('n', '<Space>', '<C-f>')                -- space as page down, like less
 vim.keymap.set({ '', 'i', 'c' }, ' ', ' ')             -- nbsp = space
 
-local function preview_window()
-  for _, winid in ipairs(vim.api.nvim_list_wins()) do
-    if vim.api.nvim_get_option_value('previewwindow', { win = winid }) then
-      return winid
-    end
-  end
-  return nil
-end
-local function flagged_window(flag)
-  if vim.fn.getwininfo(vim.api.nvim_get_current_win())[1][flag] == 1 then
-    return vim.api.nvim_get_current_win() -- prioritize the focused window if it matches
-  end
-  for _, winid in ipairs(vim.api.nvim_list_wins()) do
-    if vim.fn.getwininfo(winid)[1][flag] == 1 then
-      return winid
-    end
-  end
-  return nil
-end
-
 local function pedit_qf_entry(getqflist, idx)
   local items = getqflist({ idx = idx, items = 1 }).items[1]
   local preview = preview_window()
@@ -136,7 +140,6 @@ local function pedit_qf_entry(getqflist, idx)
   end
 end
 local function current_loclist(what)
-  print(flagged_window("loclist"))
   return vim.fn.getloclist(flagged_window("loclist") or 0, what)
 end
 local function pedit_focused_qf_entry()
