@@ -59,8 +59,8 @@ vim.keymap.set('n', '<Leader><C-g>', fzf.grep_cword)
 vim.keymap.set('v', '<Leader><C-g>', fzf.grep_visual)
 vim.keymap.set('n', '<Leader>if', "mfgggqG`f") -- fallback, ISP overrides this if it is capable
 vim.keymap.set('x', '<Leader>if', "gqgv")      -- fallback, ISP overrides this if it is capable
-vim.keymap.set("n", "<Leader>iG", '<cmd>GitGutterQuickFix<CR><cmd>lopen<CR>')
-vim.keymap.set("n", "<Leader>i<C-g>", '<cmd>GitGutterQuickFixCurrentFile<CR><cmd>lopen<CR>')
+vim.keymap.set("n", "<Leader>ig", '<cmd>GitGutterQuickFix<CR><cmd>lopen<CR>')
+vim.keymap.set("n", "<Leader>iG", '<cmd>GitGutterQuickFixCurrentFile<CR><cmd>lopen<CR>')
 vim.keymap.set('n', '<Leader>io', "<cmd>Outline<CR>")
 vim.keymap.set('n', '<Leader>iQ', fzf.diagnostics_document)
 vim.keymap.set('n', '<Leader>i<C-q>', fzf.diagnostics_workspace)
