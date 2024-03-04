@@ -184,7 +184,9 @@ vim.keymap.set('n', 'Y', 'y$') -- to be consistent with D/C
 --  callback = function() vim.keymap.set('n', '%', '<Plug>(MatchitOperationForward)') end,
 --})
 
-vim.keymap.set('n', '<C-e>', '<cmd>:buffer #<CR>')
+vim.keymap.set('n', '<C-e>', '<cmd>:FzfLua registers<CR>')
+vim.keymap.set('i', '<C-e>', function() fzf.registers() end)
+
 vim.keymap.set('n', '<C-Up>', 'gk')
 vim.keymap.set('n', '<C-Down>', 'gj')
 
