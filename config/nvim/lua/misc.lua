@@ -15,6 +15,8 @@ vim.opt.spelllang = "en_us"
 
 vim.opt.nrformats = "hex,alpha"
 vim.opt.joinspaces = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 local trail = "trail:#,tab:  " -- needs spaces for tab to avoid it written as ^I
 vim.opt.list = true
