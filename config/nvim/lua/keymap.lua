@@ -185,7 +185,12 @@ vim.keymap.set('n', 'Y', 'y$') -- to be consistent with D/C
 --})
 
 vim.keymap.set('n', '<C-e>', '<cmd>:FzfLua registers<CR>')
-vim.keymap.set('i', '<C-e>', function() fzf.registers() end)
+vim.keymap.set('i', '<C-e>', function()
+  fzf.registers({actions = {["default"] = function(selected)
+    fzf.actions.paste_register(selected)
+    vim.cmd [[noautocmd lua vim.api.nvim_feedkeys('a', 'n', true)]]
+  end}})
+end)
 
 vim.keymap.set('n', '<C-Up>', 'gk')
 vim.keymap.set('n', '<C-Down>', 'gj')
