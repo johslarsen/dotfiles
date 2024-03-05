@@ -60,7 +60,7 @@ end
 local lspconfig = require('lspconfig')
 lspconfig.bashls.setup(with_defaults {})
 lspconfig.clangd.setup(with_defaults {
-  cmd = { "clangd", "--completion-style=detailed" }
+  cmd = { "clangd", "--completion-style=detailed", "--header-insertion=never" }
 })
 lspconfig.cmake.setup(with_defaults {})
 lspconfig.dockerls.setup(with_defaults {})
