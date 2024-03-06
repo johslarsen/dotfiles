@@ -30,10 +30,3 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     end
   end,
 })
-
-vim.api.nvim_create_autocmd({ "FileType"}, {
-  pattern = "markdown",
-  callback = function()
-    vim.cmd.TableModeEnable()
-  end,
-})

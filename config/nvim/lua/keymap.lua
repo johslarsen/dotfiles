@@ -109,6 +109,7 @@ end)
 vim.keymap.set('n', '<Leader>7', function() vim.opt.colorcolumn = vim.o.colorcolumn == "73" and "-1" or "73" end)
 vim.keymap.set('n', '<Leader>8', function() vim.opt.colorcolumn = vim.o.colorcolumn == "81" and "-1" or "81" end)
 vim.keymap.set('n', '<Leader>%', '%<C-space>', { remap = true })
+vim.keymap.set({ 'n', 'x' }, '<Leader>|', '<cmd>Tabularize /|<CR>')
 
 -- US mappings that would require AltGr on a Norwegian keyboard layout
 vim.keymap.set('n', '§', '~')
