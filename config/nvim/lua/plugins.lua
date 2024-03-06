@@ -50,6 +50,9 @@ return require('packer').startup(function(use)
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
 
+  use 'ixru/nvim-markdown'
+  use 'dhruvasagar/vim-table-mode'
+
   use 'sjl/gundo.vim' -- undo history
 
   if packer_bootstrap then
