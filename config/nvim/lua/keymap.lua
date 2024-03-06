@@ -108,7 +108,6 @@ vim.keymap.set('n', '<Leader><C-w>', function()
 end)
 vim.keymap.set('n', '<Leader>7', function() vim.opt.colorcolumn = vim.o.colorcolumn == "73" and "-1" or "73" end)
 vim.keymap.set('n', '<Leader>8', function() vim.opt.colorcolumn = vim.o.colorcolumn == "81" and "-1" or "81" end)
-vim.keymap.set('n', '<Leader>%', '%<C-space>', { remap = true })
 vim.keymap.set({ 'n', 'x' }, '<Leader>|', '<cmd>Tabularize /|<CR>')
 
 -- US mappings that would require AltGr on a Norwegian keyboard layout
@@ -181,16 +180,16 @@ end)
 
 vim.keymap.set('n', 'Y', 'y$') -- to be consistent with D/C
 
---vim.api.nvim_create_autocmd({ "VimEnter" }, {
---  callback = function() vim.keymap.set('n', '%', '<Plug>(MatchitOperationForward)') end,
---})
-
 vim.keymap.set('n', '<C-e>', '<cmd>:FzfLua registers<CR>')
 vim.keymap.set('i', '<C-e>', function()
-  fzf.registers({actions = {["default"] = function(selected)
-    fzf.actions.paste_register(selected)
-    vim.cmd [[noautocmd lua vim.api.nvim_feedkeys('a', 'n', true)]]
-  end}})
+  fzf.registers({
+    actions = {
+      ["default"] = function(selected)
+        fzf.actions.paste_register(selected)
+        vim.cmd [[noautocmd lua vim.api.nvim_feedkeys('a', 'n', true)]]
+      end
+    }
+  })
 end)
 
 vim.keymap.set('n', '<C-Up>', 'gk')
