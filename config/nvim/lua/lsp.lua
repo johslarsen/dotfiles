@@ -24,7 +24,7 @@ local function on_attach(client, bufnr)
     end, bufopts)
   end
   vim.keymap.set("n", "<Leader>ih", function()
-    vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
   end, bufopts)
   vim.keymap.set("n", "<Leader>ii", "<cmd>LspInfo<CR>", bufopts)
   vim.keymap.set("n", "<Leader>ik", vim.lsp.buf.signature_help, bufopts)
@@ -46,7 +46,7 @@ local function on_attach(client, bufnr)
   end, bufopts)
 
   if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint.enable(bufnr, true)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 end
 
