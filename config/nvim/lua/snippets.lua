@@ -80,3 +80,11 @@ ls.add_snippets("asciidoc", {
   s({ trig = "CSV table", desc = "https://docs.asciidoctor.org/asciidoc/latest/tables/data-format/#csv-and-tsv" },
     fmt('[format="csv",options="header"]\n|====\ninclude::{}[]\n|====\n\n', { i(1, "file.csv") })),
 })
+
+ls.add_snippets("openscad", {
+  -- Modifier Characters
+  s({ trig = "%", desc = "**Don't** render it, but draw it in **transparent grey**.\n\n[background modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Background_modifier)"}, fmt("%", {})),
+  s({ trig = "#", desc = "Draw in **transparent pink**.\n\n[debug modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Background_modifier)"}, fmt("#", {})),
+  s({ trig = "!", desc = "Ignore the rest of the model.\n\n[root modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Root_modifier)"}, fmt("!", {})),
+  s({ trig = "*", desc = "Ignore this subtree.\n\n[disable modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Disable_modifier)"}, fmt("*", {})),
+})
