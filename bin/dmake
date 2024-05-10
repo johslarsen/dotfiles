@@ -7,7 +7,7 @@ mnt="$PWD"
 run() {
     ccache=( -e CCACHE_DIR=/tmp/ccache -v "${CCACHE_DIR:-$HOME/.cache/ccache}:/tmp/ccache" )
     [[ "$CCACHE_SIZE" ]] && ccache+=( -e CCACHE_SIZE="$CCACHE_SIZE" )
-    docker run --rm --user=$UID:$(id -g $UID) -v "$PWD:$mnt" "${ccache[@]}" --env-file=<(env | grep -e CMAKE -e FLAGS -e CC -e CXX) "$image" "$@"
+    docker run --network=none --rm --user=$UID:$(id -g $UID) -v "$PWD:$mnt" "${ccache[@]}" --env-file=<(env | grep -e CMAKE -e FLAGS -e CC -e CXX) "$image" "$@"
 }
 
 if [ -d "$build" ]; then
