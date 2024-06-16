@@ -4,7 +4,7 @@ function when_killed() {
     brightnessctl -q s $old
     exit 0
 }
-trap when_killed INT KILL TERM
+trap when_killed INT TERM HUP EXIT
 
 while true; do
     brightnessctl -q s 1
