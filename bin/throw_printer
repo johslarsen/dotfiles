@@ -18,6 +18,7 @@ class Try(gdb.Command):
       pass
 Try()
 end
+set style enabled on
 set pagination off
 catch throw
 commands
@@ -27,7 +28,6 @@ commands
   echo throw:\n
   try print \$_exception
   try print ((std::exception*)obj)->what()
-  frame 1
   backtrace full
   continue
 end
@@ -35,9 +35,13 @@ catch catch
 commands
   silent
   echo \ncatch:\n
-  frame 1
+  backtrace full 2
   continue
 end
-run ${*:2}
 EOF
-gdb -batch -x "$dir/commands.gdb" "$1"
+
+if [[ "${1:0:1}" == "-" ]]; then # gdb args, assuming -p ...
+    gdb -batch -x "$dir/commands.gdb" -ex continue "$@"
+else
+    gdb -batch -x "$dir/commands.gdb" -ex run --args "$@"
+fi
