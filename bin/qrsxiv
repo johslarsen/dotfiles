@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require 'tmpdir'
+
+data = (ARGV.empty? ? $stdin.read : ARGV.join(" ")).chomp
+Dir.mktmpdir do |tmp|
+  system("qrencode", "-o", "#{tmp}/qr.png", "--", data) && system("sxiv", "#{tmp}/qr.png")
+end
