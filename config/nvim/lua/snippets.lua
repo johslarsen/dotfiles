@@ -83,8 +83,32 @@ ls.add_snippets("asciidoc", {
 
 ls.add_snippets("openscad", {
   -- Modifier Characters
-  s({ trig = "%", desc = "**Don't** render it, but draw it in **transparent grey**.\n\n[background modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Background_modifier)"}, fmt("%", {})),
-  s({ trig = "#", desc = "Draw in **transparent pink**.\n\n[debug modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Background_modifier)"}, fmt("#", {})),
-  s({ trig = "!", desc = "Ignore the rest of the model.\n\n[root modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Root_modifier)"}, fmt("!", {})),
-  s({ trig = "*", desc = "Ignore this subtree.\n\n[disable modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Disable_modifier)"}, fmt("*", {})),
+  s(
+    {
+      trig = "%",
+      desc =
+      "**Don't** render it, but draw it in **transparent grey**.\n\n[background modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Background_modifier)"
+    },
+    fmt("%", {})),
+  s(
+    {
+      trig = "#",
+      desc =
+      "Draw in **transparent pink**.\n\n[debug modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Background_modifier)"
+    },
+    fmt("#", {})),
+  s(
+    {
+      trig = "!",
+      desc =
+      "Ignore the rest of the model.\n\n[root modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Root_modifier)"
+    },
+    fmt("!", {})),
+  s(
+    {
+      trig = "*",
+      desc =
+      "Ignore this subtree.\n\n[disable modifier](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Modifier_Characters#Disable_modifier)"
+    },
+    fmt("*", {})),
 })

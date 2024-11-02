@@ -14,6 +14,12 @@ cmp.setup {
     ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
     ['<C-d>'] = cmp.mapping.scroll_docs(4),  -- Down
     ['<C-l>'] = cmp.mapping(select_and_confirm, { 'i', 's' }),
+    ['<C-x><C-x>'] = cmp.mapping.complete({ config = { sources = {
+      { name = 'luasnip', option = { show_autosnippets = true } },
+      { name = 'nvim_lsp', entry_filter = function(entry)
+        return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] == 'Snippet'
+      end },
+    } } }, { 'i', 's' }),
     ['<CR>'] = cmp.mapping(confirm, { 'i', 's' }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
