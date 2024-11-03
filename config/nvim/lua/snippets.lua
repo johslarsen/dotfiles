@@ -1,7 +1,20 @@
 local ls = require("luasnip")
+local decorators = require("decorators")
 local s = ls.snippet
+local sn = ls.snippet_node
+local c = ls.choice_node
+local d = ls.dynamic_node
 local i = ls.insert_node
+local t = ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt
+local rep = require("luasnip.extras").rep
+
+local di = function(nr, fn)
+  return d(nr, function()
+    local result = fn()
+    return sn(nil, i(1, result))
+  end)
+end
 
 local function hdesc(trig)
   return { trig = trig, desc = "https://docs.asciidoctor.org/asciidoc/latest/sections/titles-and-levels/", }
@@ -79,6 +92,39 @@ ls.add_snippets("asciidoc", {
     fmt("|====\n|{}|{}\n\n|{}|{}\n|====\n\n", { i(1, "Header A"), i(2, "B"), i(3, "1A"), i(4, "1B") })),
   s({ trig = "CSV table", desc = "https://docs.asciidoctor.org/asciidoc/latest/tables/data-format/#csv-and-tsv" },
     fmt('[format="csv",options="header"]\n|====\ninclude::{}[]\n|====\n\n', { i(1, "file.csv") })),
+})
+
+ls.add_snippets("cpp", {
+  s({ trig = "ns", desc = "namespace name {...}" },
+    fmt("namespace {} {{\n\n{}\n\n}}",
+      { di(1, decorators.namespace_from_file), i(2, "") })),
+  s({ trig = "qn", desc = "namespace::name" },
+    fmt("{}::{}", { di(1, decorators.namespace_from_file), i(2) })),
+  s({ trig = "qc", desc = "namespace::class::name" },
+    fmt("{}::{}", { di(1, decorators.qualified_class_from_file), di(2, decorators.class_from_file) })),
+  s({ trig = "cl", desc = "class name [: public super] {\n\tmembers\npublic:\n\t...\n}" },
+    fmt("class {} {}{{\n\t{}\npublic:\n\t{}\n}};",
+      { di(1, decorators.class_from_file),
+        c(2, { t(""), fmt(": public {} ", { i(1) }), fmt(": private {} ", { i(1) }) }),
+        i(3), i(4) })),
+  s({ trig = "ci", desc = "constructor" },
+    fmt("{}({}){}",
+      { di(1, decorators.class_from_line), i(2),
+        c(3, { fmt("{} {{{}}}", { i(1), i(2) }), t(" = default;"), t(";") }) })),
+  s({ trig = "cd", desc = "destructor" },
+    fmt("~{}() {}",
+      { di(1, decorators.class_from_line),
+        c(2, { fmt(" {{{}}}", { i(1) }), t(" = default;"), t(";") }) })),
+  s({ trig = "cc", desc = "copy constructor+assignment" },
+    fmt("{}(const {} &){}\n{} &operator=(const {} &){}",
+      { di(1, decorators.class_from_line), rep(1),
+        c(2, { t(" = default;"), fmt("{} {{{}}}", { i(1), i(2) }), t(";") }), rep(1), rep(1),
+        c(3, { t(" = default;"), fmt(" {{{}}}", { i(1) }) }) })),
+  s({ trig = "cm", desc = "move constructor+assignment" },
+    fmt("{}({} &&){}\n{} &operator=({} &&){}",
+      { di(1, decorators.class_from_line), rep(1),
+        c(2, { t(" = default;"), fmt("{} {{{}}}", { i(1), i(2) }), t(";") }), rep(1), rep(1),
+        c(3, { t(" = default;"), fmt(" {{{}}}", { i(1) }) }) })),
 })
 
 ls.add_snippets("openscad", {

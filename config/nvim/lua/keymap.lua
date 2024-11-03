@@ -65,6 +65,12 @@ vim.keymap.set('n', '<Leader>io', "<cmd>Outline<CR>")
 vim.keymap.set('n', '<Leader>iQ', fzf.diagnostics_document)
 vim.keymap.set('n', '<Leader>i<C-q>', fzf.diagnostics_workspace)
 vim.keymap.set('n', '<Leader>iW', vim.diagnostic.setloclist)
+
+local decorators = require("decorators")
+vim.keymap.set('n', '<Leader>IC', function() return "0I" .. decorators.qualified_class_from_file() .. "::" end,
+  { expr = true })
+vim.keymap.set('n', '<Leader>IN', function() return "0I" .. decorators.namespace_from_file() .. "::" end, { expr = true })
+
 vim.keymap.set('n', '<Leader>K', delete_man_buffers)
 vim.keymap.set('n', '<Leader><C-k>', fzf.man_pages)
 vim.keymap.set('n', '<Leader><C-l>', function() vim.opt.spelllang = vim.o.spelllang == "en_us" and "nb" or "en_us" end)
