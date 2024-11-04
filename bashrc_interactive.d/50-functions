@@ -121,7 +121,7 @@ btest() {
 }
 atest() {
     local build=${BUILD:-build-asan}
-    BUILD="$build" CC=${CC:-clang} CXX=${CXX:-clang++} CXXFLAGS=${CXXFLAGS:--fsanitize=undefined,address -fsanitize-coverage=trace-pc-guard -g3} CFLAGS=${CFLAGS:-$CXXFLAGS} LDFALGS=${LDFLAGS:-$CXXFLAGS} bmake && BUILD="$build" btest "$@"
+    BUILD="$build" CC=${CC:-clang} CXX=${CXX:-clang++} CXXFLAGS=${CXXFLAGS:--fsanitize=undefined,address -fsanitize-coverage=trace-pc-guard -g3} CFLAGS=${CFLAGS:-$CXXFLAGS} LDFALGS=${LDFLAGS:-$CXXFLAGS} bmake "${TARGET[@]}" && BUILD="$build" btest "$@"
 }
 ttest() {
     local build=${BUILD:-build-tsan}
