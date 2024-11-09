@@ -14,9 +14,10 @@ M.qualified_class_from_file = function()
   return decorator_from_path(vim.fn.expand("%:r"))
 end
 M.class_from_line = function()
-  local pos = vim.fn.search('^\\s*class ', 'bcnw')
+  local pattern = '^\\s*\\(class\\|struct\\) *\\([^ ]\\+\\).*'
+  local pos = vim.fn.search(pattern, 'bcnW')
   if (pos == 0) then return "" end
-  return string.gsub(vim.fn.getline(pos), ".*class *([^ ]+).*", "%1")
+  return vim.fn.substitute(vim.fn.getline(pos), pattern, "\\2", "")
 end
 
 return M
