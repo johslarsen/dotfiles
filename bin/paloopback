@@ -1,0 +1,6 @@
+#!/bin/bash -
+SINK=${SINK:-$(pactl info | awk '/Default Sink/{print $3}')}
+SOURCE=${SOURCE:-$(pactl info | awk '/Default Source/{print $3}')}
+MS_LATENCY=${MS_LATENCY:-5}
+
+pacat -r --latency-msec="$MS_LATENCY" -d "$SOURCE" | pacat -p --latency-msec="$MS_LATENCY" -d "$SINK"
