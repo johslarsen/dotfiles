@@ -1,0 +1,10 @@
+#!/bin/bash -
+INTERVAL=$((10**9*${INTERVAL:?USAGE: INTERVAL=<seconds> $0 CMD [ARGS]...}))
+
+while true; do
+    now=$(date +%s%N)
+    next=$((INTERVAL*(now/INTERVAL)+INTERVAL))
+    rest=$((next - now))
+    "$@" &
+    sleep "$(echo "scale=9;$((next - now))/10^9" | bc)"
+done
