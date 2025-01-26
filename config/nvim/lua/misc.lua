@@ -18,6 +18,9 @@ vim.opt.joinspaces = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.foldmethod = "syntax"
+vim.opt.foldenable = false
+
 local trail = "trail:#,tab:  " -- needs spaces for tab to avoid it written as ^I
 vim.opt.list = true
 vim.opt.listchars = trail
