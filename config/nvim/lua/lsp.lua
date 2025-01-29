@@ -16,6 +16,8 @@ local function on_attach(client, bufnr)
   vim.keymap.set("n", "<Leader>i<C-d>", vim.lsp.buf.declaration, bufopts)
   if client.server_capabilities.documentFormattingProvider then
     vim.keymap.set("n", "<Leader>if", function() vim.lsp.buf.format { async = true } end, bufopts)
+  end
+  if client.server_capabilities.documentRangeFormattingProvider then
     vim.keymap.set("x", "<Leader>if", function()
       vim.lsp.buf.format({
         async = true,
@@ -48,6 +50,11 @@ local function on_attach(client, bufnr)
   if client.server_capabilities.inlayHintProvider then
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
+end
+local function on_attach_with_formatting(client, bufnr)
+  client.server_capabilities.documentFormattingProvider = true
+  client.server_capabilities.documentRangeFormattingProvider = true
+  on_attach(client, bufnr)
 end
 
 local capabilites = require("cmp_nvim_lsp").default_capabilities()
@@ -86,5 +93,16 @@ lspconfig.pylsp.setup(with_defaults {})
 lspconfig.rust_analyzer.setup(with_defaults {})
 lspconfig.salt_ls.setup(with_defaults {})
 lspconfig.solargraph.setup(with_defaults {})
-lspconfig.yamlls.setup(with_defaults {})
+lspconfig.yamlls.setup({
+  on_attach = on_attach_with_formatting,
+  capabilites = capabilites,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/kustomization.json"] = "kustomization.yaml",
+        ["kubernetes"] = "k8s/**/*.yaml",
+      },
+    }
+  },
+})
 lspconfig.vimls.setup(with_defaults {})
