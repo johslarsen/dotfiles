@@ -1,0 +1,5 @@
+#!/bin/bash -
+image=${1:?USAGE: $0 BUILD_IMAGE [...]}
+args=( "${@:2}" )
+
+docker run --rm -i --network=none --user="$UID:$(id -g $UID)" -v "$HOME/.cache/clangd:$HOME/.cache/clangd" -v "$PWD:$PWD" --workdir="$PWD" "$image" clangd "${args[@]}" 2>/dev/null

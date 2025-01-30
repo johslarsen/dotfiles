@@ -67,7 +67,9 @@ end
 local lspconfig = require('lspconfig')
 lspconfig.bashls.setup(with_defaults {})
 lspconfig.clangd.setup(with_defaults {
-  cmd = { "clangd", "--completion-style=detailed", "--header-insertion=never" }
+  cmd = (vim.env.DEVIMAGE
+    and { "dclangd", vim.env.DEVIMAGE, "--completion-style=detailed", "--header-insertion=never" }
+    or { "clangd", "--completion-style=detailed", "--header-insertion=never" })
 })
 lspconfig.cmake.setup(with_defaults {})
 lspconfig.dockerls.setup(with_defaults {})
