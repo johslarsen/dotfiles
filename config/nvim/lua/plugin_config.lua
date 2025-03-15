@@ -35,6 +35,9 @@ require 'fzf-lua'.setup {
 require 'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown" },
   auto_install = true,
+  highlight = {
+    enable = true,
+  }
 }
 require 'outline'.setup {
   symbol_folding = { markers = { '+', '-' } },
@@ -72,6 +75,12 @@ require 'outline'.setup {
       Object = { icon = '{' },
       Null = { icon = '0' },
     },
+  },
+}
+require("ibl").setup {
+  indent = {
+    char = "▏",
+    highlight = { "Indent1", "Indent2", "Indent3" },
   },
 }
 

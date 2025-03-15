@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-eunuch'     -- :SudoWrite
   use 'tpope/vim-unimpaired' -- e.g. [q
   use 'ibhagwan/fzf-lua'
+  use 'lukas-reineke/indent-blankline.nvim'
 
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'

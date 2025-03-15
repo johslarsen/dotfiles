@@ -36,6 +36,11 @@ vim.cmd [[
   highlight ColorColumn ctermbg=magenta guibg=magenta
   highlight CursorColumn guibg=#333333
   highlight CursorLine guibg=#333333
+
+  highlight Indent1 ctermfg=235
+  highlight Indent2 ctermfg=236
+  highlight Indent3 ctermfg=237
+  highlight IblScope ctermfg=240
 ]]
 
 vim.opt.colorcolumn = "+1"
