@@ -31,6 +31,16 @@ local function flagged_window(flag)
   return nil
 end
 
+local function git_url(head, from, to)
+  local lines = "#L" .. (to and math.min(from, to) .. "-L" .. math.max(from, to) or from)
+  local url = vim.fn.FugitiveRemoteUrl()
+  url = string.gsub(url, ".git$", "")
+  url = string.gsub(url, ".*@([^:]*):(.*)", "https://%1/%2")
+  local path = string.sub(vim.fn.expand("%:p"), string.len(vim.fn.FugitiveWorkTree()) + 2)
+  if head == "" then head = vim.fn.FugitiveExecute("rev-parse", "HEAD")["stdout"][1] end
+  print(url .. "/blob/" .. head .. "/" .. path .. lines)
+end
+
 vim.g.nproc = tonumber(vim.fn.system('nproc'))
 
 vim.keymap.set('n', '<Leader>b', fzf.buffers)
@@ -104,6 +114,12 @@ vim.keymap.set('n', '<Leader><C-r>', ':Dispatch rifle <C-r><C-p><CR>')
 vim.keymap.set('n', '<Leader>s', ':split ')
 vim.keymap.set('n', '<Leader>S', ':vs ')
 vim.keymap.set('n', '<Leader><C-s>', ':%s//gc<Left><Left><Left>')
+vim.keymap.set('n', '<Leader>u', function() git_url(vim.fn.FugitiveHead(), vim.api.nvim_win_get_cursor(0)[1], nil) end)
+vim.keymap.set('x', '<Leader>u', function()
+  git_url(vim.fn.FugitiveHead(), vim.api.nvim_win_get_cursor(0)[1], vim.fn.getpos("v")[2])
+end)
+vim.keymap.set('n', '<Leader><C-u>', function() git_url("", vim.api.nvim_win_get_cursor(0)[1], nil) end)
+vim.keymap.set('x', '<Leader><C-u>', function() git_url("", vim.api.nvim_win_get_cursor(0)[1], vim.fn.getpos("v")[2]) end)
 vim.keymap.set('n', '<Leader>U', "<cmd>GundoToggle<CR>")
 vim.keymap.set('n', '<Leader>v', fzf.git_commits)
 vim.keymap.set('n', '<Leader>V', fzf.git_bcommits)
