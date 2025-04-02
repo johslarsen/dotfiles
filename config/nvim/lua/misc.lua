@@ -34,6 +34,8 @@ vim.keymap.set('n', '<Leader>L', function()
   vim.opt.listchars = vim.o.listchars == trail and 'eol:$,tab:>-,nbsp:%,precedes:<,extends:>,trail:#' or trail
 end)
 
+vim.opt.conceallevel = 0
+
 vim.opt.completeopt = "menu,noinsert,popup"
 
 vim.api.nvim_create_autocmd({ "FileType" }, { -- use K for man-pages regardless of language defaults
