@@ -18,7 +18,9 @@ vim.opt.joinspaces = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.foldmethod = "syntax"
+vim.wo.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "" -- i.e. use the first line of the fold with fillchar suffix
 vim.opt.foldenable = false
 
 local trail = "trail:#,tab:  " -- needs spaces for tab to avoid it written as ^I
