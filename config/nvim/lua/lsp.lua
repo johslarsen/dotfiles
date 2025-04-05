@@ -74,7 +74,9 @@ lspconfig.clangd.setup(with_defaults {
 lspconfig.cmake.setup(with_defaults {})
 lspconfig.dockerls.setup(with_defaults {})
 lspconfig.gopls.setup(with_defaults {})
-lspconfig.html.setup(with_defaults {})
+lspconfig.html.setup(with_defaults {
+  filetypes = { "html", "xml", "svg" },
+})
 lspconfig.jsonls.setup(with_defaults {
   init_options = {
     provideFormatter = true
