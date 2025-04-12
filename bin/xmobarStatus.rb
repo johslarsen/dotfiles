@@ -36,7 +36,7 @@ class CPU
     current = File.open("/proc/stat").each_line.reduce([]) do |idles, l|
       break idles unless l.start_with? "cpu"
 
-      idles << l.split[4].to_i
+      idles << (l.split[4].to_i + l.split[5].to_i) # idle + iowait
     end.compact
     if @then
       dt = now - @then
