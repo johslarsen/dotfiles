@@ -36,6 +36,7 @@ require 'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown" },
   auto_install = true,
   highlight = {
+    disable = { "git_rebase" },
     enable = true,
   }
 }
