@@ -26,4 +26,33 @@ kns() {
     kubectl config set-context --current --namespace="$1"
 }
 
+kri() {
+    local volumes=""
+    local mounts=""
+    for vm in ${BINDS//,/ }; do
+        mount=${vm#*:}
+        name=${mount//\//slash}
+        mounts+=",{\"mountPath\":\"$mount\",\"name\":\"$name\"}"
+        volumes+=",{\"hostPath\":{\"path\":\"${vm%:*}\"},\"name\":\"$name\"}"
+    done
+    for nm in ${PVCS//,/ }; do
+        name=${nm%:*}
+        mounts+=",{\"mountPath\":\"${nm#*:}\",\"name\":\"$name\"}"
+        volumes+=",{\"persistentVolumeClaim\":{\"claimName\":\"$name\"},\"name\":\"$name\"}"
+    done
+    for mount in ${TMPFS//,/ }; do
+        name=${mount//\//slash}
+        mounts+=",{\"mountPath\":\"$mount\",\"name\":\"$name\"}"
+        volumes+=",{\"emptyDir\":{\"medium\":\"Memory\"},\"name\":\"$name\"}"
+    done
+
+    local overrides="${OVERRIDES:+,$OVERRIDES}"
+    if [[ "$volumes" ]]; then
+        overrides+=",{\"op\":\"add\",\"path\":\"/spec/containers/0/volumeMounts\",\"value\":[${mounts:1}]}"
+        overrides+=",{\"op\":\"add\",\"path\":\"/spec/volumes\",\"value\":[${volumes:1}]}"
+    fi
+
+    kubectl run --rm -it ${overrides:+--override-type=json --overrides="[${overrides:1}]"} --pod-running-timeout=10s --restart=Never --image-pull-policy=IfNotPresent --image="${IMG:-$1}" "${@:?kri IMAGE [-- ARGS...]}"
+}
+
 export KUBECTL_EXTERNAL_DIFF='diff -U0 --color=auto'
