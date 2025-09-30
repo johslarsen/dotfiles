@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require 'json'
+features = (ARGV.empty? ? ["/dev/stdin"] : ARGV).map do |path|
+  line_strings = Hash.new{|h,k| h[k] = []}
+  File.readlines(path).each do |line|
+    line.scan(/([-0-9.]+)([NS])[[:space:],;|]*([-0-9.]+)([EW])/).each_with_index do |(lat,ns,lng,ew), i|
+      line_strings[i] << [Float(lng) * (ew == "W" ? -1 : 1), Float(lat) * (ns == "S" ? -1 : 1)]
+    end
+  end
+  line_strings.map do |i,coords|
+    {
+      type: :Feature,
+      geometry: {
+        type: :LineString,
+        coordinates: coords,
+      },
+      properties: {
+        name: "#{path == "/dev/stdin" ? "-" : path}#{i>0?" #{i+1}":""}",
+      },
+    }.to_json
+  end
+end.flatten
+puts features

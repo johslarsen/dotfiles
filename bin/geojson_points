@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require 'json'
+
+properties = ->(path, i, j, line){{name: "#{path}:#{i},#{j}"}}
+if (name_regexp = ENV["NAME_REGEXP"])
+  name_regexp = Regexp.new(name_regexp)
+  properties = Proc.new do |path, i, j, line|
+    matches = line.scan(name_regexp)
+    name = matches.empty? ? "#{i},#{j}" : matches[j < matches.size() ? j : 0]
+    {file:path,row:i,col:j,name:name}
+  end
+end
+
+features = (ARGV.empty? ? ["/dev/stdin"] : ARGV).map do |path|
+  File.readlines(path).each_with_index.map do |line, i|
+    line.scan(/([-0-9.]+)([NS])[[:space:],;|]*([-0-9.]+)([EW])/).each_with_index.map do |(lat,ns,lng,ew), j|
+      coord = [Float(lng) * (ew == "W" ? -1 : 1), Float(lat) * (ns == "S" ? -1 : 1)]
+      {
+        type: :Feature,
+        geometry: {
+          type: :Point,
+          coordinates: coord,
+        },
+        properties: properties.call(path == "/dev/stdin" ? "-" : path, i, j, line)
+      }.to_json
+    end
+  end
+end.flatten
+puts features
