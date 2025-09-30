@@ -29,8 +29,6 @@ alias less=$PAGER
 # Misc
 alias datestamp='date +"%Y%m%d"'
 alias timestamp='date +"%Y%m%d%H%M%S"'
-alias ds='datestamp'
-alias ts='timestamp'
 alias h='history'
 alias psgrep='ps aux | grep'
 alias psgi='ps aux | gi'
