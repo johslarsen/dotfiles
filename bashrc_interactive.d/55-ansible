@@ -1,0 +1,18 @@
+#!/bin/bash -
+alias a='ansible'
+alias ad='ansible-doc'
+alias ai='ansible-inventory'
+alias aih='ansible-inventory --host'
+alias ail='ansible-inventory --list'
+alias ap='ansible-playbook'
+alias apc='ansible-playbook --check --diff'
+alias av='ansible-vault'
+alias avc='ansible-vault create'
+alias avv='ansible-vault view'
+alias ave='ansible-vault edit'
+# NOTE: no _complete_alias because python-argcomplete is super slow
+
+function aves() {
+    IFS=$'\n' files=( $(fd -t f --color always -I vault -E /bin/ "${@}" | fzf-tmux -m --ansi --color=16 --preview="ansible-vault view {} | bat --color always --file-name {}") )
+    [[ "$files" ]] && ansible-vault edit "${files[@]}"
+}

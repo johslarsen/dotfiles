@@ -4,7 +4,7 @@ if [[ "$DISPLAY" ]] && ! [ -t 0 ]; then
   [[ "$NOTES" ]] && env+="NOTES='$NOTES' "
   [[ "$TMPDIR" ]] && env+="TMPDIR='$TMPDIR' "
   [[ "$TIMEFMT" ]] && env+="TIMEFMT='$TIMEFMT' "
-  [[ "$PREIFX" ]] && env+="PREFIX='$PREFIX' "
+  [[ "$PREFIX" ]] && env+="PREFIX='$PREFIX' "
   exec xterm -e bash -c "$env $0 $*"
 fi
 
