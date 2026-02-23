@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'time'
+dt=Float(ENV.fetch("DT", "1.0"))
+lines=$stdin.readlines
+puts lines[0]
+
+rows = lines[1..-1].map do |l|
+  cols = l.split(",")
+  [Time.parse(cols[0]), *cols[1..-1].map(&:to_f)]
+end
+
+subsecs = Math.log10(1.0/dt).ceil
+
+t = rows[0][0]
+rows[1..-1].zip(rows[0..-2]).each do |after, before|
+  while (t < after[0]) do
+    dx = (t - before[0]) / (after[0] - before[0])
+    lerped = before[1..-1].zip(after[1..-1]).map{|f,t| f + (t-f) * dx}
+    puts "#{t.strftime("%FT%T#{subsecs > 0 ? ".%#{subsecs}N" : ""}")},#{lerped.map(&:to_s).join(",")}"
+    t += dt
+  end
+end
