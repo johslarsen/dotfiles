@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require 'shellwords'
+cols=Hash.new{|h,k| h[k] = []}
+ARGF.each_line.with_index do |l,i|
+  l.scan(/([[:alnum:]_]+)=([^[:space:]"]*|"(?:[^"\\]*(?:\\.)?)*")(\s|$)/) do |k,v|
+    v = v.undump.gsub(/\\"/, '""') if v.start_with?('"')
+    values = cols[k]
+    values.append([""]*(i-values.length)) if values.length < i
+    values << (v =~ /[",]/ ? "\"#{v.gsub(/"/, '""')}\"" : v)
+  end
+end
+
+nrows = cols.values.map(&:length).max
+puts "##{cols.keys.join(",")}"
+puts cols.values.map{|v| v += [""]*(nrows-v.length)}.transpose.map{|c| c.join(",")}.join("\n")
