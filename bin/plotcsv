@@ -44,7 +44,11 @@ for path in sys.argv[1:]:
             cols[0].append(guess_type(row[0]))
             for i, value in enumerate(row[1:]):
                 cols[1 + i].append(guess_type(value))
-        for col in cols[1:]:
-            plt.plot(cols[0], col, os.getenv("PLOTFMT", ""))
+        fmt = os.getenv("PLOTFMT", "")
+        if fmt.startswith("imshow"):
+            plt.imshow(cols)
+        else:
+            for col in cols[1:]:
+                plt.plot(cols[0], col, fmt)
 plt.legend(legend)
 plt.show()
